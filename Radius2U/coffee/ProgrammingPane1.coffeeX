@@ -1,0 +1,252 @@
+	# When the background is clicked, any selected block reverts to non-selected
+	$('#ProgrammingPane').click (event) ->
+		#console.log("clicked on background")
+		$(".selected").removeClass("selected")
+		$('#popupmenu').hide()
+	
+	# Delete key means delete selected blocks
+	$('body').keydown (event) ->   # can't use #ProgrammingPane
+		#console.log("body keydown, which = ", event.which)
+		if event.which == 46 or event.which == 8 # Delete, backspace
+			deleteTheseSuckers($(".draggable2.selected"))
+	
+	# Suppress Enter in editable areas
+	$('#ProgrammingPane').on "keydown", "div.editable", (event) -> 
+		if event.which == 10 or event.which == 13  # no CR/LF
+			event.preventDefault()
+		event.stopPropagation()  # hide keypress from parents
+	
+	# Allow HTML-special chars to be entered - this is still a mystery
+	###
+	$('#ProgrammingPane').on "keypress", "div.editable", (event) -> 
+		console.log('keypress which', event.which,
+			'text', $(event.target).text(), 'html', $(event.target).html()) 
+	$('#ProgrammingPane').on "keyup", "div.editable", (event) -> 
+		console.log('keyup which', event.which,
+			'text', $(event.target).text(), 'html', $(event.target).html()) 
+		#if event.which == 60  # <
+		#	console.log('text', $(event.target).text(), 'html', $(event.target).html()) 
+			#event.preventDefault()
+			# need to allow default and later change < to &lt;
+		#if event.which == 38  # &
+		#	event.preventDefault()
+	###
+	
+	# Remove 'errorHighlight' highlight and the message box when a parm is edited.
+	$('#ProgrammingPane').on "keyup", "div.errorParm", (event) -> 
+		clearErrors(true)
+	
+	# Find the length of the text, resize this editable div accordianly.
+	$('#ProgrammingPane').on "keyup", ".editable", (event) -> 
+		$("#widthAux").html($(event.target).text())
+		#console.log("length:", $('#widthAux').width())
+		boxmin = $(event.target).attr('minwidth')
+		boxmax = $(event.target).attr('maxwidth')
+		newwidth = Math.max(boxmin, $('#widthAux').width() + 10)
+		newwidth = Math.min(boxmax, newwidth)
+		$(event.target).width(newwidth)
+	
+	# Mouse down on a block's draghandle removes error messages, and may invoke the popup menu
+	$('#ProgrammingPane').on "mousedown", ".draghandle", (event) ->
+		#console.log('event', event)
+		clearErrors(true)
+		if event.altKey or event.ctrlKey or event.metaKey or event.shiftKey
+			# If this block is already selected (and perhaps others are too),
+			# then don't "reselect" it, and most importantly, don't deselect other selected blocks
+			# (shift-double click is not impacted by clickToSelect, who knows whether that's right)
+			if $(this).parent().hasClass("selected")
+				#console.log("yes, this one is selected")
+				clickToSelect = false
+			doPopup(this, event)
+
+	# Close a pop up menu if the user clicks elsewhere in the Programming Pane  (was: it loses focus)
+	# Not sure any of this is functional
+	# $('#popupmenu').focusout (event) ->
+	$('#ProgrammingPane').on "keyup", "*", (event) -> 
+		#console.log('1 popup menu loses focus')
+		$('#contextmenu').remove()
+		$('#ProgrammingPane').on "keyup", (event) -> 
+			#console.log('2 popup menu loses focus')
+			$('#contextmenu').remove()
+		$('body').on "keyup", (event) -> 
+			#console.log('3 popup menu loses focus')
+			$('#contextmenu').remove()
+	
+	# Clicking on a block over the name selects it.
+	$('#ProgrammingPane').on "click", ".draghandle", (event) ->
+		#console.log("clicked on ", event.target, lastDraggedDiv, clickToSelect)
+		event.stopPropagation()     # don't bubble up to #ProgrammingPane
+		if not clickToSelect        # turned off by shift-mousedown?
+			clickToSelect = true    #  turn back on
+			return                  #  but don't select
+		$(".selected").removeClass("selected")
+		parentDiv = $(event.target).parent()
+		if parentDiv == lastDraggedDiv
+			lastDraggedDiv = null
+			return
+		parentDiv.addClass('selected')
+		if exists parentDiv, "rad-end"
+			$("#"+parentDiv.attr("rad-end")).addClass('selected')
+	
+	# Double-click on a block over the name selects it and all children
+	$('#ProgrammingPane').on "dblclick", ".draghandle", (event) ->
+		#console.log("double clicked on ", event.target)
+		event.stopPropagation()     # don't bubble up to #ProgrammingPane
+		$(".selected").removeClass("selected")
+		parentDiv = $(event.target).parent()
+		if parentDiv == lastDraggedDiv
+			lastDraggedDiv =  null
+			return
+		for child in Radius.getAttachedDivs(parentDiv)
+			console.log("attached div", child)
+			child.addClass('selected')
+	
+	# Apply bold to variable names - this is an experiment
+	$('#ProgrammingPane').on "blur", ".ASSIGN > .parm", (event) ->
+		#console.log("blur:", event.target, $(event.target).parent())
+		varName = $(event.target).text()
+		#console.log("text: <" + varName + ">")
+		#highlightAll(varName.trim())
+		
+
+# for now, this highlighting is commented out - I'll do something more
+# sophisticated when the Vars pane is implemented
+highlightAll = (text) ->
+	###
+	for p in $("#ProgrammingPane .editable")
+		t = $(p).text()
+		#console.log("checking", t, p, t.indexOf(text))
+		i = t.indexOf(text)
+		if i > -1
+			$(p).html(t.replace(text, "<span class='highlight'>"+text+"</span>"), "g")
+			#console.log("now:", $(p).text())
+	###
+
+# invoked when Delete or Backspace is pressed
+deleteTheseSuckers = (targetList) ->
+	for target in targetList
+		t2 = $(target)
+		if exists t2, 'rad-parent'
+			$('#'+t2.attr('rad-parent')).attr('rad-child', '')
+		if exists t2, 'rad-child'
+			$('#'+t2.attr('rad-child')).attr('rad-parent', '')
+		if exists t2, 'rad-bar'
+			$('#'+t2.attr('rad-bar')).remove()
+		if exists t2, 'rad-end'
+			t3 = $('#'+t2.attr('rad-end'))
+			if exists t3, 'rad-child'
+				$('#'+t3.attr('rad-child')).attr('rad-parent', '')
+			t3.remove()
+		t2.remove()
+	#console.log("targetList:", targetList)
+	#console.log("[0]:", targetList[0])
+
+commentOutTheseSuckers = (targetList) ->
+	for target in targetList
+		#console.log('commenting out:', $(target))
+		$(target).addClass("commentedOut")
+
+uncommentOutTheseSuckers = (targetList) ->
+	for target in targetList
+		$(target).removeClass("commentedOut")
+
+# create a pop up menu
+doPopup = (div, event) ->
+	#console.log('in doPopup')
+	divWithPopup = $(div).parent()    # div is the draghandle, so get outer div
+	$('<ul/>', id: 'contextmenu').appendTo('body')   # new <ul></ul> is the basis
+	popup = $('#contextmenu')
+	popup.append('<li><a href="#">Delete</a></li>')
+	commentedOutExists = false
+	notCommentedOutExists = false
+	$(".selected").each (index, value) ->
+		div = $ value
+		if div.hasClass("commentedOut")
+			commentedOutExists = true
+		else
+			notCommentedOutExists = true
+	if notCommentedOutExists
+		popup.append('<li><a href="#">Comment out</a></li>')
+	if commentedOutExists
+		popup.append('<li><a href="#">Un-comment out</a></li>')
+	popup.append('<li>---</li>')
+	popup.append('<li><a href="#">Help</a></li>')
+	popup.menu
+		select: popupSelected
+	blurTimer = null;
+	blurTimeToWait = 200     # milliseconds before closing popup menu
+	popup.on('menufocus', -> clearTimeout(blurTimer))
+	popup.on('menublur', -> 
+		blurTimer = setTimeout -> 
+			$('#contextmenu').remove()   # console.log("OUT")
+			blurTimeToWait)
+	popup.show().position
+		my: "right top"
+		at: "left top"
+		of: divWithPopup
+	popup.menu("enable")
+	popup.keyup (event) ->     # closeable with escape
+		if event.keyCode == 27
+			$('#contextmenu').remove()
+	popup.click (event) -> console.log("click in popup")
+	popup.focus()
+	
+popupSelected = (event, ui) ->
+	console.log('in popupSelected')
+	menuSelection = ui.item.text()
+	$('#contextmenu').remove()
+	switch menuSelection
+		when "Delete"
+			deleteTheseSuckers($(".draggable2.selected"))
+			# currently doesn't glue together the two segments if there's a gap
+		when "Comment out"
+			commentOutTheseSuckers($(".selected"))
+		when "Un-comment out"
+			uncommentOutTheseSuckers($(".selected"))
+		else
+			console.log("not handling popup menu selection", menuSelection)
+
+
+# Does theDiv has a real (non "") attribute named attrString?
+exists = (theDiv, attrString) ->
+	console.log("ProgrammingPane.exists: theDiv?", theDiv, attrString) if not (theDiv.attr)?
+	theDiv.attr(attrString)? and theDiv.attr(attrString).length
+
+
+
+Radius.showError = (id, start, length, message) ->
+	console.log('showError', id, start, length, message)
+	div = $('#'+id)
+	st = Math.floor(start)      # .5 added when in parm2
+	if st == start
+		parm = $('#'+id+' .parm')
+	else
+		parm = $('#'+id+' .parm2')
+	#console.log('div', div)
+	#console.log('.parm', parm)
+	if length == 0
+		parm.addClass("errorParm")
+		parm.addClass("errorEmptyParm")
+	else
+		text = parm.text()
+		newtext = text.slice(0, st) + "<span class='errorHighlight'>" +
+			  text.slice(st, st+length) + "</span>" +
+			  text.slice(st+length)
+		#console.log('   newtext:', newtext)
+		parm.html(newtext)
+		parm.addClass('errorParm')
+	errorTop = 1 + parseFloat(div.css('top'))
+	errorLeft = parseFloat(div.css('left')) + div.outerWidth() + 5
+	$('#ProgrammingPane').append('<div class="errorMessageBox" ' +
+		'style="top: ' + errorTop + 'px; left: ' + errorLeft + 'px;">' +
+		message + '</div>')
+
+clearErrors = (fadeOutSlowly) ->
+	$('.errorParm').removeClass('errorParm')
+	$('.errorEmptyParm').removeClass('errorEmptyParm')
+	$('.errorHighlight').removeClass('errorHighlight')  # ok to leave the <span>...</span>?
+	if fadeOutSlowly
+		$(".errorMessageBox").fadeOut(1000, -> $(this).remove())
+	else
+		$(".errorMessageBox").remove()
+

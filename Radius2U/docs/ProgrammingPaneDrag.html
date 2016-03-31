@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ProgrammingPaneDrag.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="Box.html">
+                Box.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPane.html">
+                ProgrammingPane.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPane1.html">
+                ProgrammingPane1.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPaneDrag.html">
+                ProgrammingPaneDrag.coffee
+              </a>
+            
+              
+              <a class="source" href="Radius1.html">
+                Radius1.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>ProgrammingPaneDrag.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>code for dragging, dropping, and attaching in the Programming Pane</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Radius = window.Radius</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>local to this file</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>INDENT_AMOUNT = <span class="number">14</span>
+initialEndGap = <span class="number">25</span>
+attachableCandidateID = <span class="literal">null</span>
+lastDraggedDiv = <span class="literal">null</span>
+scrTop = <span class="number">0</span>    <span class="comment"># scrollTop</span>
+scrLeft = <span class="number">0</span>   <span class="comment"># scrollLeft</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>called by jQuery&#39;s onReady handler</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Radius.<span class="function"><span class="title">ProgrammingPaneDragOnReady</span> = -&gt;</span>
+	SetupDroppable()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>make draggable each element of class draggable1 (all in CommandsPane)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'.draggable1'</span>)</span>.<span class="title">each</span> <span class="params">(index, value)</span> -&gt;</span> 
+		$(value).draggable</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>stop: (event, ui) -&gt; </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="attribute">drag</span>: <span class="function"><span class="params">(event, ui)</span> -&gt;</span> lookForAttachable(event, ui)
+			<span class="attribute">helper</span>: <span class="function"><span class="params">(event, ui)</span> -&gt;</span> <span class="keyword">return</span> $(<span class="keyword">this</span>).clone().appendTo(<span class="string">'body'</span>).css(<span class="string">'zIndex'</span>,<span class="number">5</span>).show()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Keep track of how much the pane has scrolled.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">scroll</span>", <span class="params">(event)</span> -&gt;</span>
+		scrTop =  $(<span class="string">'#ProgrammingPane'</span>).scrollTop()
+		scrLeft =  $(<span class="string">'#ProgrammingPane'</span>).scrollLeft()
+	
+	Radius.SetUpDragability()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p><code>RadiusSetUpDragability</code> is called from the HTML.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Radius.<span class="function"><span class="title">SetUpDragability</span> = <span class="params">()</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>this code duplicates code run when a new command is dragged into
+id=ProgrammingPane, so some refactoring is needed.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$(<span class="string">'.draggable2'</span>).draggable
+		<span class="attribute">start</span>: <span class="function"><span class="params">(event, ui)</span> -&gt;</span> 
+			$(<span class="keyword">this</span>).attr(<span class="string">'rad-startLeft'</span>, $(<span class="keyword">this</span>).position().left)
+			$(<span class="keyword">this</span>).attr(<span class="string">'rad-startTop'</span>, $(<span class="keyword">this</span>).position().top)
+		<span class="attribute">drag</span>: onDrag     <span class="comment"># onDrag is defined below</span>
+		<span class="attribute">handle</span>: <span class="string">'.draghandle'</span>
+		<span class="attribute">zIndex</span>: <span class="number">100</span>        <span class="comment"># put dragging thing higher TODO: put endwhile higher as well</span>
+	$<span class="function"><span class="params">(<span class="string">'.draggable2'</span>)</span>.<span class="title">find</span><span class="params">(<span class="string">".editable"</span>)</span>.<span class="title">keypress</span> <span class="params">(event)</span> -&gt;</span> 
+		<span class="keyword">if</span> event.which == <span class="number">10</span> <span class="keyword">or</span> event.which == <span class="number">13</span>
+			event.preventDefault()
+	<span class="keyword">return</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Keep the nextID in the DOM so that it is set when an existing block of code is read in</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">getNextID</span> = <span class="params">()</span> -&gt;</span>
+	n = +$(<span class="string">'#nextID'</span>).attr(<span class="string">'nextID'</span>)  <span class="comment"># the + sign casts the value to a number</span>
+	$(<span class="string">'#nextID'</span>).attr(<span class="string">'nextID'</span>, (n+<span class="number">1</span>))
+	<span class="keyword">return</span> n</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>utility functions to move a div</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">shift</span> = <span class="params">(theDiv, x, y)</span> -&gt;</span>
+	currTop = parseFloat(theDiv.css(<span class="string">"top"</span>))
+	currLeft = parseFloat(theDiv.css(<span class="string">"left"</span>))
+	theDiv.css(<span class="string">"top"</span>, currTop + y)
+	theDiv.css(<span class="string">"left"</span>, currLeft  + x)
+
+<span class="function"><span class="title">setPosition</span> = <span class="params">(theDiv, x, y)</span> -&gt;</span>
+	theDiv.css(<span class="string">"top"</span>, y)
+	theDiv.css(<span class="string">"left"</span>, x)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Does theDiv has a real (non &quot;&quot;) attribute named attrString?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">exists</span> = <span class="params">(theDiv, attrString)</span> -&gt;</span>
+	console.log(<span class="string">"ProgrammingPaneDrag.exists: theDiv?"</span>, theDiv, attrString) <span class="keyword">if</span> <span class="keyword">not</span> (theDiv.attr)?
+	theDiv.attr(attrString)? <span class="keyword">and</span> theDiv.attr(attrString).length</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>onDrag is used only for draggable2s, and drags around children as well
+calls lookForAttachable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">onDrag</span> = <span class="params">(event, ui)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>find how much the mouse moved, and prepare for next onDrag</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	topDragDiv = $(ui.helper)   <span class="comment"># $(ui.helper) is what's being dragged</span>
+	topDragDiv.css(<span class="string">"z-index"</span>, <span class="number">200</span>)
+	xDelta = ui.position.left - topDragDiv.attr(<span class="string">'rad-startLeft'</span>)
+	yDelta = ui.position.top - topDragDiv.attr(<span class="string">'rad-startTop'</span>)
+	topDragDiv.attr(<span class="string">'rad-startLeft'</span>, ui.position.left)
+	topDragDiv.attr(<span class="string">'rad-startTop'</span>, ui.position.top)
+	<span class="keyword">if</span> exists topDragDiv, <span class="string">'rad-parent'</span>	  <span class="comment"># has a parent, so detach it</span>
+		parentDiv = $(<span class="string">'#'</span>+topDragDiv.attr(<span class="string">'rad-parent'</span>))
+		parentDiv.attr(<span class="string">'rad-child'</span>, <span class="string">''</span>)				<span class="comment"># parent forgets child</span>
+		topDragDiv.attr(<span class="string">'rad-parent'</span>, <span class="string">''</span>)			<span class="comment"># child forgets parent</span>
+		alignEntireBlock(parentDiv)                 <span class="comment"># to adjust ifs and whiles</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>softCompile()  # here is where it should compile upon detach</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		changes = <span class="literal">true</span>
+	<span class="keyword">else</span> <span class="keyword">if</span> exists topDragDiv, <span class="string">'rad-if'</span>
+		$(<span class="string">'#'</span>+topDragDiv.attr(<span class="string">'rad-if'</span>)).attr(<span class="string">'rad-else'</span>, <span class="string">''</span>) <span class="comment"># if forgets else</span>
+		topDragDiv.attr(<span class="string">'rad-if'</span>, <span class="string">''</span>)				<span class="comment"># else forgets if</span>
+		$(<span class="string">'#'</span>+topDragDiv.attr(<span class="string">'rad-bar'</span>)).hide()
+	<span class="keyword">for</span> attachedDiv <span class="keyword">in</span> Radius.getAttachedDivs topDragDiv
+		attachedDiv.css(<span class="string">"z-index"</span>, <span class="number">200</span>)
+		shift attachedDiv, xDelta, yDelta 
+	<span class="keyword">if</span> <span class="keyword">not</span> exists topDragDiv, <span class="string">'rad-hastobefirst'</span>    <span class="comment">#topDragDiv.hasClass "hastobefirst"</span>
+		lookForAttachable event, ui
+	<span class="keyword">return</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>returns an array of all of the objects attached (below) to topDiv</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Radius.<span class="function"><span class="title">getAttachedDivs</span> = <span class="params">(topDiv)</span> -&gt;</span>
+	result = []
+	divsToSee = [topDiv]      <span class="comment"># initialize array</span>
+	currentDiv = <span class="literal">null</span>
+	<span class="keyword">while</span> (currentDiv = divsToSee.pop())?    <span class="comment">#parens needed here!</span>
+		<span class="keyword">while</span> currentDiv?
+			result.push(currentDiv)
+			<span class="keyword">if</span> exists currentDiv, <span class="string">'rad-bar'</span>
+				result.push($(<span class="string">"#"</span>+currentDiv.attr(<span class="string">'rad-bar'</span>)))
+			<span class="keyword">if</span> exists currentDiv, <span class="string">'rad-end'</span>
+				divsToSee.push($(<span class="string">"#"</span>+currentDiv.attr(<span class="string">'rad-end'</span>)))
+			<span class="keyword">if</span> exists currentDiv, <span class="string">'rad-else'</span>
+				divsToSee.push($(<span class="string">"#"</span>+currentDiv.attr(<span class="string">'rad-else'</span>)))
+			<span class="keyword">if</span> exists currentDiv, <span class="string">'rad-child'</span>
+				currentDiv = $(<span class="string">"#"</span>+currentDiv.attr(<span class="string">'rad-child'</span>))
+			<span class="keyword">else</span>
+				currentDiv = <span class="literal">null</span>
+	<span class="keyword">return</span> result</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>find another draggable2 that is close enough to attach this one to.
+Set attachableCandidateID to that element&#39;s id, and it will be attached
+when the dragged div is dropped.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">lookForAttachable</span> = <span class="params">(event, ui)</span> -&gt;</span> 
+	draggedDiv = $(ui.helper)
+	closeEnough = <span class="number">10</span>
+	thisTop = parseFloat draggedDiv.css(<span class="string">'top'</span>)     <span class="comment"># ui.position.top - scrTop</span>
+	thisLeft = parseFloat draggedDiv.css(<span class="string">'left'</span>)   <span class="comment"># ui.position.left - scrLeft</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>command templates are attached to the body and don&#39;t know anything about
+scrolling in ProgrammingPane</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="keyword">if</span> draggedDiv.hasClass <span class="string">"draggable1"</span> 	     <span class="comment"># if a command template,</span>
+		thisTop = thisTop - $(<span class="string">"#ProgrammingPane"</span>).offset().top + scrTop + <span class="number">9</span>     <span class="comment"># mystery offsets</span>
+		thisLeft = thisLeft - $(<span class="string">"#ProgrammingPane"</span>).offset().left + scrLeft + <span class="number">5</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>console.log(&quot;draggedDiv:&quot;, thisTop, thisLeft, &quot;that.position:&quot;, $(&quot;#x100&quot;).css(&#39;top&#39;), $(&quot;#x100&quot;).css(&#39;left&#39;))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	
+	$(<span class="string">'.attachable'</span>).removeClass <span class="string">"attachable"</span>
+	attachableCandidateID = <span class="literal">null</span>
+	$<span class="function"><span class="params">(<span class="string">'.draggable2'</span>)</span>.<span class="title">each</span> <span class="params">(index, value)</span> -&gt;</span> 
+		candidateDiv = $ value        <span class="comment"># possible block to attach to</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>same element? if so, skip to next draggable2</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> candidateDiv.attr(<span class="string">"id"</span>) == draggedDiv.attr(<span class="string">"id"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>skip on various conditions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> <span class="keyword">not</span> okToDropHere(candidateDiv, draggedDiv)
+		thatBottom = (parseFloat candidateDiv.css(<span class="string">'top'</span>)) + candidateDiv.outerHeight() <span class="comment"># candidateDiv.position().top + $(value).outerHeight()</span>
+		thatLeft = parseFloat candidateDiv.css(<span class="string">'left'</span>)  <span class="comment"># candidateDiv.position().left</span>
+		thatRight = thatLeft + candidateDiv.width()
+		letsAttach = <span class="literal">false</span>
+		<span class="keyword">if</span> thisTop &lt;= thatBottom + closeEnough <span class="keyword">and</span>
+				thisTop &gt;= thatBottom - closeEnough <span class="keyword">and</span>
+				thisLeft &gt;= thatLeft - closeEnough <span class="keyword">and</span>
+				thisLeft &lt;= thatRight + closeEnough
+			letsAttach = <span class="literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>console.log(&quot;this:&quot;, thisTop, thisLeft, &quot;that:&quot;,
+      thatBottom, thatLeft, thatRight, &quot;==&gt;&quot;, letsAttach)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">if</span> letsAttach <span class="keyword">and</span> attachableCandidateID == <span class="literal">null</span> 
+			candidateDiv.addClass(<span class="string">"attachable"</span>)
+			attachableCandidateID = candidateDiv.attr(<span class="string">'id'</span>)
+			<span class="keyword">return</span> <span class="literal">false</span>  <span class="comment"># we're done, break out of .each loop</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>use DOM attributes to remember parent-child attachments, and move
+child and grandchildren into alignment</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">attach</span> = <span class="params">(parentID, childID)</span> -&gt;</span> 
+	changes = <span class="literal">true</span>
+	parentDiv = $(<span class="string">"#"</span>+parentID)
+	childDiv = $(<span class="string">"#"</span>+childID)
+	<span class="keyword">if</span> exists parentDiv, <span class="string">'rad-child'</span>    <span class="comment"># already has a child?</span>
+		grandchildID = parentDiv.attr(<span class="string">'rad-child'</span>)
+	<span class="keyword">else</span>
+		grandchildID = <span class="string">''</span>
+	parentDiv.attr(<span class="string">'rad-child'</span>, childDiv.attr(<span class="string">"id"</span>))
+	childDiv.attr(<span class="string">'rad-parent'</span>, parentDiv.attr(<span class="string">"id"</span>))
+	<span class="keyword">if</span> grandchildID != <span class="string">''</span>
+		childDiv.attr(<span class="string">'rad-child'</span>, grandchildID)
+		$(<span class="string">'#'</span>+grandchildID).attr(<span class="string">'rad-parent'</span>, childID)
+	$<span class="function"><span class="params">(<span class="string">'.draggable2'</span>)</span>.<span class="title">each</span> <span class="params">(index, value)</span> -&gt;</span> 
+		($ value).css(<span class="string">"z-index"</span>, <span class="number">100</span>)
+	<span class="keyword">if</span> childDiv.hasClass(<span class="string">"ELSE"</span>)			<span class="comment"># block before ELSE doesn't</span>
+		parentDiv.attr(<span class="string">'rad-child'</span>, <span class="string">''</span>)		<span class="comment"># point to ELSE block</span>
+		childDiv.attr(<span class="string">'rad-parent'</span>, <span class="string">''</span>)     <span class="comment"># and ELSE has no parent</span>
+		ifparent = parentDiv
+		<span class="keyword">while</span> <span class="literal">true</span>
+			<span class="keyword">if</span> ifparent.hasClass(<span class="string">"IF"</span>)
+				ifparent.attr(<span class="string">'rad-else'</span>, childID)
+				childDiv.attr(<span class="string">'rad-if'</span>, ifparent.attr(<span class="string">'id'</span>))
+				alignEntireBlock(ifparent)
+				<span class="keyword">return</span>
+			<span class="keyword">if</span> exists ifparent, <span class="string">'rad-parent'</span>
+				ifparent = $(<span class="string">'#'</span> + ifparent.attr(<span class="string">'rad-parent'</span>))
+			<span class="keyword">else</span>
+				console.log(<span class="string">"**Couldn't find ifparent for"</span>, childID)
+				<span class="keyword">return</span>
+	alignEntireBlock(parentDiv)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>if connectsToStart(childDiv) 
+newLine = getCodeLine(childDiv)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	
+
+alignTopPos = <span class="number">0</span>   <span class="comment"># global, for communication within align* functions</span>
+
+<span class="function"><span class="title">alignEntireBlock</span> = <span class="params">(div)</span> -&gt;</span> 
+	topDiv = div
+	<span class="keyword">while</span> <span class="literal">true</span>
+		<span class="keyword">if</span> exists topDiv, <span class="string">'rad-parent'</span>
+			topDiv = $(<span class="string">"#"</span>+(topDiv.attr(<span class="string">'rad-parent'</span>)))
+		<span class="keyword">else</span> <span class="keyword">if</span> exists topDiv, <span class="string">'rad-if'</span>
+			topDiv = $(<span class="string">"#"</span>+(topDiv.attr(<span class="string">'rad-if'</span>)))
+		<span class="keyword">else</span>
+			<span class="keyword">break</span>
+	leftPos = parseFloat(topDiv.css(<span class="string">'left'</span>))
+	alignTopPos = parseFloat(topDiv.css(<span class="string">'top'</span>))
+	align2(topDiv, leftPos)
+
+<span class="function"><span class="title">align2</span> = <span class="params">(theDiv, leftPos)</span> -&gt;</span>
+	currDiv = theDiv
+	<span class="keyword">while</span> currDiv?
+		setPosition(currDiv, leftPos, alignTopPos)
+		alignTopPos += currDiv.outerHeight() + -<span class="number">1</span>   <span class="comment"># include padding , -1 forces overlap</span>
+		<span class="keyword">if</span> exists currDiv, <span class="string">'rad-end'</span> 	  <span class="comment"># does this div start a block?</span>
+			barDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-bar'</span>))
+			endDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-end'</span>))
+			setPosition(barDiv, leftPos, alignTopPos)
+			<span class="keyword">if</span> exists currDiv, <span class="string">'rad-child'</span>
+				align2($(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-child'</span>)), leftPos+INDENT_AMOUNT)
+			<span class="keyword">else</span>
+				alignTopPos += initialEndGap   <span class="comment"># a little space for empty blocks</span>
+			barHeight = alignTopPos - parseFloat(barDiv.css(<span class="string">'top'</span>))
+			barDiv.height(barHeight)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>handle else, if needed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">if</span> exists currDiv, <span class="string">'rad-else'</span>
+				elseDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-else'</span>))</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>console.log(&quot;handling elseDiv:&quot;, elseDiv)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				setPosition(elseDiv, leftPos, alignTopPos)
+				alignTopPos += elseDiv.outerHeight() + -<span class="number">1</span>
+				barDiv = $(<span class="string">'#'</span>+elseDiv.attr(<span class="string">'rad-bar'</span>))
+				setPosition(barDiv, leftPos, alignTopPos)
+				<span class="keyword">if</span> exists elseDiv, <span class="string">'rad-child'</span>
+					align2($(<span class="string">'#'</span>+elseDiv.attr(<span class="string">'rad-child'</span>)), leftPos+INDENT_AMOUNT)
+				<span class="keyword">else</span>
+					alignTopPos += <span class="number">5</span>   <span class="comment"># a little space for empty blocks</span>
+				barHeight = alignTopPos - parseFloat(barDiv.css(<span class="string">'top'</span>))
+				barDiv.height(barHeight) 
+				barDiv.show()
+			setPosition(endDiv, leftPos, alignTopPos)
+			alignTopPos += endDiv.outerHeight() + -<span class="number">1</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>continue with rad-child of the end block, if it exists</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">if</span> exists endDiv, <span class="string">'rad-child'</span>
+				currDiv = $(<span class="string">'#'</span>+endDiv.attr(<span class="string">'rad-child'</span>))
+			<span class="keyword">else</span>
+				<span class="keyword">return</span>
+		<span class="keyword">else</span> <span class="comment"># not a block</span>
+			<span class="keyword">if</span> exists currDiv, <span class="string">'rad-child'</span>
+				currDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-child'</span>))
+			<span class="keyword">else</span>
+				<span class="keyword">return</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>checks if a start block is already there, or a return block isn&#39;t 
+being attached to a function, or if there is already an else block there</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">okToDropHere</span> = <span class="params">(candidate, dragged)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>need to restore this test - really should just automatically put in one &quot;Start&quot; block
+return false if dragged.hasClass(&quot;maxone&quot;) and $(&quot;#ProgrammingPane &gt; .maxone&quot;).length &gt; 0</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="keyword">if</span> dragged.attr(<span class="string">'rad-command'</span>) == <span class="string">'else'</span> <span class="keyword">or</span> dragged.attr(<span class="string">'id'</span>)==<span class="string">'telse'</span>
+		<span class="keyword">return</span> availableIFfor candidate
+	<span class="keyword">if</span> dragged.attr(<span class="string">'rad-command'</span>) == <span class="string">'return'</span> <span class="keyword">or</span> dragged.attr(<span class="string">'id'</span>)==<span class="string">'treturn'</span>
+		<span class="keyword">return</span> connectsToFunction(candidate)
+	<span class="keyword">return</span> <span class="literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>Return true if the block, or one of its ancestors, is an IF without an ELSE</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">availableIFfor</span> = <span class="params">(block)</span> -&gt;</span>
+	ancestorDiv = block
+	<span class="keyword">while</span> <span class="literal">true</span>
+		<span class="keyword">if</span> ancestorDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'if'</span>
+			<span class="keyword">if</span> exists ancestorDiv, <span class="string">'rad-else'</span>
+				<span class="keyword">return</span> <span class="literal">false</span>
+			<span class="keyword">else</span>
+				<span class="keyword">return</span> <span class="literal">true</span>
+		<span class="keyword">if</span> exists ancestorDiv, <span class="string">'rad-parent'</span>
+			ancestorDiv = $(<span class="string">'#'</span>+ancestorDiv.attr(<span class="string">'rad-parent'</span>))
+		<span class="keyword">else</span>
+			<span class="keyword">return</span> <span class="literal">false</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>delete when dropped in the left box</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">deleteOnDrop</span> = <span class="params">(event, ui, draggedID)</span> -&gt;</span> 
+	changes = <span class="literal">true</span>
+	<span class="keyword">if</span> draggedID?
+		draggedElement = $(<span class="string">'#'</span>+draggedID)
+	<span class="keyword">else</span>
+		draggedElement = $(ui.helper)
+	<span class="keyword">if</span> draggedElement.hasClass(<span class="string">"draggable2"</span>) <span class="keyword">and</span> overCommandList(ui)
+		attachedDiv.remove() <span class="keyword">for</span> attachedDiv <span class="keyword">in</span> Radius.getAttachedDivs(draggedElement)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>softCompile() #compile here when you delete something, like a function</p>
+<p>Returns true if the div being dragged, thisOne, has its upper left hand
+corner in the Command List area.
+probably should use .offset which is in relation to the window</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">overCommandList</span> = <span class="params">(thisOne)</span> -&gt;</span>
+	thisTop = thisOne.position.top + $(<span class="string">"#ProgrammingPane"</span>).position().top <span class="comment"># relative position</span>
+	thisLeft = thisOne.position.left + $(<span class="string">"#ProgrammingPane"</span>).position().left
+	thatTop = $(<span class="string">"#CommandsPane"</span>).position().top
+	thatLeft = $(<span class="string">"#CommandsPane"</span>).position().left
+	thatRight = $(<span class="string">"#CommandsPane"</span>).position().top + $(<span class="string">"#CommandsPane"</span>).width()
+	thatBot = $(<span class="string">"#CommandsPane"</span>).position().left + $(<span class="string">"#CommandsPane"</span>).height()
+	<span class="keyword">return</span> thisTop &lt;= thatBot <span class="keyword">and</span> thisTop &gt;= thatTop <span class="keyword">and</span> 
+			thisLeft &lt;= thatRight <span class="keyword">and</span> thisLeft &gt;= thatLeft</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>until rad-parent is null</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">connectsToStart</span> = <span class="params">(block)</span> -&gt;</span> 
+	parentBlock = block
+	<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> parentBlock.attr(<span class="string">'rad-command'</span>) == <span class="string">'start'</span> 
+	parID = parentBlock.attr(<span class="string">'rad-parent'</span>)
+	<span class="keyword">while</span> parID? <span class="keyword">and</span> parID.length
+		parentBlock = $(<span class="string">'#'</span>+parID)
+		<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> parentBlock.attr(<span class="string">'rad-command'</span>) == <span class="string">'start'</span> 
+		parID = parentBlock.attr(<span class="string">'rad-parent'</span>)
+	<span class="keyword">return</span> <span class="literal">false</span>
+
+
+<span class="function"><span class="title">connectsToFunction</span> = <span class="params">(block)</span> -&gt;</span> 
+	parentBlock = block
+	<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> parentBlock.attr(<span class="string">'rad-command'</span>) == <span class="string">'functiondef'</span> 
+	parID = parentBlock.attr(<span class="string">'rad-parent'</span>)
+	<span class="keyword">while</span> parID? <span class="keyword">and</span> parID.length
+		parentBlock = $(<span class="string">'#'</span>+parID)
+		<span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> parentBlock.attr(<span class="string">'rad-command'</span>) == <span class="string">'functiondef'</span> 
+		parID = parentBlock.attr(<span class="string">'rad-parent'</span>)
+	<span class="keyword">return</span> <span class="literal">false</span>
+
+
+
+<span class="function"><span class="title">SetupDroppable</span> = -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>The only .droppable is the programming box, #ProgrammingPane.
+Two cases are handled, 1) the dropped div is already in the programming
+area, so just see if it should be attached; 2) the dropped div was dragged
+over from the command pane, so make a clone, and then see if it should be
+attached.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$(<span class="string">'#ProgrammingPane'</span>).droppable
+		<span class="attribute">drop</span>: <span class="function"><span class="params">(event, ui)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>console.log(&#39;drop&#39;, event)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">if</span> ui.draggable.hasClass(<span class="string">"draggable2"</span>)
+				<span class="keyword">return</span> <span class="keyword">if</span> exists ui.draggable, <span class="string">'rad-hastobefirst'</span>   <span class="comment"># no can attach</span>
+				<span class="keyword">return</span> <span class="keyword">if</span> <span class="keyword">not</span> attachableCandidateID?
+				attach(attachableCandidateID, $(ui.draggable).attr(<span class="string">"id"</span>))
+				attachableCandidateID = <span class="literal">null</span>
+				$(<span class="string">'.attachable'</span>).removeClass(<span class="string">'attachable'</span>)
+				changes = <span class="literal">true</span>
+				<span class="keyword">return</span>
+			<span class="keyword">return</span> <span class="keyword">if</span> <span class="keyword">not</span> ui.draggable.hasClass(<span class="string">"draggable1"</span>) <span class="comment"># new command?</span>
+			<span class="keyword">return</span> <span class="keyword">if</span> overCommandList($(ui.draggable))  <span class="comment"># not fully dragged in?</span>
+			changes = <span class="literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>put the clone in the DOM with a new unique ID and no helper clone when dragged</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			myclone = ui.helper.clone()	           <span class="comment"># clone of the clone !!</span>
+			setUpClone(myclone, ui.draggable, ui.offset)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>append myclone to the HTML of this (id=&#39;ProgrammingPane&#39;), and make it draggable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			myclone.appendTo($(<span class="keyword">this</span>)).draggable
+				<span class="attribute">start</span>: <span class="function"><span class="params">(event, ui)</span> -&gt;</span> 
+					myclone.attr(<span class="string">'rad-startLeft'</span>, myclone.position().left + scrLeft)
+					myclone.attr(<span class="string">'rad-startTop'</span>, myclone.position().top + scrTop)
+					$(<span class="string">".selected"</span>).removeClass(<span class="string">"selected"</span>)
+					lastDraggedDiv = myclone
+				<span class="attribute">drag</span>: onDrag     <span class="comment"># onDrag is defined above</span>
+				<span class="attribute">containment</span>: <span class="string">"parent"</span>
+				<span class="attribute">handle</span>: <span class="string">'.draghandle'</span>
+				<span class="attribute">zIndex</span>: <span class="number">100</span>        <span class="comment"># put dragging thing higher TODO: put endwhile higher as well</span>
+			<span class="keyword">if</span> myclone.attr(<span class="string">"rad-end"</span>).length &gt; <span class="number">0</span>
+				parentTop = parseFloat(myclone.css(<span class="string">"top"</span>))
+				parentBottom = parentTop + <span class="number">29</span> <span class="comment"># should use parseFloat(myclone.css("outerHeight"))</span>
+				parentLeft = parseFloat(myclone.css(<span class="string">"left"</span>))
+				endID = myclone.attr(<span class="string">'rad-end'</span>)
+				<span class="keyword">if</span> myclone.attr(<span class="string">'rad-command'</span>) == <span class="string">"while"</span>
+					endTemplate = $(<span class="string">"#endwhiletemplate"</span>)
+					barTemplate = $(<span class="string">"#whilebartemplate"</span>)
+				<span class="keyword">else</span> <span class="keyword">if</span> myclone.attr(<span class="string">'rad-command'</span>) == <span class="string">"if"</span>
+					endTemplate = $(<span class="string">"#endiftemplate"</span>)
+					barTemplate = $(<span class="string">"#ifelsebartemplate"</span>)
+					myclone.attr(<span class="string">'rad-else'</span>, <span class="string">''</span>)
+				endTemplate.clone()
+					.attr(<span class="string">'id'</span>, endID)
+					.attr(<span class="string">'rad-parent'</span>, myclone.attr(<span class="string">"id"</span>))
+					.css(<span class="string">'position'</span>, <span class="string">'absolute'</span>)
+					.css(<span class="string">'top'</span>, parentBottom + initialEndGap)
+					.css(<span class="string">'left'</span>, parentLeft)
+					.addClass(<span class="string">"draggable2"</span>)  <span class="comment"># so it can be attached to, but it isn't really draggable</span>
+					.appendTo($(<span class="keyword">this</span>))
+					.show()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>console.log(&quot;end div:&quot;, $(&#39;#&#39;+endID).css(&#39;top&#39;), parentTop + 50)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				barTemplate.clone()
+					.attr(<span class="string">'id'</span>, myclone.attr(<span class="string">'rad-bar'</span>))
+					.css(<span class="string">'position'</span>, <span class="string">'absolute'</span>)
+					.css(<span class="string">'top'</span>, parentTop + myclone.outerHeight())
+					.css(<span class="string">'left'</span>, parentLeft)
+					.height(parseFloat($(<span class="string">'#'</span>+endID).css(<span class="string">"top"</span>)) - (parentTop + myclone.outerHeight()))
+					.appendTo($(<span class="keyword">this</span>))
+					.show()
+				<span class="keyword">if</span> myclone.attr(<span class="string">'rad-command'</span>) == <span class="string">"while"</span>
+					$(<span class="string">"#"</span>+endID).attr(<span class="string">'rad-command'</span>, <span class="string">'endwhile'</span>)
+				<span class="keyword">else</span> <span class="keyword">if</span> myclone.attr(<span class="string">'rad-command'</span>) == <span class="string">"if"</span>
+					$(<span class="string">"#"</span>+endID).attr(<span class="string">'rad-command'</span>, <span class="string">'endif'</span>)
+			<span class="keyword">if</span> myclone.attr(<span class="string">'rad-command'</span>) == <span class="string">"else"</span>
+				barID = <span class="string">"xxx"</span> + getNextID()
+				myclone.attr(<span class="string">'rad-bar'</span>, barID)
+				barTemplate = $(<span class="string">"#ifelsebartemplate"</span>)
+				barTemplate.clone()
+					.attr(<span class="string">'id'</span>, barID)
+					.css(<span class="string">'position'</span>, <span class="string">'absolute'</span>)
+					.css(<span class="string">'top'</span>, parentTop + myclone.outerHeight())
+					.css(<span class="string">'left'</span>, parentLeft)
+					.width(<span class="number">8</span>)
+					.height(<span class="number">30</span> - myclone.outerHeight())
+					.appendTo($(<span class="keyword">this</span>))
+					.hide()
+
+			<span class="keyword">return</span> <span class="keyword">if</span> <span class="keyword">not</span> attachableCandidateID?
+			<span class="keyword">return</span> <span class="keyword">if</span> exists myclone, <span class="string">'rad-hastobefirst'</span>    <span class="comment">#myclone.hasClass("hastobefirst")</span>
+			attach(attachableCandidateID, myclone.attr(<span class="string">"id"</span>))
+			attachableCandidateID = <span class="literal">null</span>
+			$(<span class="string">'.attachable'</span>).removeClass(<span class="string">'attachable'</span>)
+			<span class="keyword">return</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>This stuff doesn&#39;t work in Chrome, because when multi-line text is
+pasted in, Chrome creates new divs.
+Solution may lie here:
+<a href="http://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser">http://stackoverflow.com/questions/2176861/javascript-get-clipboard-data-on-paste-event-cross-browser</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">removeCRcallback</span> = <span class="params">(event)</span> -&gt;</span>
+	console.log(<span class="string">"callback event"</span>, event)
+	console.log(<span class="string">"event.target"</span>, event.target)
+	text1 = $(event.target).html()
+	console.log(<span class="string">"pasted"</span>, text1)
+	$(event.target).html(text1.replace(<span class="regexp">/[\n\r]+/g</span>, <span class="string">"#"</span>))
+
+<span class="function"><span class="title">removeCR</span> = <span class="params">(event)</span> -&gt;</span>
+	console.log(<span class="string">"removeCR: before setTimeout"</span>)
+	setTimeout(removeCRcallback(event), <span class="number">1000</span>)
+	console.log(<span class="string">"removeCT: after setTimeout"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>When a command is dragged onto the programming area, a clone of it is
+created, which remains in the programming area.  This function sets up
+that clone, based on the original.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">setUpClone</span> = <span class="params">(clone, original, offset)</span> -&gt;</span>
+	clone.attr(<span class="string">'id'</span>, <span class="string">'x'</span> + getNextID())  <span class="comment"># its own unique id</span>
+	clone.attr(<span class="string">"class"</span>, <span class="string">"draggable2 ui-widget-content"</span>)
+	clone.css(<span class="string">"position"</span>, <span class="string">"absolute"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>I don&#39;t know why it is necessary to add 9 and 5 below.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	clone.css(<span class="string">"top"</span>, offset.top - $(<span class="string">"#ProgrammingPane"</span>).offset().top + <span class="number">9</span> + scrTop)
+	clone.css(<span class="string">"left"</span>, offset.left - $(<span class="string">"#ProgrammingPane"</span>).offset().left + <span class="number">5</span> + scrLeft)
+	clone.css(<span class="string">"z-index"</span>, <span class="number">100</span>)
+	clone.attr(<span class="string">'rad-child'</span>, <span class="string">''</span>)
+	clone.attr(<span class="string">'rad-parent'</span>, <span class="string">''</span>)
+	clone.attr(<span class="string">'rad-end'</span>, <span class="string">''</span>)      <span class="comment"># used by while and if</span>
+	clone.attr(<span class="string">'rad-bar'</span>, <span class="string">''</span>)      <span class="comment"># used by while and if and else</span>
+	clone.attr(<span class="string">'rad-command'</span>, original.attr(<span class="string">'id'</span>).substring(<span class="number">1</span>))  <span class="comment"># remember the id, except for the inition 't'</span>
+	<span class="keyword">if</span> original.hasClass(<span class="string">'maxone'</span>)
+		clone.attr(<span class="string">'rad-maxone'</span>, <span class="literal">true</span>)
+	<span class="keyword">if</span> original.hasClass(<span class="string">'hastobefirst'</span>)
+		clone.attr(<span class="string">'rad-hastobefirst'</span>, <span class="literal">true</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <h1 id="-">#</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tstart'</span>
+		clone.addClass(<span class="string">'START'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tshow'</span>
+		clone.addClass(<span class="string">'SHOW'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tclear'</span>
+		clone.addClass(<span class="string">'CLEAR'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'twhile'</span>
+		clone.addClass(<span class="string">'WHILE'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tif'</span>
+		clone.addClass(<span class="string">'IF'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'telse'</span>
+		clone.addClass(<span class="string">'ELSE'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tassign'</span>
+		clone.addClass(<span class="string">'ASSIGN'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tfunctiondef'</span>
+		clone.addClass(<span class="string">'FUNCDEF'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'treturn'</span>
+		clone.addClass(<span class="string">'RETURN'</span>)
+	<span class="keyword">if</span> original.attr(<span class="string">'id'</span>)==<span class="string">'tfndo'</span>
+		clone.addClass(<span class="string">'FUNCDO'</span>)
+	<span class="keyword">if</span> original.hasClass(<span class="string">'maxone'</span>)
+		clone.addClass(<span class="string">'maxone'</span>)
+	<span class="keyword">if</span> original.hasClass(<span class="string">'hastobefirst'</span>)
+		clone.addClass(<span class="string">'hastobefirst'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h1 id="-">#</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	clone.find(<span class="string">".editable"</span>).<span class="literal">on</span>(<span class="string">"paste"</span>, removeCR)
+	clone.find(<span class="string">".short"</span>).attr(<span class="string">'minwidth'</span>, <span class="number">40</span>).attr(<span class="string">'maxwidth'</span>, <span class="number">300</span>)
+	clone.find(<span class="string">".medium"</span>).attr(<span class="string">'minwidth'</span>, <span class="number">80</span>).attr(<span class="string">'maxwidth'</span>, <span class="number">400</span>)
+	clone.find(<span class="string">".long"</span>).attr(<span class="string">'minwidth'</span>, <span class="number">180</span>).attr(<span class="string">'maxwidth'</span>, <span class="number">500</span>)
+	<span class="keyword">if</span> original.hasClass(<span class="string">"has-end"</span>)
+		clone.attr(<span class="string">'rad-end'</span>, <span class="string">"x"</span> + getNextID())
+		clone.attr(<span class="string">'rad-bar'</span>, <span class="string">"x"</span> + getNextID())</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

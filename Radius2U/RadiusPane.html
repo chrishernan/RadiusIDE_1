@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-ui.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="jQuery/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="jQuery/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+<link href="Radius2.css" rel="stylesheet" type="text/css" />
+<link href="RadiusPanes.css" rel="stylesheet" type="text/css" />
+
+
+<script src="js/Radius1.js"></script>
+<script src="js/Box.js"></script>
+<script src="js/Block.js"></script>
+<script src="js/Token.js"></script>
+<script src="js/PrototypesPane.js"></script>
+<script src="js/ProgrammingPane.js"></script>
+<script src="js/RadiusPanes.js"></script>
+  
+</head>
+
+<body>
+  <title>Radius IDE</title>
+
+<div id="tool-bar" class="pane">
+  <div id="tool-bar-title">Radius IDE</div>
+  <button class="button"> Login </button>
+
+  <button class="button"> New </button>
+  <button class="button"> Classes </button>
+  <button class="button"> Trash </button>
+  <button class="button"> Help </button>
+  <button class="button"> Lock </button>
+  <button class="button"> Settings </button>
+  <button class="button"> Run </button>
+  <button class="button"> Stop </button>
+
+</div>
+<div id="window" class="win">
+  <div id="programming" onclick = "setID(e)" class="draggable pane">
+    <div id="title" class="simple-title">Programming</div>
+        <div id="ProgrammingPane"></div>
+  </div>
+
+  <div id="top-right" class="ghostpane"></div>
+
+
+  <div id="program-output" class="draggable pane">
+    <div id="title" class="simple-title">Program Output</div>
+  </div>
+
+  <div id="bottom-right" class="ghostpane"></div>
+
+
+  <div id="control-panel" class="draggable pane">
+    <div id="title" class="simple-title">Control Panel</div>
+        <div id="PrototypesPane"></div>
+  </div>
+
+  <div id="left" class="ghostpane"></div>
+
+
+</div>
+
+  
+</body>
+
+</html>
+
