@@ -1,5 +1,6 @@
 $(function() {
-  $("#programming").draggable({
+  //make all panes draggable and snapable and contained in #window
+  $(".draggable").draggable({
     snap: ".ui-widget-header",
     handle: '.simple-title',
     containment: "parent"
@@ -8,20 +9,6 @@ $(function() {
     grid: 5
   });
 
-  $("#program-output").draggable({
-    snap: ".ui-widget-header",
-    handle: '.simple-title',
-    containment: "parent"
-  }).resizable({
-    grid: 5
-  });
-  $("#control-panel").draggable({
-    snap: ".ui-widget-header",
-    handle: '.simple-title',
-    containment: "parent"
-  }).resizable({
-    grid: 5
-  });
   //All buttons in Toolbar
   $("button:first").button({
     label: "LogIn",
@@ -63,18 +50,16 @@ $(function() {
     },
   });
 
+//change dimension of div 
+//mostly used for snaping
 function setBounds(element, l, t, w, h) {
   element.style.left = l + '%';
   element.style.top = t + '%';
   element.style.width = w + '%';
   element.style.height = h + '%';
 }
-var id = "control-panel";
-function setID(e){
-  id = e.target.id;
-  alert(id);
-}
 
+//hide the ghostpanes
 function hintHide(ghost) {
   ghost.style.opacity = 0;
 }
@@ -96,20 +81,26 @@ document.getElementById("program-output").addEventListener('mousedown', onDown);
 var st;
 var id;
 function onDown(e){
+//save element when click 
+//not sure if this is really needed
 st = $(this);
 id = document.getElementById(st.attr('id'));
+//bring div to the front
+st.parent().append(st);
 
 }
 
 function onUp(e){
-//alert($('#window').width());
-  if(id.style.left =='0px'){
+//sanp the left
+  if(id.style.left =='50px'){
   setBounds(id, 0, 0, 25, 100);
   }
-  else if(id.style.top =='0px' && $('#window').width() - (st.offset().left + st.width())<3){
+  //snap to top-right
+  else if(id.style.top <'50px' && $('#window').width() - (st.offset().left + st.width())<100){
   setBounds(id, 25, 0, 75, 55);
   }
-    else if(($('#window').height() - (st.offset().top + st.height()))<3 && $('#window').width() - (st.offset().left + st.width())<3){
+  //snap to bottom-right
+    else if(($('#window').height() - (st.offset().top + st.height()))<100 && $('#window').width() - (st.offset().left + st.width())<100){
   setBounds(id, 25, 55, 75, 45);
   }
 }
