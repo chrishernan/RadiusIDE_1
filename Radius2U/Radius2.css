@@ -12,30 +12,26 @@ Style the enclosing panes
 */
 #PrototypesPane {
 	position: absolute;
-	background-color: #EEE; 
-	border: medium solid black;
+  overflow: scroll; 
 	overflow: visible; 
 	padding: 5px; 
+
 	/* it seems to be necessary for PrototypesPane to have a higher z than 
 	   ProgrammingPane, so that its sub-divs will be on top of ProgrammingPane
 	   while being dragged - the z of the sub-div has no effect */
 	z-index: 6;
-	left: 10px;
-	top: 10px;
-	width: 275px;
-	height: 500px;
+  width: calc(100% - 15px);
+  height: calc(95% - 15px);
+
 }
 
 #ProgrammingPane {
+
 	position: absolute;
-	background-color: #DED; 
-	border: medium solid blue;
 	overflow: scroll; 
 	z-index: 5;
-	left: 325px;
-	top: 50px;
-	width: 400px;
-	height: 500px;
+	width: calc(100% - 6px);
+	height: calc(95% - 6px);
 }
 
 *:focus {  /* no focus pocus - remove fuzzy border around focus'd parm */
