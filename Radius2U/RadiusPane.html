@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-ui.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="jQuery/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="jQuery/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+<link href="Radius2.css" rel="stylesheet" type="text/css" />
+<link href="RadiusPanes.css" rel="stylesheet" type="text/css" />
+
+
+<script src="js/Radius1.js"></script>
+<script src="js/Box.js"></script>
+<script src="js/Block.js"></script>
+<script src="js/Token.js"></script>
+<script src="js/PrototypesPane.js"></script>
+<script src="js/ProgrammingPane.js"></script>
+<script src="js/RadiusPanes.js"></script>
+  
+</head>
+
+<body>
+  <title>Radius IDE</title>
+
+<div id="tool-bar" class="pane">
+  <div id="tool-bar-title">Radius IDE</div>
+
+  <button id = "b-login" class="button"> Login </button>
+  <button id = "b-new" class="button"> New </button>
+  <button id = "b-classes" class="button"> Classes </button>
+  <button id = "b-trash" class="button"> Trash </button>
+  <button id = "b-help" class="button"> Help </button>
+  <button id = "b-lock" class="button"> Lock </button>
+  <button id = "b-settings" class="button"> Settings </button>
+  <button id = "b-run" class="button"> Run </button>
+  <button id = "b-stop" class="button"> Stop </button>
+
+</div>
+<div id="window" class="win">
+  <div id="programming" class="draggable pane">
+    <div id="progamming-title" class="simple-title">Programming</div>
+        <div id="ProgrammingPane"></div>
+  </div>
+
+  <div id="top-right" class="ghostpane"></div>
+
+
+  <div id="program-output" class="draggable pane">
+    <div id="program-ouput-title" class="simple-title">Program Output</div>
+  </div>
+
+  <div id="bottom-right" class="ghostpane"></div>
+
+
+  <div id="control-panel" class="draggable pane">
+    <div id="control-panel-title" class="simple-title">Control Panel</div>
+        <div id="PrototypesPane"></div>
+  </div>
+
+  <div id="left" class="ghostpane"></div>
+
+
+</div>
+
+    <div id = "login-pop" class = "pop">
+        <div id="login-title" class="simple-title">LogIn/SignUp
+        <span id = "close" class="close" onClick="closeOnClick">x</span></div>
+          <modal name="login-form" action="" method="post">
+            <center>Username:</center>
+            <center><input name="username" size="26" /></center>
+            <center>Password:</center>
+            <center><input name="password" type="password" size="26" /></center>
+            <center><input type="submit" name="submit" value="Login" /></center>
+          </modal>
+    </div>
+
+  
+</body>
+
+</html>
+

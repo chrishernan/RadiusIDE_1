@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ProgrammingPane1.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="Box.html">
+                Box.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPane.html">
+                ProgrammingPane.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPane1.html">
+                ProgrammingPane1.coffee
+              </a>
+            
+              
+              <a class="source" href="ProgrammingPaneDrag.html">
+                ProgrammingPaneDrag.coffee
+              </a>
+            
+              
+              <a class="source" href="Radius1.html">
+                Radius1.coffee
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>ProgrammingPane1.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>When the background is clicked, any selected block reverts to non-selected</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">click</span> <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>console.log(&quot;clicked on background&quot;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		$(<span class="string">".selected"</span>).removeClass(<span class="string">"selected"</span>)
+		$(<span class="string">'#popupmenu'</span>).hide()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Delete key means delete selected blocks</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'body'</span>)</span>.<span class="title">keydown</span> <span class="params">(event)</span> -&gt;</span>   <span class="comment"># can't use #ProgrammingPane</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>console.log(&quot;body keydown, which = &quot;, event.which)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">if</span> event.which == <span class="number">46</span> <span class="keyword">or</span> event.which == <span class="number">8</span> <span class="comment"># Delete, backspace</span>
+			deleteTheseSuckers($(<span class="string">".draggable2.selected"</span>))</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Suppress Enter in editable areas</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keydown</span>", "<span class="title">div</span>.<span class="title">editable</span>", <span class="params">(event)</span> -&gt;</span> 
+		<span class="keyword">if</span> event.which == <span class="number">10</span> <span class="keyword">or</span> event.which == <span class="number">13</span>  <span class="comment"># no CR/LF</span>
+			event.preventDefault()
+		event.stopPropagation()  <span class="comment"># hide keypress from parents</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Allow HTML-special chars to be entered - this is still a mystery</p>
+<h1 id="-">#</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keypress</span>", "<span class="title">div</span>.<span class="title">editable</span>", <span class="params">(event)</span> -&gt;</span> 
+		console.log(<span class="string">'keypress which'</span>, event.which,
+			<span class="string">'text'</span>, $(event.target).text(), <span class="string">'html'</span>, $(event.target).html()) 
+	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", "<span class="title">div</span>.<span class="title">editable</span>", <span class="params">(event)</span> -&gt;</span> 
+		console.log(<span class="string">'keyup which'</span>, event.which,
+			<span class="string">'text'</span>, $(event.target).text(), <span class="string">'html'</span>, $(event.target).html())</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>if event.which == 60  # &lt;
+console.log(&#39;text&#39;, $(event.target).text(), &#39;html&#39;, $(event.target).html()) 
+event.preventDefault()
+need to allow default and later change &lt; to &lt;
+if event.which == 38  # &amp;
+event.preventDefault()</p>
+<h1 id="-">#</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Remove &#39;errorHighlight&#39; highlight and the message box when a parm is edited.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", "<span class="title">div</span>.<span class="title">errorParm</span>", <span class="params">(event)</span> -&gt;</span> 
+		clearErrors(<span class="literal">true</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Find the length of the text, resize this editable div accordianly.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", ".<span class="title">editable</span>", <span class="params">(event)</span> -&gt;</span> 
+		$(<span class="string">"#widthAux"</span>).html($(event.target).text())</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>console.log(&quot;length:&quot;, $(&#39;#widthAux&#39;).width())</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		boxmin = $(event.target).attr(<span class="string">'minwidth'</span>)
+		boxmax = $(event.target).attr(<span class="string">'maxwidth'</span>)
+		newwidth = Math.max(boxmin, $(<span class="string">'#widthAux'</span>).width() + <span class="number">10</span>)
+		newwidth = Math.min(boxmax, newwidth)
+		$(event.target).width(newwidth)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Mouse down on a block&#39;s draghandle removes error messages, and may invoke the popup menu</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">mousedown</span>", ".<span class="title">draghandle</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>console.log(&#39;event&#39;, event)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		clearErrors(<span class="literal">true</span>)
+		<span class="keyword">if</span> event.altKey <span class="keyword">or</span> event.ctrlKey <span class="keyword">or</span> event.metaKey <span class="keyword">or</span> event.shiftKey</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>If this block is already selected (and perhaps others are too),
+then don&#39;t &quot;reselect&quot; it, and most importantly, don&#39;t deselect other selected blocks
+(shift-double click is not impacted by clickToSelect, who knows whether that&#39;s right)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">if</span> $(<span class="keyword">this</span>).parent().hasClass(<span class="string">"selected"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>console.log(&quot;yes, this one is selected&quot;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				clickToSelect = <span class="literal">false</span>
+			doPopup(<span class="keyword">this</span>, event)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Close a pop up menu if the user clicks elsewhere in the Programming Pane  (was: it loses focus)
+Not sure any of this is functional
+$(&#39;#popupmenu&#39;).focusout (event) -&gt;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", "*", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>console.log(&#39;1 popup menu loses focus&#39;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		$(<span class="string">'#contextmenu'</span>).remove()
+		$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>console.log(&#39;2 popup menu loses focus&#39;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			$(<span class="string">'#contextmenu'</span>).remove()
+		$<span class="function"><span class="params">(<span class="string">'body'</span>)</span>.<span class="title">on</span> "<span class="title">keyup</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>console.log(&#39;3 popup menu loses focus&#39;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			$(<span class="string">'#contextmenu'</span>).remove()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Clicking on a block over the name selects it.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">click</span>", ".<span class="title">draghandle</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>console.log(&quot;clicked on &quot;, event.target, lastDraggedDiv, clickToSelect)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		event.stopPropagation()     <span class="comment"># don't bubble up to #ProgrammingPane</span>
+		<span class="keyword">if</span> <span class="keyword">not</span> clickToSelect        <span class="comment"># turned off by shift-mousedown?</span>
+			clickToSelect = <span class="literal">true</span>    <span class="comment">#  turn back on</span>
+			<span class="keyword">return</span>                  <span class="comment">#  but don't select</span>
+		$(<span class="string">".selected"</span>).removeClass(<span class="string">"selected"</span>)
+		parentDiv = $(event.target).parent()
+		<span class="keyword">if</span> parentDiv == lastDraggedDiv
+			lastDraggedDiv = <span class="literal">null</span>
+			<span class="keyword">return</span>
+		parentDiv.addClass(<span class="string">'selected'</span>)
+		<span class="keyword">if</span> exists parentDiv, <span class="string">"rad-end"</span>
+			$(<span class="string">"#"</span>+parentDiv.attr(<span class="string">"rad-end"</span>)).addClass(<span class="string">'selected'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Double-click on a block over the name selects it and all children</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">dblclick</span>", ".<span class="title">draghandle</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>console.log(&quot;double clicked on &quot;, event.target)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		event.stopPropagation()     <span class="comment"># don't bubble up to #ProgrammingPane</span>
+		$(<span class="string">".selected"</span>).removeClass(<span class="string">"selected"</span>)
+		parentDiv = $(event.target).parent()
+		<span class="keyword">if</span> parentDiv == lastDraggedDiv
+			lastDraggedDiv =  <span class="literal">null</span>
+			<span class="keyword">return</span>
+		<span class="keyword">for</span> child <span class="keyword">in</span> Radius.getAttachedDivs(parentDiv)
+			console.log(<span class="string">"attached div"</span>, child)
+			child.addClass(<span class="string">'selected'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Apply bold to variable names - this is an experiment</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	$<span class="function"><span class="params">(<span class="string">'#ProgrammingPane'</span>)</span>.<span class="title">on</span> "<span class="title">blur</span>", ".<span class="title">ASSIGN</span> &gt; .<span class="title">parm</span>", <span class="params">(event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>console.log(&quot;blur:&quot;, event.target, $(event.target).parent())</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		varName = $(event.target).text()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>console.log(&quot;text: &lt;&quot; + varName + &quot;&gt;&quot;)
+highlightAll(varName.trim())</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>for now, this highlighting is commented out - I&#39;ll do something more
+sophisticated when the Vars pane is implemented</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">highlightAll</span> = <span class="params">(text)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <h1 id="-">#</h1>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="keyword">for</span> p <span class="keyword">in</span> $(<span class="string">"#ProgrammingPane .editable"</span>)
+		t = $(p).text()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>console.log(&quot;checking&quot;, t, p, t.indexOf(text))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		i = t.indexOf(text)
+		<span class="keyword">if</span> i &gt; -<span class="number">1</span>
+			$(p).html(t.replace(text, <span class="string">"&lt;span class='highlight'&gt;"</span>+text+<span class="string">"&lt;/span&gt;"</span>), <span class="string">"g"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>console.log(&quot;now:&quot;, $(p).text())</p>
+<h1 id="-">#</h1>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>invoked when Delete or Backspace is pressed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">deleteTheseSuckers</span> = <span class="params">(targetList)</span> -&gt;</span>
+	<span class="keyword">for</span> target <span class="keyword">in</span> targetList
+		t2 = $(target)
+		<span class="keyword">if</span> exists t2, <span class="string">'rad-parent'</span>
+			$(<span class="string">'#'</span>+t2.attr(<span class="string">'rad-parent'</span>)).attr(<span class="string">'rad-child'</span>, <span class="string">''</span>)
+		<span class="keyword">if</span> exists t2, <span class="string">'rad-child'</span>
+			$(<span class="string">'#'</span>+t2.attr(<span class="string">'rad-child'</span>)).attr(<span class="string">'rad-parent'</span>, <span class="string">''</span>)
+		<span class="keyword">if</span> exists t2, <span class="string">'rad-bar'</span>
+			$(<span class="string">'#'</span>+t2.attr(<span class="string">'rad-bar'</span>)).remove()
+		<span class="keyword">if</span> exists t2, <span class="string">'rad-end'</span>
+			t3 = $(<span class="string">'#'</span>+t2.attr(<span class="string">'rad-end'</span>))
+			<span class="keyword">if</span> exists t3, <span class="string">'rad-child'</span>
+				$(<span class="string">'#'</span>+t3.attr(<span class="string">'rad-child'</span>)).attr(<span class="string">'rad-parent'</span>, <span class="string">''</span>)
+			t3.remove()
+		t2.remove()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>console.log(&quot;targetList:&quot;, targetList)
+console.log(&quot;[0]:&quot;, targetList[0])</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="function"><span class="title">commentOutTheseSuckers</span> = <span class="params">(targetList)</span> -&gt;</span>
+	<span class="keyword">for</span> target <span class="keyword">in</span> targetList</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>console.log(&#39;commenting out:&#39;, $(target))</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		$(target).addClass(<span class="string">"commentedOut"</span>)
+
+<span class="function"><span class="title">uncommentOutTheseSuckers</span> = <span class="params">(targetList)</span> -&gt;</span>
+	<span class="keyword">for</span> target <span class="keyword">in</span> targetList
+		$(target).removeClass(<span class="string">"commentedOut"</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>create a pop up menu</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">doPopup</span> = <span class="params">(div, event)</span> -&gt;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>console.log(&#39;in doPopup&#39;)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	divWithPopup = $(div).parent()    <span class="comment"># div is the draghandle, so get outer div</span>
+	$(<span class="string">'&lt;ul/&gt;'</span>, <span class="attribute">id</span>: <span class="string">'contextmenu'</span>).appendTo(<span class="string">'body'</span>)   <span class="comment"># new &lt;ul&gt;&lt;/ul&gt; is the basis</span>
+	popup = $(<span class="string">'#contextmenu'</span>)
+	popup.append(<span class="string">'&lt;li&gt;&lt;a href="#"&gt;Delete&lt;/a&gt;&lt;/li&gt;'</span>)
+	commentedOutExists = <span class="literal">false</span>
+	notCommentedOutExists = <span class="literal">false</span>
+	$<span class="function"><span class="params">(<span class="string">".selected"</span>)</span>.<span class="title">each</span> <span class="params">(index, value)</span> -&gt;</span>
+		div = $ value
+		<span class="keyword">if</span> div.hasClass(<span class="string">"commentedOut"</span>)
+			commentedOutExists = <span class="literal">true</span>
+		<span class="keyword">else</span>
+			notCommentedOutExists = <span class="literal">true</span>
+	<span class="keyword">if</span> notCommentedOutExists
+		popup.append(<span class="string">'&lt;li&gt;&lt;a href="#"&gt;Comment out&lt;/a&gt;&lt;/li&gt;'</span>)
+	<span class="keyword">if</span> commentedOutExists
+		popup.append(<span class="string">'&lt;li&gt;&lt;a href="#"&gt;Un-comment out&lt;/a&gt;&lt;/li&gt;'</span>)
+	popup.append(<span class="string">'&lt;li&gt;---&lt;/li&gt;'</span>)
+	popup.append(<span class="string">'&lt;li&gt;&lt;a href="#"&gt;Help&lt;/a&gt;&lt;/li&gt;'</span>)
+	popup.menu
+		<span class="attribute">select</span>: popupSelected
+	blurTimer = <span class="literal">null</span>;
+	blurTimeToWait = <span class="number">200</span>     <span class="comment"># milliseconds before closing popup menu</span>
+	popup.<span class="literal">on</span>(<span class="string">'menufocus'</span>,<span class="function"> -&gt;</span> clearTimeout(blurTimer))
+	popup.<span class="literal">on</span>(<span class="string">'menublur'</span>,<span class="function"> -&gt;</span> 
+		blurTimer = setTimeout<span class="function"> -&gt;</span> 
+			$(<span class="string">'#contextmenu'</span>).remove()   <span class="comment"># console.log("OUT")</span>
+			blurTimeToWait)
+	popup.show().position
+		<span class="attribute">my</span>: <span class="string">"right top"</span>
+		<span class="attribute">at</span>: <span class="string">"left top"</span>
+		<span class="attribute">of</span>: divWithPopup
+	popup.menu(<span class="string">"enable"</span>)
+	popup.keyup <span class="function"><span class="params">(event)</span> -&gt;</span>     <span class="comment"># closeable with escape</span>
+		<span class="keyword">if</span> event.keyCode == <span class="number">27</span>
+			$(<span class="string">'#contextmenu'</span>).remove()
+	popup.click <span class="function"><span class="params">(event)</span> -&gt;</span> console.log(<span class="string">"click in popup"</span>)
+	popup.focus()
+	
+<span class="function"><span class="title">popupSelected</span> = <span class="params">(event, ui)</span> -&gt;</span>
+	console.log(<span class="string">'in popupSelected'</span>)
+	menuSelection = ui.item.text()
+	$(<span class="string">'#contextmenu'</span>).remove()
+	<span class="keyword">switch</span> menuSelection
+		<span class="keyword">when</span> <span class="string">"Delete"</span>
+			deleteTheseSuckers($(<span class="string">".draggable2.selected"</span>))</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>currently doesn&#39;t glue together the two segments if there&#39;s a gap</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="keyword">when</span> <span class="string">"Comment out"</span>
+			commentOutTheseSuckers($(<span class="string">".selected"</span>))
+		<span class="keyword">when</span> <span class="string">"Un-comment out"</span>
+			uncommentOutTheseSuckers($(<span class="string">".selected"</span>))
+		<span class="keyword">else</span>
+			console.log(<span class="string">"not handling popup menu selection"</span>, menuSelection)
+
+radCode = <span class="string">""</span>  <span class="comment"># window.generatedRadiusCode</span>
+Radius.<span class="function"><span class="title">generateCode</span> = -&gt;</span>
+	startDiv = <span class="literal">null</span>
+	radCode = <span class="string">""</span>
+	$<span class="function"><span class="params">(<span class="string">".draggable2"</span>)</span>.<span class="title">each</span> <span class="params">(index, value)</span> -&gt;</span>     <span class="comment">#$(".FUNCDEF")</span>
+		funcDiv = $ value
+		<span class="keyword">if</span> funcDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'functiondef'</span> <span class="keyword">and</span> exists funcDiv, <span class="string">'rad-child'</span>
+			generateCode2 funcDiv, <span class="number">0</span>
+			radCode += <span class="string">"#ENDFUNCTION\n"</span>
+		<span class="keyword">else</span> <span class="keyword">if</span> funcDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'start'</span>   <span class="comment"># remember START for next</span>
+			startDiv = funcDiv
+	
+	<span class="keyword">if</span> startDiv? <span class="keyword">and</span> exists startDiv, <span class="string">'rad-child'</span>
+		generateCode2 $(<span class="string">'#'</span>+startDiv.attr(<span class="string">'rad-child'</span>)), <span class="number">0</span>
+
+	console.log(<span class="string">"No code generated."</span>) <span class="keyword">if</span> radCode.length == <span class="number">0</span>
+	<span class="keyword">return</span> radCode
+
+<span class="function"><span class="title">spaces</span> = <span class="params">(n)</span> -&gt;</span>
+	<span class="keyword">return</span> <span class="string">"          "</span> <span class="keyword">if</span> n &gt;= <span class="number">5</span>
+	<span class="keyword">return</span> <span class="string">"        "</span>   <span class="keyword">if</span> n == <span class="number">4</span>
+	<span class="keyword">return</span> <span class="string">"      "</span>     <span class="keyword">if</span> n == <span class="number">3</span>
+	<span class="keyword">return</span> <span class="string">"    "</span>       <span class="keyword">if</span> n == <span class="number">2</span>
+	<span class="keyword">return</span> <span class="string">"  "</span>         <span class="keyword">if</span> n == <span class="number">1</span>
+	<span class="keyword">return</span> <span class="string">""</span>
+
+<span class="function"><span class="title">generateCode2</span> = <span class="params">(div, level)</span> -&gt;</span>
+	<span class="keyword">if</span> <span class="keyword">typeof</span> div == <span class="string">'string'</span>
+		<span class="keyword">return</span> <span class="keyword">if</span> div.length == <span class="number">0</span>
+		div = $(<span class="string">'#'</span>+div)
+	currDiv = div
+	<span class="keyword">while</span> currDiv?
+		radCode += (spaces level) + (generateCodeLine currDiv)
+		<span class="keyword">if</span> currDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'while'</span>
+			generateCode2 currDiv.attr(<span class="string">'rad-child'</span>), level+<span class="number">1</span>  <span class="comment"># in while block</span>
+			currDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-end'</span>))  <span class="comment"># ENDWHILE and all following</span>
+		<span class="keyword">else</span> <span class="keyword">if</span> currDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'if'</span>
+			generateCode2 currDiv.attr(<span class="string">'rad-child'</span>), level+<span class="number">1</span>  <span class="comment"># in if block</span>
+			<span class="keyword">if</span> exists currDiv, <span class="string">'rad-else'</span>
+				generateCode2 currDiv.attr(<span class="string">'rad-else'</span>), level
+			currDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-end'</span>))  <span class="comment"># ENDIF and all following</span>
+		<span class="keyword">else</span> <span class="keyword">if</span> currDiv.attr(<span class="string">'rad-command'</span>) == <span class="string">'else'</span>
+			generateCode2 currDiv.attr(<span class="string">'rad-child'</span>), level+<span class="number">1</span>  <span class="comment"># in else block</span>
+			currDiv = <span class="literal">null</span>
+		<span class="keyword">else</span>
+			<span class="keyword">if</span> exists currDiv, <span class="string">'rad-child'</span>
+				currDiv = $(<span class="string">'#'</span>+currDiv.attr(<span class="string">'rad-child'</span>))
+			<span class="keyword">else</span>
+				currDiv = <span class="literal">null</span>
+
+<span class="function"><span class="title">generateCodeLine</span> = <span class="params">(commandDiv)</span> -&gt;</span>
+	<span class="keyword">if</span> <span class="keyword">not</span> exists commandDiv, <span class="string">'rad-command'</span>
+		console.log(<span class="string">'commandDiv'</span>, commandDiv, <span class="string">"does not have rad-command"</span>)
+		<span class="keyword">return</span> <span class="string">''</span>
+	command = commandDiv.attr(<span class="string">'rad-command'</span>)
+	<span class="keyword">if</span> commandDiv.hasClass(<span class="string">'commentedOut'</span>)
+		console.log(<span class="string">"commented out:"</span>, command)
+		<span class="keyword">return</span> <span class="string">''</span>
+	<span class="keyword">if</span> command == <span class="string">'start'</span>
+		console.log(<span class="string">"start commandDiv seen"</span>)
+		<span class="keyword">return</span> <span class="string">''</span>
+	theID = commandDiv.attr(<span class="string">'id'</span>)
+	<span class="keyword">switch</span> command
+		<span class="keyword">when</span> <span class="string">'show'</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>I used .val() instead of .text() when the .parm element was an input</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #SHOW '</span> + commandDiv.children(<span class="string">'.parm'</span>).text() + <span class="string">' #ENDSHOW\n'</span>
+		<span class="keyword">when</span> <span class="string">'clear'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #CLEAR #ENDCLEAR\n'</span>
+		<span class="keyword">when</span> <span class="string">'while'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #WHILE '</span> + commandDiv.children(<span class="string">'.parm'</span>).text() + <span class="string">' #ENDCONDITION\n'</span>
+		<span class="keyword">when</span> <span class="string">'endwhile'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #ENDWHILE\n'</span>
+		<span class="keyword">when</span> <span class="string">'if'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #IF '</span>+commandDiv.children(<span class="string">'.parm'</span>).text() + <span class="string">' #ENDCONDITION\n'</span>
+		<span class="keyword">when</span> <span class="string">'endif'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #ENDIF\n'</span>
+		<span class="keyword">when</span> <span class="string">'else'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #ELSE\n'</span>
+		<span class="keyword">when</span> <span class="string">'assign'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #ASSIGN '</span>+commandDiv.children(<span class="string">'.parm'</span>).text()+<span class="string">' #GETS '</span>+commandDiv.children(<span class="string">'.parm2'</span>).text()+<span class="string">' #ENDASSIGN\n'</span>
+		<span class="keyword">when</span> <span class="string">'functiondef'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #FUNCTION '</span>+commandDiv.children(<span class="string">'.parm'</span>).text()+<span class="string">' #ENDNAME '</span>+commandDiv.children(<span class="string">'.parm2'</span>).text()+<span class="string">' #ENDPARMS\n'</span>
+		<span class="keyword">when</span> <span class="string">'fndo'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #FUNCDO '</span> + commandDiv.children(<span class="string">'.parm'</span>).text() + <span class="string">' #ENDFUNCDO\n'</span>
+		<span class="keyword">when</span> <span class="string">'return'</span>
+			<span class="keyword">return</span> <span class="string">'##'</span> + theID + <span class="string">' #RETURN '</span>+commandDiv.children(<span class="string">'.parm'</span>).text()+<span class="string">' #ENDRETURN\n'</span>
+		<span class="keyword">else</span>
+			console.log(<span class="string">"unknown in generateCodeLine:"</span>, command, commandDiv)
+	<span class="keyword">return</span> <span class="string">''</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Does theDiv has a real (non &quot;&quot;) attribute named attrString?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="function"><span class="title">exists</span> = <span class="params">(theDiv, attrString)</span> -&gt;</span>
+	console.log(<span class="string">"ProgrammingPane.exists: theDiv?"</span>, theDiv, attrString) <span class="keyword">if</span> <span class="keyword">not</span> (theDiv.attr)?
+	theDiv.attr(attrString)? <span class="keyword">and</span> theDiv.attr(attrString).length
+
+
+
+Radius.<span class="function"><span class="title">showError</span> = <span class="params">(id, start, length, message)</span> -&gt;</span>
+	console.log(<span class="string">'showError'</span>, id, start, length, message)
+	div = $(<span class="string">'#'</span>+id)
+	st = Math.floor(start)      <span class="comment"># .5 added when in parm2</span>
+	<span class="keyword">if</span> st == start
+		parm = $(<span class="string">'#'</span>+id+<span class="string">' .parm'</span>)
+	<span class="keyword">else</span>
+		parm = $(<span class="string">'#'</span>+id+<span class="string">' .parm2'</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>console.log(&#39;div&#39;, div)
+console.log(&#39;.parm&#39;, parm)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	<span class="keyword">if</span> length == <span class="number">0</span>
+		parm.addClass(<span class="string">"errorParm"</span>)
+		parm.addClass(<span class="string">"errorEmptyParm"</span>)
+	<span class="keyword">else</span>
+		text = parm.text()
+		newtext = text.slice(<span class="number">0</span>, st) + <span class="string">"&lt;span class='errorHighlight'&gt;"</span> +
+			  text.slice(st, st+length) + <span class="string">"&lt;/span&gt;"</span> +
+			  text.slice(st+length)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>console.log(&#39;   newtext:&#39;, newtext)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		parm.html(newtext)
+		parm.addClass(<span class="string">'errorParm'</span>)
+	errorTop = <span class="number">1</span> + parseFloat(div.css(<span class="string">'top'</span>))
+	errorLeft = parseFloat(div.css(<span class="string">'left'</span>)) + div.outerWidth() + <span class="number">5</span>
+	$(<span class="string">'#ProgrammingPane'</span>).append(<span class="string">'&lt;div class="errorMessageBox" '</span> +
+		<span class="string">'style="top: '</span> + errorTop + <span class="string">'px; left: '</span> + errorLeft + <span class="string">'px;"&gt;'</span> +
+		message + <span class="string">'&lt;/div&gt;'</span>)
+
+<span class="function"><span class="title">clearErrors</span> = <span class="params">(fadeOutSlowly)</span> -&gt;</span>
+	$(<span class="string">'.errorParm'</span>).removeClass(<span class="string">'errorParm'</span>)
+	$(<span class="string">'.errorEmptyParm'</span>).removeClass(<span class="string">'errorEmptyParm'</span>)
+	$(<span class="string">'.errorHighlight'</span>).removeClass(<span class="string">'errorHighlight'</span>)  <span class="comment"># ok to leave the &lt;span&gt;...&lt;/span&gt;?</span>
+	<span class="keyword">if</span> fadeOutSlowly
+		$(<span class="string">".errorMessageBox"</span>).fadeOut(<span class="number">1000</span>,<span class="function"> -&gt;</span> $(<span class="keyword">this</span>).remove())
+	<span class="keyword">else</span>
+		$(<span class="string">".errorMessageBox"</span>).remove()</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
