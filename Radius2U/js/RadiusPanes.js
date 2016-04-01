@@ -71,16 +71,17 @@ var left = document.getElementById('left');
 //hintHide(topRight);
 //hintHide(bottomRight);
 //hintHide(left);
-document.getElementById("programming").addEventListener('mouseup', onUp);
-document.getElementById("control-panel").addEventListener('mouseup', onUp);
-document.getElementById("program-output").addEventListener('mouseup', onUp);
+
+document.addEventListener('mouseup', onUp);
+
 
 document.getElementById("programming").addEventListener('mousedown', onDown);
 document.getElementById("control-panel").addEventListener('mousedown', onDown);
 document.getElementById("program-output").addEventListener('mousedown', onDown);
 var st;
 var id;
-function onDown(e){
+
+function onDown(){
 //save element when click 
 //not sure if this is really needed
 st = $(this);
@@ -90,17 +91,18 @@ st.parent().append(st);
 
 }
 
-function onUp(e){
+function onUp(){
 //sanp the left
-  if(id.style.left =='50px'){
+  alert(id.style.left<'50px');
+  if(id.style.left =='0px'){
   setBounds(id, 0, 0, 25, 100);
   }
   //snap to top-right
-  else if(id.style.top <'50px' && $('#window').width() - (st.offset().left + st.width())<100){
+  else if(id.style.top =='0px' && $('#window').width() - (st.offset().left + st.width())<3){
   setBounds(id, 25, 0, 75, 55);
   }
   //snap to bottom-right
-    else if(($('#window').height() - (st.offset().top + st.height()))<100 && $('#window').width() - (st.offset().left + st.width())<100){
+    else if(($('#window').height() - (st.offset().top + st.height()))<3 && $('#window').width() - (st.offset().left + st.width())<3){
   setBounds(id, 25, 55, 75, 45);
   }
 }
