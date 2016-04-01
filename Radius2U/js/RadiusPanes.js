@@ -93,7 +93,6 @@ st.parent().append(st);
 
 function onUp(){
 //sanp the left
-  alert(id.style.left<'50px');
   if(id.style.left =='0px'){
   setBounds(id, 0, 0, 25, 100);
   }
@@ -106,5 +105,25 @@ function onUp(){
   setBounds(id, 25, 55, 75, 45);
   }
 }
+
+var login =document.getElementById("login-pop");
+document.getElementById("b-login").addEventListener('click', onLogin);
+
+function onLogin(event){
+  login.style.visibility = "visible";
+}
+
+document.getElementById("close").addEventListener("mousedown", onDown)
+
+document.getElementById("close").addEventListener("mouseup", closeOnClick)
+
+function closeOnClick(event){
+  document.getElementById($(this).closest('.pop').attr("id")).style.visibility="hidden";
+}
+
+
+
+//$("close").addEventListener("click",closeOnClick);
+
 
 });

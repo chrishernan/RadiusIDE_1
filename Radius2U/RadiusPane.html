@@ -33,20 +33,20 @@
 
 <div id="tool-bar" class="pane">
   <div id="tool-bar-title">Radius IDE</div>
-  <button class="button"> Login </button>
 
-  <button class="button"> New </button>
-  <button class="button"> Classes </button>
-  <button class="button"> Trash </button>
-  <button class="button"> Help </button>
-  <button class="button"> Lock </button>
-  <button class="button"> Settings </button>
-  <button class="button"> Run </button>
-  <button class="button"> Stop </button>
+  <button id = "b-login" class="button"> Login </button>
+  <button id = "b-new" class="button"> New </button>
+  <button id = "b-classes" class="button"> Classes </button>
+  <button id = "b-trash" class="button"> Trash </button>
+  <button id = "b-help" class="button"> Help </button>
+  <button id = "b-lock" class="button"> Lock </button>
+  <button id = "b-settings" class="button"> Settings </button>
+  <button id = "b-run" class="button"> Run </button>
+  <button id = "b-stop" class="button"> Stop </button>
 
 </div>
 <div id="window" class="win">
-  <div id="programming" onclick = "setID(e)" class="draggable pane">
+  <div id="programming" class="draggable pane">
     <div id="progamming-title" class="simple-title">Programming</div>
         <div id="ProgrammingPane"></div>
   </div>
@@ -70,6 +70,18 @@
 
 
 </div>
+
+    <div id = "login-pop" class = "pop">
+        <div id="login-title" class="simple-title">LogIn/SignUp
+        <span id = "close" class="close" onClick="closeOnClick">x</span></div>
+          <modal name="login-form" action="" method="post">
+            <center>Username:</center>
+            <center><input name="username" size="26" /></center>
+            <center>Password:</center>
+            <center><input name="password" type="password" size="26" /></center>
+            <center><input type="submit" name="submit" value="Login" /></center>
+          </modal>
+    </div>
 
   
 </body>

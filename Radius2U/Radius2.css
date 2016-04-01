@@ -319,3 +319,41 @@ body {
   top: %;
   left: %;
 }
+
+
+.pop{
+  position: absolute;
+  height: 300px;
+  width: 400px;
+  margin: -100px 0 0 -200px;
+  top: 50%;
+  left: 50%;
+  border: 1px solid white;
+  background: white;
+  padding: 5px; 
+  z-index: 999;
+  visibility: hidden;
+
+}
+
+#login-form{
+  top:25%;
+}
+.close{
+  padding:5px;
+      color: red;
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
