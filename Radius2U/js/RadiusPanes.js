@@ -1,4 +1,15 @@
 $(function() {
+
+  //var Firebase = require("firebase");
+
+  //var url = "https://radius-ide.firebaseio.com/"
+  var ref = new Firebase("https://radius-ide.firebaseio.com/");
+
+//var FirebaseTokenGenerator = require("firebase-token-generator");
+//var tokenGenerator = new FirebaseTokenGenerator("<YOUR_FIREBASE_SECRET>");
+//var token = tokenGenerator.createToken({ uid: "uniqueId1", some: "arbitrary", data: "here" });
+
+
   //make all panes draggable and snapable and contained in #window
   $(".draggable").draggable({
     snap: ".ui-widget-header",
@@ -106,8 +117,15 @@ function onUp(){
   }
 }
 
-var login =document.getElementById("login-pop");
+
+
+var login = document.getElementById("login-pop");
+var signup = document.getElementById("signup-form");
+var loginEnter = document.getElementById("login-enter");
+
+loginEnter.addEventListener('click',authOnClick);
 document.getElementById("b-login").addEventListener('click', onLogin);
+document.getElementById("signup-enter").addEventListener("click",createAccount);
 
 function onLogin(event){
   login.style.visibility = "visible";
@@ -117,13 +135,50 @@ document.getElementById("close").addEventListener("mousedown", onDown)
 
 document.getElementById("close").addEventListener("mouseup", closeOnClick)
 
+
+
 function closeOnClick(event){
   document.getElementById($(this).closest('.pop').attr("id")).style.visibility="hidden";
 }
 
 
 
-//$("close").addEventListener("click",closeOnClick);
+function authOnClick(){
+  ref.authWithPassword({
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value 
+  }, function(error, authData) {
+    if(error){
+      document.getElementById('alert').innerHTML = "Login Failed!";
+      document.getElementById('alert').style.visibility = "visible";
+    } else {
+      alert("Authenticated sucessfully with payload:",authData);
+    }
+  });
+
+}
+
+function createAccount(){
+  if($(signup).css("visibility") == "hidden"){
+    signup.style.visibility = "visible";
+    loginEnter.style.visibility = "hidden";
+
+  }
+  else
+  ref.createUser({
+  email    : document.getElementById("email").value,
+  password : document.getElementById("password").value 
+}, function(error, userData) {
+  if (error) {
+      document.getElementById('alert').innerHTML = "Error creating user:"+ error;
+      document.getElementById('alert').style.visibility = "visible";
+  } else {
+      document.getElementById('alert').innerHTML = "sucessfully:";
+      document.getElementById('alert').style.visibility = "visible";
+  }
+});
+}
+
 
 
 });

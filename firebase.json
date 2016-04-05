@@ -1,0 +1,9 @@
+{
+  "firebase": "radius-ide",
+  "public": "radius2u",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
