@@ -1,5 +1,6 @@
 $(function() {
 
+  var accountType;
   //var Firebase = require("firebase");
 
   //var url = "https://radius-ide.firebaseio.com/"
@@ -138,7 +139,8 @@ document.getElementById("close").addEventListener("mouseup", closeOnClick)
 
 
 function closeOnClick(event){
-  document.getElementById($(this).closest('.pop').attr("id")).style.visibility="hidden";
+  $(login).hide();
+  //document.getElementById($(this).closest('.pop').attr("id")).style.visibility="hidden";
 }
 
 
@@ -149,10 +151,10 @@ function authOnClick(){
     password: document.getElementById("password").value 
   }, function(error, authData) {
     if(error){
-      document.getElementById('alert').innerHTML = "Login Failed!";
+      document.getElementById('alert').innerHTML = "Login Failed:" + error;
       document.getElementById('alert').style.visibility = "visible";
     } else {
-      alert("Authenticated sucessfully with payload:",authData);
+      $(login).hide();
     }
   });
 
@@ -164,7 +166,13 @@ function createAccount(){
     loginEnter.style.visibility = "hidden";
 
   }
-  else
+  else{
+    var courseCode = document.getElementById("course-code");
+    if (isNaN(courseCode.value) && courseCode.value.length){
+        accountType = "student";
+        //write course-code to account
+      }
+
   ref.createUser({
   email    : document.getElementById("email").value,
   password : document.getElementById("password").value 
@@ -173,10 +181,10 @@ function createAccount(){
       document.getElementById('alert').innerHTML = "Error creating user:"+ error;
       document.getElementById('alert').style.visibility = "visible";
   } else {
-      document.getElementById('alert').innerHTML = "sucessfully:";
-      document.getElementById('alert').style.visibility = "visible";
+      $(login).hide();
   }
 });
+}
 }
 
 
