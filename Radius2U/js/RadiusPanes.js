@@ -3,8 +3,8 @@ $(function() {
   var accountType;
   //var Firebase = require("firebase");
 
-  //var url = "https://radius-ide.firebaseio.com/"
-  var ref = new Firebase("https://radius-ide.firebaseio.com/");
+  var url = "https://radius-ide.firebaseio.com/"
+  var ref = new Firebase(url);
 
 //var FirebaseTokenGenerator = require("firebase-token-generator");
 //var tokenGenerator = new FirebaseTokenGenerator("<YOUR_FIREBASE_SECRET>");
@@ -13,17 +13,15 @@ $(function() {
 
   //make all panes draggable and snapable and contained in #window
   $(".draggable").draggable({
-    snap: ".ui-widget-header",
+    snap: ".pane",
     handle: '.simple-title',
-    containment: "parent"
 
   }).resizable({
     grid: 5
   });
 
   //All buttons in Toolbar
-  $("button:first").button({
-    label: "LogIn",
+   $("button:first").button({
     icons: {
       primary: "ui-icon-arrowthickstop-1-e"
     },
@@ -62,6 +60,13 @@ $(function() {
     },
   });
 
+function  show(id) {
+  $(id).style.display ='block';
+}
+function hide(id) {
+  $(id).style.display ='none';
+}
+
 //change dimension of div 
 //mostly used for snaping
 function setBounds(element, l, t, w, h) {
@@ -84,14 +89,15 @@ var left = document.getElementById('left');
 //hintHide(bottomRight);
 //hintHide(left);
 
-document.addEventListener('mouseup', onUp);
+document.getElementById("window").addEventListener('mouseup', onUp);
+document.getElementById("tool-bar").addEventListener('mouseup', onUp);
 
 
 document.getElementById("programming").addEventListener('mousedown', onDown);
 document.getElementById("control-panel").addEventListener('mousedown', onDown);
 document.getElementById("program-output").addEventListener('mousedown', onDown);
-var st;
-var id;
+var st = "undefined";
+var id = "undefined";
 
 function onDown(){
 //save element when click 
@@ -105,42 +111,48 @@ st.parent().append(st);
 
 function onUp(){
 //sanp the left
-  if(id.style.left =='0px'){
+if(st!="undefined"){
+  if(st.offset().left <=3){
   setBounds(id, 0, 0, 25, 100);
   }
   //snap to top-right
-  else if(id.style.top =='0px' && $('#window').width() - (st.offset().left + st.width())<3){
+  else if(st.offset().top <=100 && $('#window').width() - (st.offset().left + st.width())<5){
   setBounds(id, 25, 0, 75, 55);
   }
   //snap to bottom-right
-    else if(($('#window').height() - (st.offset().top + st.height()))<3 && $('#window').width() - (st.offset().left + st.width())<3){
+    else if(($('#window').height() - (st.offset().top + st.height()))<5 && $('#window').width() - (st.offset().left + st.width())<5){
   setBounds(id, 25, 55, 75, 45);
   }
 }
 
 
+}
 
-var login = document.getElementById("login-pop");
+
+
 var signup = document.getElementById("signup-form");
 var loginEnter = document.getElementById("login-enter");
 
 loginEnter.addEventListener('click',authOnClick);
-document.getElementById("b-login").addEventListener('click', onLogin);
-document.getElementById("signup-enter").addEventListener("click",createAccount);
+$("#b-login")[0].addEventListener('click', onLogin);
+$("#signup-enter")[0].addEventListener("click",showSignUp);
 
-function onLogin(event){
-  login.style.visibility = "visible";
+function onLogin(){
+  $("#login-pop").css("display","block");
 }
 
-document.getElementById("close").addEventListener("mousedown", onDown)
+//document.getElementById("login-close").addEventListener("mousedown", onDown)
 
-document.getElementById("close").addEventListener("mouseup", closeOnClick)
+//document.getElementById("login-close").addEventListener("mouseup", closeOnClick)
 
+$("#login-close")[0].addEventListener("click",closeOnClick)
+$("#signup-close")[0].addEventListener("click",closeOnClick)
+$("#signup-submit")[0].addEventListener("click",createAccount)
+$("#b-signout")[0].addEventListener("click",signOut)
 
-
-function closeOnClick(event){
-  $(login).hide();
-  //document.getElementById($(this).closest('.pop').attr("id")).style.visibility="hidden";
+function closeOnClick(){
+  $("#login-pop").hide();
+  $("#signup-form").hide();
 }
 
 
@@ -154,37 +166,61 @@ function authOnClick(){
       document.getElementById('alert').innerHTML = "Login Failed:" + error;
       document.getElementById('alert').style.visibility = "visible";
     } else {
-      $(login).hide();
+      $("#login-pop").hide();
+      var demail = document.getElementById("email").value.split('@');
+      document.getElementById('user').innerHTML = demail[0];
+      $("#user-form").show();
+      $("#b-signout").show();
+
+
     }
   });
 
 }
 
-function createAccount(){
-  if($(signup).css("visibility") == "hidden"){
-    signup.style.visibility = "visible";
-    loginEnter.style.visibility = "hidden";
+function showSignUp(){
+   $("#signup-form").css("display","block");
+}
 
-  }
-  else{
+var studentref;
+
+function createAccount(){
+  var studentName = document.getElementById("name");
+  var Email = document.getElementById("email1").value;
+  var femail = Email.split("@");
     var courseCode = document.getElementById("course-code");
-    if (isNaN(courseCode.value) && courseCode.value.length){
-        accountType = "student";
-        //write course-code to account
-      }
+    url += "Courses/" +courseCode.value+"/";
+    studentref = new Firebase(url);
+
 
   ref.createUser({
-  email    : document.getElementById("email").value,
-  password : document.getElementById("password").value 
+  email    : document.getElementById("email1").value,
+  password : document.getElementById("password1").value 
 }, function(error, userData) {
   if (error) {
-      document.getElementById('alert').innerHTML = "Error creating user:"+ error;
-      document.getElementById('alert').style.visibility = "visible";
+      document.getElementById('alert1').innerHTML = "Error creating user:"+ error;
+      document.getElementById('alert1').style.visibility = "visible";
   } else {
-      $(login).hide();
+        if (!isNaN(courseCode.value) && courseCode.value.length==5){
+        accountType = "student";
+        document.getElementById('user').innerHTML = femail[0];
+        studentref.child(userData.uid).set({
+            name: document.getElementById("name").value,
+            cCode: courseCode.value,
+            email: Email
+        })
+
+      }
+      $("#login-pop").hide();
+      $("#user").show();
   }
 });
 }
+
+function signOut(){
+  ref.unauth();
+   $("#user-form").hide();
+
 }
 
 

@@ -6,18 +6,12 @@
   <meta name="googlebot" content="noindex, nofollow">
 
 <script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="jQuery/js/jquery-ui.js"></script>
-<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
 
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
-<link rel="stylesheet" type="text/css" href="jQuery/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="jQuery/css/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+<link rel="stylesheet" type="text/css" href="jQuery/css/smoothness/jquery-ui.css">
 <link href="Radius2.css" rel="stylesheet" type="text/css" />
-<link href="RadiusPanes.css" rel="stylesheet" type="text/css" />
 
 
 <script src="js/Radius1.js"></script>
@@ -34,9 +28,7 @@
   <title>Radius IDE</title>
 
 <div id="tool-bar" class="pane">
-  <div id="tool-bar-title">Radius IDE</div>
-
-  <button id = "b-login" class="button"> Login </button>
+  <button id = "b-login" class="button"> Log In/Sign Up </button>
   <button id = "b-new" class="button"> New </button>
   <button id = "b-classes" class="button"> Classes </button>
   <button id = "b-trash" class="button"> Trash </button>
@@ -45,6 +37,8 @@
   <button id = "b-settings" class="button"> Settings </button>
   <button id = "b-run" class="button"> Run </button>
   <button id = "b-stop" class="button"> Stop </button>
+  <span id = "user-form"> <div id="user"> </div><button id = "b-signout" class="button">SignOut</button></span>
+  
 
 </div>
 <div id="window" class="win">
@@ -74,20 +68,33 @@
 </div>
 
     <div id = "login-pop" class = "pop">
-        <div id="login-title" class="simple-title">LogIn/SignUp
-        <span id = "close" class="close" onClick="closeOnClick">x</span></div>
+        <div id="login-title" class="simple-title">Log In/Sign Up
+        <span id = "login-close" class="close">x</span></div>
           <div id="login-form" >
-            <center><div id = "alert" >Login</div></center>
-            <div id = "signup-form">
+            <center><div id = "alert" class = "alert"></div></center>
+            <div id = "signup-form" class = "pop">
+            <div id="signup-title" class="simple-title">Sign Up
+            <span id = "signup-close" class="close">x</span></div>
+            <center><div id = "alert1" class = "alert"></div></center>
+
             <center>Course Code:</center>
             <center><input id = "course-code"size="26" /></center>
+            <center class="star">Email Address:</center>
+            <center><input id = "email1" name="username" size="26" /></center>
+            <center class="star">Password:</center>
+            <center><input id = "password1" name="password" type="password" size="26" /></center>
+            <center>Name:</center>
+            <center><input id = "name" size="26" /></center>
+
+            <center><input id = "signup-submit" type="submit" name="submit" value="SignUp" /></center>
             </div>
-            <center>Email Address:</center>
-            <center><input id = "email" name="username" size="26" /></center>
-            <center>Password:</center>
-            <center><input id = "password" name="password" type="password" size="26" /></center>
-            <center><input id = "login-enter" type="submit" name="submit" value="Login" /></center>
-            <center><input id = "signup-enter" type="submit" name="submit" value="SignUp" /></center>
+          </div>
+          <center>Email Address:</center>
+          <center><input id = "email" name="username" size="26" /></center>
+          <center>Password:</center>
+          <center><input id = "password" name="password" type="password" size="26" /></center>
+          <center><input id = "login-enter" type="submit" name="submit" value="Login" /></center>
+          <center><input id = "signup-enter" type="submit" name="submit" value="SignUp" /></center>
 
           </div>
     </div>
