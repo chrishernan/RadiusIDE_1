@@ -215,7 +215,7 @@ body {
   width: 100%;
   height: 100%;
   top: 10%;
-  left: %;
+  left: 0%;
   overflow: hidden;
 }
 
@@ -242,7 +242,7 @@ body {
   overflow: hidden;
   width: 50%;
   height: 40%;
-  top: %;
+  top: 0%;
   left: 25%;
 }
 
@@ -253,8 +253,8 @@ display: none;
 #control-panel {
   width: 25%;
   height: 100%;
-  top: %;
-  left: %;
+  top: 0%;
+  left: 0%;
   float: left;
 }
 
@@ -299,7 +299,7 @@ display: none;
 #top-right {
   width: 75%;
   height: 55%;
-  top: %;
+  top: 0%;
   left: 25%;
 }
 
@@ -313,8 +313,8 @@ display: none;
 #left {
   width: 25%;
   height: 100%;
-  top: %;
-  left: %;
+  top: 0%;
+  left: 0%;
 }
 
 

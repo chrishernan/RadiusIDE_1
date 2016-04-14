@@ -1,107 +1,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="googlebot" content="noindex, nofollow">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
 
-<script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="jQuery/js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
 
-<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
-<link rel="stylesheet" type="text/css" href="jQuery/css/smoothness/jquery-ui.css">
-<link href="Radius2.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="jQuery/css/smoothness/jquery-ui.css">
+    <link href="Radius2.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="css/RadiusPane.css">
+    <link rel="stylesheet" type="text/css" href="css/Login.css">
 
 
-<script src="js/Radius1.js"></script>
-<script src="js/Box.js"></script>
-<script src="js/Block.js"></script>
-<script src="js/Token.js"></script>
-<script src="js/PrototypesPane.js"></script>
-<script src="js/ProgrammingPane.js"></script>
-<script src="js/RadiusPanes.js"></script>
-  
+
+
+    <script src="js/Radius1.js"></script>
+    <script src="js/Box.js"></script>
+    <script src="js/Block.js"></script>
+    <script src="js/Token.js"></script>
+    <script src="js/PrototypesPane.js"></script>
+    <script src="js/ProgrammingPane.js"></script>
+    <script src="js/RadiusPanes.js"></script>
+    <script src="js/Help.js"></script>
+    <script src="js/LoginSignup.js"></script>
+
+
 </head>
 
 <body>
-  <title>Radius IDE</title>
+<title>Radius IDE Home</title>
 
 <div id="tool-bar" class="pane">
-  <button id = "b-login" class="button"> Log In/Sign Up </button>
-  <button id = "b-new" class="button"> New </button>
-  <button id = "b-classes" class="button"> Classes </button>
-  <button id = "b-trash" class="button"> Trash </button>
-  <button id = "b-help" class="button"> Help </button>
-  <button id = "b-lock" class="button"> Lock </button>
-  <button id = "b-settings" class="button"> Settings </button>
-  <button id = "b-run" class="button"> Run </button>
-  <button id = "b-stop" class="button"> Stop </button>
-  <span id = "user-form"> <div id="user"> </div><button id = "b-signout" class="button">SignOut</button></span>
-  
+    <button id="b-login" class="button"> Log In/Sign Up</button>
+    <button id="b-new" class="button"> New</button>
+    <button id="b-classes" class="button"> Classes</button>
+    <button id="b-trash" class="button"> Trash</button>
+    <button id="b-help" class="button"> Help</button>
+    <button id="b-lock" class="button"> Lock</button>
+    <button id="b-settings" class="button"> Settings</button>
+    <button id="b-run" class="button"> Run</button>
+    <button id="b-stop" class="button"> Stop</button>
+    <span id="user-form"> <div id="user"> </div><button id="b-signout" class="button">SignOut</button></span>
+
 
 </div>
 <div id="window" class="win">
-  <div id="programming" class="draggable pane">
-    <div id="progamming-title" class="simple-title">Programming</div>
+    <div id="programming" class="draggable pane">
+        <div id="progamming-title" class="simple-title">Programming</div>
         <div id="ProgrammingPane"></div>
-  </div>
+    </div>
 
-  <div id="top-right" class="ghostpane"></div>
-
-
-  <div id="program-output" class="draggable pane">
-    <div id="program-ouput-title" class="simple-title">Program Output</div>
-  </div>
-
-  <div id="bottom-right" class="ghostpane"></div>
+    <div id="top-right" class="ghostpane"></div>
 
 
-  <div id="control-panel" class="draggable pane">
-    <div id="control-panel-title" class="simple-title">Control Panel</div>
+    <div id="program-output" class="draggable pane">
+        <div id="program-ouput-title" class="simple-title">Program Output</div>
+    </div>
+
+    <div id="bottom-right" class="ghostpane"></div>
+
+
+    <div id="control-panel" class="draggable pane">
+        <div id="control-panel-title" class="simple-title">Control Panel</div>
         <div id="PrototypesPane"></div>
-  </div>
+    </div>
 
-  <div id="left" class="ghostpane"></div>
+    <div id="left" class="ghostpane"></div>
 
 
 </div>
 
-    <div id = "login-pop" class = "pop">
-        <div id="login-title" class="simple-title">Log In/Sign Up
-        <span id = "login-close" class="close">x</span></div>
-          <div id="login-form" >
-            <center><div id = "alert" class = "alert"></div></center>
-            <div id = "signup-form" class = "pop">
+<div id="login-pop" class="pop">
+    <div id="login-title" class="simple-title">Log In/Sign Up
+        <span id="login-close" class="close">x</span></div>
+    <div id="login-form">
+        <center>
+            <div id="alert" class="alert"></div>
+        </center>
+        <div id="signup-form" class="pop">
             <div id="signup-title" class="simple-title">Sign Up
-            <span id = "signup-close" class="close">x</span></div>
-            <center><div id = "alert1" class = "alert"></div></center>
+                <span id="signup-close" class="close">x</span></div>
+            <center>
+                <div id="alert1" class="alert"></div>
+            </center>
 
             <center>Course Code:</center>
-            <center><input id = "course-code"size="26" /></center>
+            <center><input id="course-code" size="26"/></center>
             <center class="star">Email Address:</center>
-            <center><input id = "email1" name="username" size="26" /></center>
+            <center><input id="email1" name="username" size="26"/></center>
             <center class="star">Password:</center>
-            <center><input id = "password1" name="password" type="password" size="26" /></center>
+            <center><input id="password1" name="password" type="password" size="26"/></center>
             <center>Name:</center>
-            <center><input id = "name" size="26" /></center>
+            <center><input id="name" size="26"/></center>
 
-            <center><input id = "signup-submit" type="submit" name="submit" value="SignUp" /></center>
-            </div>
-          </div>
-          <center>Email Address:</center>
-          <center><input id = "email" name="username" size="26" /></center>
-          <center>Password:</center>
-          <center><input id = "password" name="password" type="password" size="26" /></center>
-          <center><input id = "login-enter" type="submit" name="submit" value="Login" /></center>
-          <center><input id = "signup-enter" type="submit" name="submit" value="SignUp" /></center>
-
-          </div>
+            <center><input id="signup-submit" type="submit" name="submit" value="SignUp"/></center>
+        </div>
     </div>
+    <center>Email Address:</center>
+    <center><input id="email" name="username" size="26"/></center>
+    <center>Password:</center>
+    <center><input id="password" name="password" type="password" size="26"/></center>
+    <center><input id="login-enter" type="submit" name="submit" value="Login"/></center>
+    <center><input id="signup-enter" type="submit" name="submit" value="SignUp"/></center>
+
+</div>
+</div>
 
 
-
-  
 </body>
 
 </html>
