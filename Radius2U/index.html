@@ -11,9 +11,9 @@
     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 
     <link rel="stylesheet" type="text/css" href="jQuery/css/smoothness/jquery-ui.css">
-    <link href="Radius2.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="css/RadiusPane.css">
-    <link rel="stylesheet" type="text/css" href="css/Login.css">
+    <link rel="stylesheet" type="text/css"href="Radius2.css"/>
+    <link rel="stylesheet" type="text/css" href="css/RadiusPane.css"/>
+    <link rel="stylesheet" type="text/css" href="css/Login.css"/>
 
 
 
@@ -35,16 +35,17 @@
 <title>Radius IDE Home</title>
 
 <div id="tool-bar" class="pane">
-    <button id="b-login" class="button"> Log In/Sign Up</button>
     <button id="b-new" class="button"> New</button>
     <button id="b-classes" class="button"> Classes</button>
     <button id="b-trash" class="button"> Trash</button>
-    <button id="b-help" class="button"> Help</button>
     <button id="b-lock" class="button"> Lock</button>
     <button id="b-settings" class="button"> Settings</button>
     <button id="b-run" class="button"> Run</button>
     <button id="b-stop" class="button"> Stop</button>
-    <span id="user-form"> <div id="user"> </div><button id="b-signout" class="button">SignOut</button></span>
+    <a href="help.html">? Help</a>
+    <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
+
+    <span class = "spanRight" id="user-form"> <div id="user"> </div><button id="b-signout" class="button">SignOut</button></span>
 
 
 </div>
@@ -79,31 +80,33 @@
         <span id="login-close" class="close">x</span></div>
     <div id="login-form">
         <center>
-            <div id="alert" class="alert"></div>
+            <div id="alert" class="alert input"></div>
         </center>
         <div id="signup-form" class="pop">
             <div id="signup-title" class="simple-title">Sign Up
                 <span id="signup-close" class="close">x</span></div>
             <center>
-                <div id="alert1" class="alert"></div>
+                <div id="alert1" class="alert input"></div>
             </center>
 
             <center>Course Code:</center>
-            <center><input id="course-code" size="26"/></center>
+            <center><input class="input" class="input" id="course-code" placeholder="12345" size="26"/></center>
             <center class="star">Email Address:</center>
-            <center><input id="email1" name="username" size="26"/></center>
+            <center><input class="input" id="email1" placeholder="Peter@anteater.com" name="username" size="26"/></center>
             <center class="star">Password:</center>
-            <center><input id="password1" name="password" type="password" size="26"/></center>
+            <center><input class="input" id="password1" name="password" type="password" size="26"/></center>
+            <center class="star">Re-Enter Password:</center>
+            <center><input class="input" id="password2" name="password" type="password" size="26"/></center>
             <center>Name:</center>
-            <center><input id="name" size="26"/></center>
+            <center><input class="input"  id="name" placeholder="Peter" size="26"/></center>
 
             <center><input id="signup-submit" type="submit" name="submit" value="SignUp"/></center>
         </div>
     </div>
     <center>Email Address:</center>
-    <center><input id="email" name="username" size="26"/></center>
+    <center><input class = "input" id="email" placeholder="Peter@anteater.com" name="username" size="26"/></center>
     <center>Password:</center>
-    <center><input id="password" name="password" type="password" size="26"/></center>
+    <center><input class="input" id="password" name="password" type="password" size="26"/></center>
     <center><input id="login-enter" type="submit" name="submit" value="Login"/></center>
     <center><input id="signup-enter" type="submit" name="submit" value="SignUp"/></center>
 
