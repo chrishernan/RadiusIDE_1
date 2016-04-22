@@ -18,10 +18,7 @@ $(function () {
     function onLogin() {
         $("#login-pop").css("display", "block");
     }
-
-    //document.getElementById("login-close").addEventListener("mousedown", onDown)
-
-    //document.getElementById("login-close").addEventListener("mouseup", closeOnClick)
+    
 
     $("#login-close")[0].addEventListener("click", closeOnClick);
     $("#signup-close")[0].addEventListener("click", closeOnClick);
@@ -34,7 +31,6 @@ $(function () {
         clear();
 
     }
-
 
     function closeLogin(){
         $("#login-pop").hide();
@@ -137,9 +133,6 @@ $(function () {
         for (var i = 0; i < alertList.length; i++) {
             alertList[i].innerHTML ="";
         }
-        // $(".input").each(function(index, element){
-        //     element.val("");
-        // });
     }
 
 
