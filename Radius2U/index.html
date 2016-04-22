@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css"href="Radius2.css"/>
     <link rel="stylesheet" type="text/css" href="css/RadiusPane.css"/>
     <link rel="stylesheet" type="text/css" href="css/Login.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+
 
 
 
@@ -27,6 +29,8 @@
     <script src="js/RadiusPanes.js"></script>
     <script src="js/Help.js"></script>
     <script src="js/LoginSignup.js"></script>
+    <script src="js/FileExplorerDataRetreival.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 
 
 </head>
@@ -35,11 +39,24 @@
 <title>Radius IDE Home</title>
 
 <div id="tool-bar" class="pane">
+<<<<<<< HEAD
     <button type="submit" id="b-new" class="button" value = "New"> NEW</button>
     <button type="submit" id="b-classes" class="button" value = "Assignments"> ASSIGNMENTS</button>
     <button type="submit" id="b-settings" class="button" value = "Settings"> SETTINGS</button>
     <button type ="submit"id="b-run" class="button" valule = "Run"> RUN</button>
     <button type= "submit" id="b-stop" class="button" value = "Stop"> STOP</button>
+=======
+    <button id="b-new" class="button"> New</button>
+    <!-- we need to remove this one to stop the confusion
+    <button id="b-classes" class="button"> Classes</button>
+    -->
+    <button id="b-assignments" class="button" >Assignments</button>
+    <button id="b-trash" class="button"> Trash</button>
+    <button id="b-lock" class="button"> Lock</button>
+    <button id="b-settings" class="button"> Settings</button>
+    <button id="b-run" class="button"> Run</button>
+    <button id="b-stop" class="button"> Stop</button>
+>>>>>>> origin/master
     <a href="help.html">? Help</a>
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
@@ -49,7 +66,7 @@
 </div>
 <div id="window" class="win">
     <div id="programming" class="draggable pane">
-        <div id="progamming-title" class="simple-title">Programming</div>
+        <div id="programming-title" class="simple-title">Programming</div>
         <div id="ProgrammingPane"></div>
     </div>
 
@@ -62,6 +79,13 @@
 
     <div id="bottom-right" class="ghostpane"></div>
 
+    <div id="assignment-panel" class="draggable pane">
+        <div id="assignment-panel-title" class="simple-title">Assignments Panel</div>
+        <div class="assignment-panel-body">
+            <table id="dataHolder"></table>
+
+        </div>
+    </div>
 
     <div id="control-panel" class="draggable pane">
         <div id="control-panel-title" class="simple-title">Control Panel</div>
