@@ -49,6 +49,24 @@
     float: left;
 }
 
+
+/* Added the css to control assignments div*/
+#assignment-panel {
+    width: 25%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    float: left;
+    display: none;
+}
+
+/*adding the hover feature to the table*/
+tr:hover {
+    background-color: green;
+}
+
+
+
 #program-output {
     width: 75%;
     height: 45%;
