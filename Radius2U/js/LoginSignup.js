@@ -1,5 +1,6 @@
 $(function () {
 
+
     var accountType;
     //var Firebase = require("firebase");
 
@@ -41,8 +42,6 @@ $(function () {
         $("#b-login").prop("disabled",true);
         $("#user-form").show();
         $("#b-signout").show();
-        $("#login-form")[0].reset();
-        $("#signup-form")[0].reset();
         clear();
     }
 
@@ -55,9 +54,10 @@ $(function () {
             if (error) {
                 alertError("Login Failed:","alert",error);
             } else {
-                closeLogin();
+                rememberMe: true;
                 var demail = document.getElementById("email").value.split('@');
                 document.getElementById('user').innerHTML = demail[0];
+                closeLogin();
 
             }
         });
@@ -93,6 +93,7 @@ $(function () {
                     alertError("Error creating uer:","alert1",error);
 
                 } else {
+                    rememberMe: true;
                     if (!isNaN(courseCode.value) && courseCode.value.length == 5) {
                         accountType = "student";
                         studentref.child(userData.uid).set({

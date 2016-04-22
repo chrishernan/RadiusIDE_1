@@ -21,14 +21,15 @@
 }
 
 .close{
-    postion: relative;
+    postion: fixed;
     top:0;
     color: red;
     float: right;
     font-size: 25px;
     font-weight: bold;
     padding-right: 5px;
-    padding-bottom:1px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 
