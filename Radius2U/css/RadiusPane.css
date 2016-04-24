@@ -68,11 +68,18 @@
     left: 0%;
     float: left;
     display: none;
+    overflow: auto;
+    color: darkslateblue;
 }
 
 /*adding the hover feature to the table*/
 tr:hover {
-    background-color: green;
+    background-color: lightgrey;
+
+}
+
+#hover-div {
+    text-align: center;
 }
 
 
