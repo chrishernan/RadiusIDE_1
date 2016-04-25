@@ -62,12 +62,13 @@
 
 /* Added the css to control assignments div*/
 #assignment-panel {
-    width: 25%;
+    width: 100%;
     height: 100%;
     top: 0%;
     left: 0%;
     float: left;
     display: none;
+    postion:inherit;
 }
 
 /*adding the hover feature to the table*/
