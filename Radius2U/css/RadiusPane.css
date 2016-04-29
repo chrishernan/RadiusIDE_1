@@ -34,10 +34,10 @@
 }
 
 #programming {
-    width: 75%;
+    width: calc(100% - 258px);
     height: 55%;
     top: 0%;
-    left: 25%;
+    left: 256px;
     z-index: 200;
 
     border-bottom: 5px solid darkblue;
@@ -50,7 +50,7 @@
 
 #control-panel {
     float:left;
-    width: 25%;
+    width: 256px;
     height: 100%;
     top: 0px;
     left: 0px;
@@ -86,10 +86,10 @@ tr:hover {
 
 
 #program-output {
-    width: 75%;
+    width: calc(100% - 258px);
     height: 45%;
     top: 55%;
-    left: 25%;
+    left: 256px;
 }
 
 #tool-bar {

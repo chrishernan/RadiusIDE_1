@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b194035a-a81f-4411-9560-41b6b9b8ba24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/Login.css" afterPath="$PROJECT_DIR$/css/Login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/LoginSignup.js" afterPath="$PROJECT_DIR$/js/LoginSignup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/RadiusPane.css" afterPath="$PROJECT_DIR$/css/RadiusPane.css" />
     </list>
     <ignored path="Radius2U.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,18 +27,18 @@
       <file leaf-file-name="RadiusPanes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
+            <state relative-caret-position="120">
+              <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/RadiusPane.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+            <state relative-caret-position="735">
+              <caret line="82" column="23" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -77,10 +74,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Login.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Login.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/Login.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="690">
               <caret line="46" column="9" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding />
             </state>
@@ -116,10 +113,10 @@
         <option value="$PROJECT_DIR$/css/Toolbar.css" />
         <option value="$PROJECT_DIR$/css/ToolBar.css" />
         <option value="$PROJECT_DIR$/js/RadiusPanes.js" />
-        <option value="$PROJECT_DIR$/css/RadiusPane.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/LoginSignup.js" />
         <option value="$PROJECT_DIR$/css/Login.css" />
+        <option value="$PROJECT_DIR$/css/RadiusPane.css" />
       </list>
     </option>
   </component>
@@ -680,12 +677,12 @@
       <workItem from="1461300780307" duration="98000" />
       <workItem from="1461348163288" duration="2508000" />
       <workItem from="1461554699275" duration="7202000" />
-      <workItem from="1461907517614" duration="3005000" />
+      <workItem from="1461907517614" duration="3417000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40094000" />
+    <option name="totallyTimeSpent" value="40506000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="842" y="23" width="838" height="1027" extended-state="0" />
@@ -1072,14 +1069,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/ToolBar.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1104,18 +1093,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/RadiusPane.css">
+    <entry file="file://$PROJECT_DIR$/css/Login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="110" column="9" selection-start-line="110" selection-start-column="9" selection-end-line="110" selection-end-column="9" />
+        <state relative-caret-position="690">
+          <caret line="46" column="9" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/Login.css">
+    <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="46" column="9" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="120">
+          <caret line="8" column="60" selection-start-line="8" selection-start-column="60" selection-end-line="8" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/RadiusPane.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="82" column="23" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
           <folding />
         </state>
       </provider>
