@@ -13,7 +13,7 @@ $(function () {
 
     loginEnter.addEventListener('click', authOnClick);
     $("#b-login")[0].addEventListener('click', onLogin);
-    $("#signup-enter")[0].addEventListener("click", showSignUp);
+    // $("#signup-enter")[0].addEventListener("click", showSignUp);
 
     function onLogin() {
         $("#login-pop").css("display", "block");
@@ -21,13 +21,12 @@ $(function () {
 
 
     $("#login-close")[0].addEventListener("click", closeOnClick);
-    $("#signup-close")[0].addEventListener("click", closeOnClick);
+    // $("#signup-close")[0].addEventListener("click", closeOnClick);
     $("#signup-submit")[0].addEventListener("click", createAccount);
     $("#b-signout")[0].addEventListener("click", signOut);
 
     function closeOnClick() {
         $("#login-pop").hide();
-        $("#signup-form").hide();
         clear();
 
     }
@@ -35,7 +34,6 @@ $(function () {
     function closeLogin(){
         $("#login-pop").hide();
         $("#b-login").hide();
-        $("#b-login").prop("disabled",true);
         $("#user-form").show();
         $("#b-signout").show();
         clear();
@@ -43,21 +41,31 @@ $(function () {
 
 
     function authOnClick() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+        login(email,password);
+        closeLogin();
+
+
+    }
+
+
+    function login(email,password){
         ref.authWithPassword({
-            email: document.getElementById("email").value,
-            password: document.getElementById("password").value
+            email: email,
+            password: password
         }, function (error, authData) {
             if (error) {
                 alertError("Login Failed:","alert",error);
             } else {
                 rememberMe: true;
-                var demail = document.getElementById("email").value.split('@');
-                document.getElementById('user').innerHTML = demail[0];
-                closeLogin();
+                var demail = authData.password.email.split('@')[0];
+                console.log(demail);
+                document.getElementById('user').innerHTML = authData.password.email.split('@')[0];
+                // closeLogin();
 
             }
         });
-
     }
 
 
@@ -73,53 +81,62 @@ $(function () {
     var users = new Firebase(url+"Users/")
 
     function createAccount() {
-        var studentName = document.getElementById("name");
-        var Email = document.getElementById("email1").value;
-        var femail = Email.split("@");
+        var userName = document.getElementById("name");
+        var email = document.getElementById("email1").value;
         var courseCode = document.getElementById("course-code");
         studentref = new Firebase(url+"Courses/" + courseCode.value + "/");
 
         if($("#password1").val()==$("#password2").val()) {
-
             ref.createUser({
-                email: document.getElementById("email1").value,
-                password: document.getElementById("password1").value
-            }, function (error, userData) {
+                email: email,
+                password: document.getElementById("password1").value,
+            }, function (error, authData) {
                 if (error) {
                     alertError("Error creating uer:","alert1",error);
 
                 } else {
-                    rememberMe: true;
                     if (!isNaN(courseCode.value) && courseCode.value.length == 5) {
-                        accountType = "student";
-                        studentref.child(userData.uid).set({
-                            name: document.getElementById("name").value,
-                            cCode: courseCode.value,
-                            email: Email
+                        studentref.child(authData.uid).set({
+                            name: userName.value,
+                            courseCode: courseCode.value,
+                            email: email
                         })
-
                     }
                     else {
-                        accountType = "user";
-                        users.child(userData.uid).set({
+                        users.child(authData.uid).set({
                             name: document.getElementById("name").value,
-                            email: Email
+                            email: email
                         })
                     }
-                    document.getElementById('user').innerHTML = femail[0];
-                    closeLogin();
+                    ref.child("users").child(authData.uid).set({
+                        name: userName.value,
+                        courseCode: courseCode.value
+                    });
                 }
             });
         }
-        else
-        alertError("Password not matching!","alert1","");
+        else {
+            alertError("Password not matching!", "alert1", "");
+        }
+        //login(email,document.getElementById("password1").value);
+        // ref.onAuth(function(authData) {
+        //     if (authData) {
+        //         alert("YESSS"+userName.value+" "+courseCode.value);
+        //         ref.child("users").child(authData.uid).set({
+        //             name: userName.value,
+        //             courseCode: courseCode.value
+        //         });
+        //     }
+        // });
+
+        closeLogin();
+
     }
 
     function signOut() {
         ref.unauth();
         $("#user-form").hide();
         $("#b-login").show();
-        $("#b-login").prop("disabled",false);
         $("#signup-form").hide();
 
     }
@@ -134,6 +151,17 @@ $(function () {
             alertList[i].innerHTML ="";
         }
     }
+
+
+
+    window.onload = ref.onAuth(function (authData) {
+        if (authData) {
+            console.log(authData);
+            document.getElementById('user').innerHTML =
+                authData.password.email.split('@')[0];
+            closeLogin();
+        }
+    });
 
 
 });

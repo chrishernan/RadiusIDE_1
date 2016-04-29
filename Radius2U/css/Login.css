@@ -10,18 +10,40 @@
     background: white;
     padding: 5px;
     z-index: 999;
+    display: inline-block;
     display: none;
 
 
 }
-
+.form {
+    margin :10px;
+}
 
 #login-form{
-    top:50%;
+    /*top:50%;*/
+    left:50%;
+    top:0%;
+    width: 40%;
+    height: 90%;
+    display: block;
+    float: right;
+
+
+}
+
+#signup-form{
+    /*top:50%;*/
+    left:0%;
+    top:0%;
+    width: 40%;
+    height: 90%;
+    display: block;
+    float:left;
+
 }
 
 .close{
-    postion: relative;
+    postion: absolute;
     top:0;
     color: red;
     float: right;
@@ -60,4 +82,12 @@
 .star::after{
     content: "*";
     color:red;
+}
+
+#login-enter{
+    margin:5px;
+}
+
+#signup-submit{
+    margin:5px;
 }
