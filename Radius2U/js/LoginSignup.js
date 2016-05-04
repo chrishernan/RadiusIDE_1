@@ -1,6 +1,5 @@
 $(function () {
 
-
     var accountType;
     //var Firebase = require("firebase");
 
@@ -101,16 +100,19 @@ $(function () {
                             courseCode: courseCode.value,
                             email: email
                         })
+                        accountType= "student";
                     }
                     else {
                         users.child(authData.uid).set({
                             name: document.getElementById("name").value,
                             email: email
                         })
+                        accountType = "normal";
                     }
                     ref.child("users").child(authData.uid).set({
                         name: userName.value,
-                        courseCode: courseCode.value
+                        courseCode: courseCode.value,
+                        accountType: accountType
                     });
                 }
             });
