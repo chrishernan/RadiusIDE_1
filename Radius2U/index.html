@@ -41,6 +41,14 @@
 <body>
 <title>Radius IDE Home</title>
 
+<div id="splash-screen">
+    <span id="splash-screen-text">Welcome to Radius, a modern, block-based programming environment designed for schools and ready for everyone.
+            You can create an account in Mr. Frost's class, or you can program without logging in.
+            Have fun!</span>
+
+
+</div>
+
 <div id="tool-bar" class="pane">
     <button type="submit" id="b-new" class="button" value = "New"> NEW</button>
     <button type="submit" id="b-assignments" class="button" value = "Assignments"> ASSIGNMENTS</button>
@@ -72,12 +80,21 @@
     <div id="control-panel" class="draggable pane">
         <div id="control-panel-title" class="simple-title">Blocks</div>
         <div id="PrototypesPane"></div>
-        <div id="assignment-panel" class="draggable pane">
-            <div id="assignment-panel-title" class="simple-title">Assignments Panel</div>
-            <div class="assignment-panel-body">
-                <table id="dataHolder"></table>
 
-            </div>
+    </div>
+
+    <div id="assignment-panel" class="draggable pane">
+        <div id="assignment-panel-title" class="simple-title">Assignments Panel</div>
+        <div class="assignment-panel-body">
+            <table id="dataHolder"></table>
+
+        </div>
+    </div>
+
+    <div id="resources-panel" class="draggable pane">
+        <div id="resources-panel-title" class="simple-title">Resources Panel</div>
+            <span class="container"></span>
+            <img id="plus-sign-image" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/blue-jelly-icons-alphanumeric/069596-blue-jelly-icon-alphanumeric-plus-sign-simple.png"  />
         </div>
     </div>
 
@@ -86,7 +103,6 @@
 
 </div>
 
-</div>
 
 <div id="login-pop" class="pop">
     <div id="login-title" class="simple-title">Log In/Sign Up

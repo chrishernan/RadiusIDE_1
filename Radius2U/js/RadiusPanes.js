@@ -16,24 +16,14 @@ $(function () {
 
     });
 
-
+/*
     //Changes the visibility of the assignments pane by a toggle button
     $('#b-assignments').click(function() {
         var table;
         var row;
         var cell1;
         var cell2;
-        /*document.getElementById("assignment-panel").style.visibility= 'visible';
-        if($("#assignment-panel").is(':hidden')){
-            alert("in if");
-            document.getElementById("assignment-panel").style.visibility= 'visible';
-        }
-        else {
-            alert("in else");
-            //document.getElementById("assignment-panel").style.visibility = 'hidden';
 
-        }
-        alert("end");*/
         if(document.getElementById("assignment-panel").style.display=='block') {
             document.getElementById("assignment-panel").style.display='none';
         }
@@ -51,7 +41,7 @@ $(function () {
             row = table.insertRow(counter);
             cell1 = row.insertCell(0);
             cell2 = row.insertCell(1);
-            cell1.innerHTML = "<img src='/Users/christianhernandez/WebstormProjects/RadiusIDE_1/Radius2U/folder_icon.png'>";
+            cell1.innerHTML = "<img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png'>";
             cell2.innerHTML = data[key].name;
             counter++;
         }
@@ -67,17 +57,17 @@ $(function () {
         });
         var data = {"assignments": [{"name":"Assignment 1"},{"name":"Assignment 2"},{"name":"Assignment 3"},{"name":"Assignment 4"}]};
     */
-/*
+        /*
         table.row.add([
             'Assignment 1',
             'Assignment 2' ,
             'Assignment 3',
             'Assignment 4'
-        ]).draw(false);*/
+        ]).draw(false);
 
 
 
-    })
+    })*/
 
     $("#dataHolder").click(function () {
         alert("Due Date: TBA");

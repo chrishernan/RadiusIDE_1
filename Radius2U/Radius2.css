@@ -13,7 +13,8 @@ Style the enclosing panes
 #PrototypesPane {
 	position: absolute;
   overflow: scroll; 
-	overflow: visible; 
+	overflow: visible;
+	top: 0%;
 	padding: 5px; 
 
 	/* it seems to be necessary for PrototypesPane to have a higher z than 
@@ -41,7 +42,7 @@ Style the enclosing panes
 body {
     xxfont:.8rem/1.5 sans-serif;
     xxmargin:1rem;
-    -moz-user-select: none; 
+    -moz-user-select: none;
     -webkit-user-select: none; 
     -ms-user-select:none; 
     user-select:none;' 
