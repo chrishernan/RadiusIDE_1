@@ -4,7 +4,7 @@ $(function() {
     var data;
 
     //Changes the visibility of the assignments pane by a toggle button
-    $('#b-assignments').click(function() {
+    $('#b-ass').click(function() {
         var table;
         var row;
         var cell1;
@@ -49,7 +49,7 @@ $(function() {
      var reference = new Firebase(url);
      //reference.set({Name:"assignment 1",Date: "08./15/17", assignmentDetails: "Turn the farenheit temperature into celsius."});
 
-    $("#b-assignments")[0].addEventListener("click",retrieveAssignmentName);
+    $("#b-ass")[0].addEventListener("click",retrieveAssignmentName);
 
     $("table").on("mouseenter",".folder-rows, #hover-div",function(event) {
 
