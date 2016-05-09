@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
@@ -67,16 +70,21 @@
 
 </div>
 
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
 <div id="tool-bar" class="pane">
-    <button type="submit" id="b-new" class="button" value = "New"> NEW</button>
-    <button type="submit" id="b-assignments" class="button" value = "Assignments"> ASSIGNMENTS</button>
-    <button type="submit" id="b-settings" class="button" value = "Settings"> SETTINGS</button>
-    <button type ="submit"id="b-run" class="button" valule = "Run"> RUN</button>
-    <button type= "submit" id="b-stop" class="button" value = "Stop"> STOP</button>
-    <a href="help.html"> Help</a>
+    <button type="button" class="btn btn-success" value = "New"> NEW</button>
+
+    <button type="button" id="b-ass" class="btn btn-success" value = "Assignments"> ASSIGNMENTS</button>
+
+    <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
+    <button type="button" class="btn btn-success" valule = "Run"> RUN</button>
+    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+    <a type="button" class="btn btn-success" href="help.html">? Help</a>
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
-    <span class = "spanRight" id="user-form"> <div type = 'text' id="user" ng-model="user.test">  </input><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+    <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
 
 
 </div>

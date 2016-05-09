@@ -1,27 +1,30 @@
-.button{
-    font-size: 20px;
-}
 
 #window{
     width: 100%;
     height: 100%;
-    top: 5%;
+    top: 10%;
     left: 0%;
     margin:0;
     padding:0;
     position: fixed;
 
 }
+/*
+5e92b7
+a2aeaa
+cbdad5
 
+#bbeeee
+*/
 .simple-title {
-    font-family: monospace;
-    background: black;
+    background: #689F38;
     color: white;
+    font-family: Helvetica, "Nimbus Sans L", "Liberation Sans", Arial, sans-serif;
     font-size: 15px;
     height: 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #689F38;
     text-align: center;
-    padding-top: 3px;
+    padding-bottom: 4px;
 }
 
 .pane {
@@ -29,18 +32,18 @@
     padding: 0px;
     z-index: 99;
     border: 1px solid black;
-    background: darkgray;
+    background: #bbeeee;
     position: absolute;
 }
 
 #programming {
-    width: calc(100% - 258px);
+    width: 75%;
     height: 55%;
     top: 0%;
-    left: 256px;
+    left: 25%;
     z-index: 200;
 
-    border-bottom: 5px solid darkblue;
+    border-bottom: 5px solid #cbdad5;
 
 }
 
@@ -50,12 +53,12 @@
 
 #control-panel {
     float:left;
-    width: 256px;
+    width: 25%;
     height: 100%;
     top: 0px;
     left: 0px;
     z-index: 400;
-    border-right: 5px solid darkblue;
+    border-right: 5px solid #cbdad5;
 
 }
 
@@ -160,7 +163,7 @@ tr:hover {
 }
 
 #tool-bar {
-    color: white;
+    color: green;
     width: 100%;
     height: 3%;
     top: 0%;
@@ -175,12 +178,14 @@ tr:hover {
 
 }
 
+/*
 .button {
     font-size: 12px;
     margin-left: 20px;
     vertical-align: middle;
 
 }
+*/
 
 .ghostpane {
     background: #999;
