@@ -72,18 +72,27 @@ $(function () {
         document.getElementById(a).innerHTML = text + error;
         document.getElementById(a).style.visibility = "visible";
     }
-    function showSignUp() {
-        $("#signup-form").css("display", "block");
-    }
 
     var studentref;
-    var users = new Firebase(url+"Users/")
+    // var cCoderef = new Firebase(url+"users/cCode");
+    var users = new Firebase(url+"Users/");
+
+
+    //
+    // function checkCourseCode(urlref){
+    //     var dataref = new Firebase(url+"Users/"+urlref);
+    //     dataref.on("value",function(snapshot){
+    //
+    //     })
+    // }
+
 
     function createAccount() {
-        var userName = document.getElementById("name");
+        var userName = document.getElementById("name").value;
         var email = document.getElementById("email1").value;
-        var courseCode = document.getElementById("course-code");
-        studentref = new Firebase(url+"Courses/" + courseCode.value + "/");
+        var courseCode = document.getElementById("course-code").value;
+        studentref = new Firebase(url+"Courses/" + courseCode + "/");
+
 
         if($("#password1").val()==$("#password2").val()) {
             ref.createUser({
@@ -94,24 +103,35 @@ $(function () {
                     alertError("Error creating uer:","alert1",error);
 
                 } else {
-                    if (!isNaN(courseCode.value) && courseCode.value.length == 5) {
+                    if (!isNaN(courseCode) && courseCode.length == 5) {
+                        var cCoderef = new Firebase(url+"users/cCode/"+courseCode);
+                        cCoderef.on("value",function(snapshot) {
+                            if(snapshot.val()===null){
+                                alertError("The Course Code: "+courseCode+" does not exist!",'alert1','');
+                                return;
+                            }
+                            alert("NotNull");
+
+                        },function(err){
+                            console.log("The read failed: " + err.code);
+                        });
                         studentref.child(authData.uid).set({
-                            name: userName.value,
-                            courseCode: courseCode.value,
-                            email: email
-                        })
+                            name: userName,
+                            email: email,
+                            courseCode:courseCode
+                        });
                         accountType= "student";
                     }
                     else {
                         users.child(authData.uid).set({
-                            name: document.getElementById("name").value,
+                            name: userName,
                             email: email
-                        })
+                        });
                         accountType = "normal";
                     }
                     ref.child("users").child(authData.uid).set({
-                        name: userName.value,
-                        courseCode: courseCode.value,
+                        name: userName,
+                        courseCode: courseCode,
                         accountType: accountType
                     });
                 }
@@ -131,7 +151,7 @@ $(function () {
         //     }
         // });
 
-        closeLogin();
+        //closeLogin();
 
     }
 
@@ -139,7 +159,6 @@ $(function () {
         ref.unauth();
         $("#user-form").hide();
         $("#b-login").show();
-        $("#signup-form").hide();
 
     }
     

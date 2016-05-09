@@ -27,7 +27,7 @@ app.controller("dataController",
     ['$http', '$scope', function ($http, $scope) {
         $scope.userData = {};
         $scope.userData.email ='';
-
+        
 
         window.onload = ref.onAuth(function (authData) {
             if (authData) {
@@ -35,6 +35,8 @@ app.controller("dataController",
                 closeLogin();
             }
         });
+        
+        
         
 
     }]);
