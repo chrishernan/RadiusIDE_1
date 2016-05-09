@@ -101,6 +101,7 @@
     left: 0px;
     float: left;
     display: none;
+    text-align: center;
     position: absolute;
     overflow: auto;
     color: darkslateblue;
@@ -136,6 +137,7 @@
 /*adding the hover feature to the table*/
 tr:hover {
     background-color: lightgrey;
+
 
 }
 

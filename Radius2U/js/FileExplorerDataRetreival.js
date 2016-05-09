@@ -2,8 +2,7 @@ $(function() {
 
     var counter=0;
     var data;
-    var month= 2;
-    var day = 14;
+
     //Changes the visibility of the assignments pane by a toggle button
     $('#b-assignments').click(function() {
         var table;
@@ -31,13 +30,10 @@ $(function() {
         if (counter <= 0) {
             for (var key in data) {
                 row = table.insertRow(counter);
-                row.innerHTML= " class='folder-row'";
                 cell1 = row.insertCell(0);
-                cell1.innerHTML = " <img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png' class='folder-images' style='width: 50px;height: 50px;'/> " + data[key].name +
-                    "  - Due Date: " + month + "/" + day + '/17';
+                cell1.innerHTML = " <img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png' class='folder-images' style='width: 50px;height: 50px;'/> " + data[key].name;
                 counter++;
-                month++
-                day += 3;
+
 
 
             }
@@ -97,7 +93,7 @@ $(function() {
 
 
     $("#splash-screen").click(function () {
-        document.getElementById("splash-screen").style.display = "none";
+        $("#splash-screen").fadeOut();
     })
 
 
