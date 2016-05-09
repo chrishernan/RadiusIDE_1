@@ -12,12 +12,10 @@ $(function() {
 
         if (document.getElementById("assignment-panel").style.display === 'block') {
             document.getElementById("assignment-panel").style.display = 'none';
-            document.getElementById("control-panel").style.display = 'block';
 
         }
         else {
             document.getElementById("assignment-panel").style.display = 'block';
-            document.getElementById("control-panel").style.display = 'none';
         }
 
         data = [{"name": "Assignment 1", "due_date": "08/16/17"}, {
