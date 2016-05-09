@@ -87,7 +87,7 @@ $(function() {
     })
 
 
-    $("#splash-screen").click(function () {
+    $("#splash-screen-button").click(function () {
         $("#splash-screen").fadeOut();
     })
 
