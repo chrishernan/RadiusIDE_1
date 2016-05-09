@@ -12,7 +12,7 @@ Style the enclosing panes
 */
 #PrototypesPane {
 	position: absolute;
-  overflow: scroll; 
+  overflow: scroll;
 	overflow: visible;
 	top: 0%;
 	padding: 5px; 
@@ -50,6 +50,8 @@ body {
 
 .box {
     /* command box in the programming area*/
+	border-radius: 5px;
+	top:5%;
     position: absolute;
 	padding: 2px;
 	border: thin solid black;

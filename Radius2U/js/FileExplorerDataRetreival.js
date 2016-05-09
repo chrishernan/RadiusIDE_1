@@ -18,10 +18,7 @@ $(function() {
             document.getElementById("assignment-panel").style.display = 'block';
         }
 
-        data = [{"name": "Assignment 1", "due_date": "08/16/17"}, {
-            "name": "Assignment 2",
-            "due_date": "08/24/17"
-        }, {"name": "Assignment 3", "due_date": "09/03/17"}, {"name": "Assignment 4", "due_date": "09/25/17"}];
+        data = [];
 
         table = document.getElementById("dataHolder");
 
@@ -90,7 +87,7 @@ $(function() {
     })
 
 
-    $("#splash-screen").click(function () {
+    $("#splash-screen-button").click(function () {
         $("#splash-screen").fadeOut();
     })
 

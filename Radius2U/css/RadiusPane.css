@@ -31,7 +31,7 @@ cbdad5
     margin: 0;
     padding: 0px;
     z-index: 99;
-    border: 1px solid black;
+    border: 1px solid #cbdad5;
     background: #bbeeee;
     position: absolute;
 }
@@ -69,18 +69,19 @@ cbdad5
     position: absolute;
     top: 0px;
     left: 0px;
-    background-color: #0040aa;
+    background-color: steelblue;
     display: table;
-    opacity: .9;
+    opacity: .95;
     z-index: 200;
+    overflow: hidden;
     text-align: center;
 }
 
 #splash-screen-text {
     width:30%;
-    height:50%;
+    height:100%;
     left: 35%;
-    top:25%;
+    top:20%;
     overflow: hidden;
     position: absolute;
     display: table-cell;
@@ -89,11 +90,13 @@ cbdad5
     color: white;
     font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
     font-size: 200%;
-
-
-
 }
 
+#splash-screen-button {
+    position: absolute;
+    top:70%;
+    left:47%;
+}
 
 
 /* Added the css to control assignments div*/
@@ -137,6 +140,8 @@ cbdad5
     
 
 }
+
+
 
 /*adding the hover feature to the table*/
 tr:hover {
