@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60aa3de6-068e-41b0-85cb-96cf7ce620b2" name="Default" comment="Changed the shape of the buttons.">
+    <list default="true" id="60aa3de6-068e-41b0-85cb-96cf7ce620b2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/Radius2.css" afterPath="$PROJECT_DIR$/Radius2U/Radius2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" afterPath="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/index.html" afterPath="$PROJECT_DIR$/Radius2U/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" afterPath="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" />
     </list>
     <ignored path="RadiusIDE_1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +27,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="801">
-              <caret line="57" column="7" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
+            <state relative-caret-position="435">
+              <caret line="53" column="81" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -41,9 +40,11 @@
       <file leaf-file-name="LoginSignup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/js/LoginSignup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="897">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+              <folding>
+                <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+            <state relative-caret-position="162">
+              <caret line="110" column="23" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -84,9 +85,9 @@
         <entry file="file://$PROJECT_DIR$/Radius2U/css/Login.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+              <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
               <folding>
-                <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+                <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -108,10 +109,10 @@
         <option value="$PROJECT_DIR$/Radius2U/js/LoginSignup.js" />
         <option value="$PROJECT_DIR$/Radius2U/css/Login.css" />
         <option value="$PROJECT_DIR$/Radius2U/js/RadiusPanes.js" />
-        <option value="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
         <option value="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" />
         <option value="$PROJECT_DIR$/Radius2U/Radius2.css" />
         <option value="$PROJECT_DIR$/Radius2U/index.html" />
+        <option value="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
       </list>
     </option>
   </component>
@@ -315,7 +316,7 @@
       <workItem from="1462744222532" duration="191000" />
       <workItem from="1462744700512" duration="35000" />
       <workItem from="1462769824492" duration="2494000" />
-      <workItem from="1462811496041" duration="6211000" />
+      <workItem from="1462811496041" duration="6884000" />
     </task>
     <task id="LOCAL-00001" summary="Folder pictures work now. I was putting a local file as URL which didn't work. I've added a hovering div functionality that can display the assignment information such as starter code, and assignment details.">
       <created>1461537166330</created>
@@ -359,20 +360,34 @@
       <option name="project" value="LOCAL" />
       <updated>1462825251933</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Splash screen now only fades away when you press the button.">
+      <created>1462826836247</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1462826836248</updated>
+    </task>
+    <task id="LOCAL-00008" summary="I made the splash screen fade away only if the &quot;continue &quot; button is pressed.">
+      <created>1462827071390</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1462827071390</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64657000" />
+    <option name="totallyTimeSpent" value="65330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1683876" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32671756" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3740458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -444,7 +459,9 @@
     <MESSAGE value="Deleted the ghost panes." />
     <MESSAGE value="Added a splash screen button" />
     <MESSAGE value="Changed the shape of the buttons." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed the shape of the buttons." />
+    <MESSAGE value="Splash screen now only fades away when you press the button." />
+    <MESSAGE value="I made the splash screen fade away only if the &quot;continue &quot; button is pressed." />
+    <option name="LAST_COMMIT_MESSAGE" value="I made the splash screen fade away only if the &quot;continue &quot; button is pressed." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -486,7 +503,7 @@
         <state relative-caret-position="690">
           <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -503,7 +520,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -538,7 +557,7 @@
         <state relative-caret-position="690">
           <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -555,7 +574,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="49" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -590,7 +611,7 @@
         <state relative-caret-position="360">
           <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -607,7 +628,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="49" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -642,7 +665,7 @@
         <state relative-caret-position="360">
           <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -659,7 +682,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="49" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -694,7 +719,7 @@
         <state relative-caret-position="360">
           <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -711,7 +736,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="49" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -746,7 +773,7 @@
         <state relative-caret-position="360">
           <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -763,7 +790,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="19" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -788,7 +817,7 @@
         <state relative-caret-position="360">
           <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -805,7 +834,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="19" selection-start-line="28" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -844,18 +875,20 @@
     <entry file="file://$PROJECT_DIR$/Radius2U/css/Login.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+          <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
           <folding>
-            <marker date="1462479214000" expanded="true" signature="5:226" placeholder="{...}" />
+            <marker date="1462829446000" expanded="true" signature="5:226" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Radius2U/js/LoginSignup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="897">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <marker date="1462829446000" expanded="true" signature="5145:5155" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -863,14 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="768">
           <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -887,8 +912,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Radius2U/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="801">
-          <caret line="57" column="7" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
+        <state relative-caret-position="435">
+          <caret line="53" column="81" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="110" column="23" selection-start-line="110" selection-start-column="23" selection-end-line="110" selection-end-column="23" />
           <folding />
         </state>
       </provider>
