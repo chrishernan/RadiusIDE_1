@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="main" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,15 +22,6 @@
 
 
 
-    <!--Angular and Controller -->
-    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
-
-
-
-
-
     <script src="js/Radius1.js"></script>
     <script src="js/Box.js"></script>
     <script src="js/Block.js"></script>
@@ -44,6 +35,10 @@
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="js/ToolBar.js"></script>
 
+    <!--Angular and Controller -->
+    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
 
 
 </head>
@@ -63,6 +58,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <div id="tool-bar" class="pane">
+<<<<<<< Updated upstream
     <button type="button" class="btn btn-success" value = "New"> NEW</button>
 
     <button type="button" id="b-ass" class="btn btn-success" value = "Assignments"> ASSIGNMENTS</button>
@@ -74,6 +70,19 @@
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
     <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+=======
+    <button type="submit" id="b-new" class="button" value = "New"> NEW</button>
+    <button type="submit" id="b-assignments" class="button" value = "Assignments"> ASSIGNMENTS</button>
+    <button type="submit" id="b-settings" class="button" value = "Settings"> SETTINGS</button>
+    <button type ="submit"id="b-run" class="button" valule = "Run"> RUN</button>
+    <button type= "submit" id="b-stop" class="button" value = "Stop"> STOP</button>
+    <a href="help.html"> Help</a>
+
+
+    <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
+
+    <span class = "spanRight" id="user-form"> <div id="user" ng-bind="userData.email| capitalize"></div> <button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+>>>>>>> Stashed changes
 
 
 </div>

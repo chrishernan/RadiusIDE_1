@@ -76,6 +76,8 @@
 #user-form{
     color:black;
     float: right;
+    padding-right: 10px;
+    padding-top: 5px;
     display: inline-block;
 }
 

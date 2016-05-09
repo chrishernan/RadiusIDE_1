@@ -153,17 +153,7 @@ $(function () {
             alertList[i].innerHTML ="";
         }
     }
-
-
-
-    window.onload = ref.onAuth(function (authData) {
-        if (authData) {
-            console.log(authData);
-            document.getElementById('user').innerHTML =
-                authData.password.email.split('@')[0];
-            closeLogin();
-        }
-    });
+    
 
 
 });
