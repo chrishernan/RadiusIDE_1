@@ -19,6 +19,13 @@
 
 
 
+    <!--Angular and Controller -->
+    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
+
+
+
 
 
     <script src="js/Radius1.js"></script>
@@ -47,7 +54,7 @@
 
 </head>
 
-<body>
+<body ng-controller = "dataController">
 <title>Radius IDE Home</title>
 
 <div id="splash-screen">
@@ -66,10 +73,10 @@
     <button type="submit" id="b-settings" class="button" value = "Settings"> SETTINGS</button>
     <button type ="submit"id="b-run" class="button" valule = "Run"> RUN</button>
     <button type= "submit" id="b-stop" class="button" value = "Stop"> STOP</button>
-    <a href="help.html">? Help</a>
+    <a href="help.html"> Help</a>
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
-    <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+    <span class = "spanRight" id="user-form"> <div type = 'text' id="user" ng-model="user.test">  </input><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
 
 
 </div>
@@ -90,22 +97,23 @@
         <div id="control-panel-title" class="simple-title">Blocks</div>
         <div id="PrototypesPane"></div>
 
-    </div>
+        <div id="assignment-panel" class="draggable pane">
+            <div id="assignment-panel-title" class="simple-title">Assignments Panel</div>
+            <div class="assignment-panel-body">
+                <table id="dataHolder"></table>
 
-    <div id="assignment-panel" class="draggable pane">
-        <div id="assignment-panel-title" class="simple-title">Assignments Panel</div>
-        <div class="assignment-panel-body">
-            <table id="dataHolder"></table>
-
+            </div>
         </div>
-    </div>
 
-    <div id="resources-panel" class="draggable pane">
-        <div id="resources-panel-title" class="simple-title">Resources Panel</div>
+        <div id="resources-panel" class="draggable pane">
+            <div id="resources-panel-title" class="simple-title">Resources Panel</div>
             <span class="container"></span>
             <img id="plus-sign-image" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/blue-jelly-icons-alphanumeric/069596-blue-jelly-icon-alphanumeric-plus-sign-simple.png"  />
         </div>
     </div>
+
+    </div>
+
 
 
 
@@ -146,6 +154,7 @@
     </div>
 
 </div>
+
 
 
 
