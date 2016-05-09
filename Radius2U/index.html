@@ -62,10 +62,28 @@
 
     <button type="button" id="b-ass" class="btn btn-success" value = "Assignments"> ASSIGNMENTS</button>
 
+    
     <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
+    
+
     <button type="button" class="btn btn-success" valule = "Run"> RUN</button>
     <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
     <a type="button" class="btn btn-success" href="help.html">? Help</a>
+
+<!-- Single button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
     <span class = "spanRight" id="user-form"> <div id="user" ng-bind="userData.email| capitalize"></div> <button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
