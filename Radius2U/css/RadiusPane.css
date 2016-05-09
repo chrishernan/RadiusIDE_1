@@ -2,7 +2,7 @@
 #window{
     width: 100%;
     height: 100%;
-    top: 10%;
+    top: 6%;
     left: 0%;
     margin:0;
     padding:0;
@@ -108,6 +108,7 @@ cbdad5
     position: absolute;
     overflow: auto;
     color: darkslateblue;
+    border: none;
 }
 
 #resources-panel {
@@ -160,7 +161,7 @@ tr:hover {
 #tool-bar {
     color: green;
     width: 100%;
-    height: 3%;
+    height: 6%;
     top: 0%;
     left: 0%;
     display: inline-block;
