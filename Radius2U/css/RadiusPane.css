@@ -98,6 +98,12 @@ cbdad5
     left:47%;
 }
 
+#splash-screen-gif {
+    width: 60%;
+    height: 10%;
+}
+
+
 
 /* Added the css to control assignments div*/
 #assignment-panel {
