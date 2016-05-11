@@ -110,7 +110,6 @@ $(function () {
                                 alertError("The Course Code: "+courseCode+" does not exist!",'alert1','');
                                 return;
                             }
-                            alert("NotNull");
 
                         },function(err){
                             console.log("The read failed: " + err.code);
