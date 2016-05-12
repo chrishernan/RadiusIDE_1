@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b194035a-a81f-4411-9560-41b6b9b8ba24" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/LoginSignup.js" afterPath="$PROJECT_DIR$/js/LoginSignup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/RadiusPane.css" afterPath="$PROJECT_DIR$/css/RadiusPane.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/RadiusPanes.js" afterPath="$PROJECT_DIR$/js/RadiusPanes.js" />
     </list>
     <ignored path="Radius2U.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,24 +24,24 @@
     <favorites_list name="Radius2U" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.40797102">
+    <splitter split-orientation="horizontal" split-proportion="0.7137681">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="RadiusPanes.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="RadiusPanes.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+                <state relative-caret-position="75">
+                  <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="true">
+          <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/css/RadiusPane.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="608">
-                  <caret line="71" column="24" selection-start-line="71" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+                <state relative-caret-position="399">
+                  <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -70,7 +70,7 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
+                <state relative-caret-position="-285">
                   <caret line="36" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
                   <folding />
                 </state>
@@ -142,7 +142,6 @@
         <option value="$PROJECT_DIR$/Radius2.css" />
         <option value="$PROJECT_DIR$/css/Toolbar.css" />
         <option value="$PROJECT_DIR$/css/ToolBar.css" />
-        <option value="$PROJECT_DIR$/js/RadiusPanes.js" />
         <option value="$PROJECT_DIR$/js/ToolBar.js" />
         <option value="$PROJECT_DIR$/js/app/main.js" />
         <option value="$PROJECT_DIR$/js/app/controllers/main.js" />
@@ -150,8 +149,9 @@
         <option value="$PROJECT_DIR$/js/app/controllers/dataCtrl.js" />
         <option value="$PROJECT_DIR$/css/Login.css" />
         <option value="$PROJECT_DIR$/js/FileExplorerDataRetreival.js" />
-        <option value="$PROJECT_DIR$/css/RadiusPane.css" />
         <option value="$PROJECT_DIR$/js/LoginSignup.js" />
+        <option value="$PROJECT_DIR$/css/RadiusPane.css" />
+        <option value="$PROJECT_DIR$/js/RadiusPanes.js" />
       </list>
     </option>
   </component>
@@ -714,16 +714,16 @@
       <workItem from="1462485688362" duration="10000" />
       <workItem from="1462560276015" duration="207000" />
       <workItem from="1462817861917" duration="12253000" />
-      <workItem from="1463082099309" duration="299000" />
+      <workItem from="1463082099309" duration="974000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57420000" />
+    <option name="totallyTimeSpent" value="58095000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1676" height="1027" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -735,7 +735,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17661098" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17661098" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1101,22 +1101,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/ToolBar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/Login.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-591">
@@ -1158,9 +1142,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/ToolBar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
+        <state relative-caret-position="-285">
           <caret line="36" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
@@ -1168,8 +1160,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/RadiusPane.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="71" column="24" selection-start-line="71" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        <state relative-caret-position="399">
+          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/RadiusPanes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>

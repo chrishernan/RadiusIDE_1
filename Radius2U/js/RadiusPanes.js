@@ -1,9 +1,8 @@
 $(function () {
 
-    $("#programming").resizable({ handles: 's' });
-    $("#programming").bind("resize", function () {
-        $('#program-output').height($('#window').height()-$("#programming").height());
-        $('#program-output').css('top',$("#programming").height());
+    $("#program-output").resizable({ handles: 'n' });
+    $("#program-output").bind("resize", function () {
+        $('#programming').height($('#window').height()-$("#program-output").height());
     });
 
     $("#control-panel").resizable({ handles: 'e', minWidth: 256 });
