@@ -88,6 +88,7 @@ $(function () {
 
 
     function createAccount() {
+        var pass = false;
         var userName = document.getElementById("name").value;
         var email = document.getElementById("email1").value;
         var courseCode = document.getElementById("course-code").value;
@@ -100,26 +101,34 @@ $(function () {
                 password: document.getElementById("password1").value,
             }, function (error, authData) {
                 if (error) {
-                    alertError("Error creating uer:","alert1",error);
+                    alertError("","alert1",error);
 
                 } else {
-                    if (!isNaN(courseCode) && courseCode.length == 5) {
-                        var cCoderef = new Firebase(url+"users/cCode/"+courseCode);
-                        cCoderef.on("value",function(snapshot) {
-                            if(snapshot.val()===null){
-                                alertError("The Course Code: "+courseCode+" does not exist!",'alert1','');
-                                return;
-                            }
+                    if (!isNaN(courseCode)) {
+                        if(courseCode.length!=5){
+                            alertError("Invalid Course Code!",'alert1','');
+                        }
+                        else {
+                            var cCoderef = new Firebase(url + "users/cCode/" + courseCode);
+                            cCoderef.on("value", function (snapshot) {
+                                if (snapshot.val() === null) {
+                                    alertError("The Course Code: " + courseCode + " does not exist!", 'alert1', '');
+                                }
+                                else{
+                                    studentref.child(authData.uid).set({
+                                        name: userName,
+                                        email: email,
+                                        courseCode:courseCode
+                                    });
+                                    accountType= "student";
+                                    pass = true;
+                                }
 
-                        },function(err){
-                            console.log("The read failed: " + err.code);
-                        });
-                        studentref.child(authData.uid).set({
-                            name: userName,
-                            email: email,
-                            courseCode:courseCode
-                        });
-                        accountType= "student";
+                            }, function (err) {
+                                console.log("The read failed: " + err.code);
+                            });
+                        }
+
                     }
                     else {
                         users.child(authData.uid).set({
@@ -127,12 +136,15 @@ $(function () {
                             email: email
                         });
                         accountType = "normal";
+                        pass = true;
                     }
-                    ref.child("users").child(authData.uid).set({
-                        name: userName,
-                        courseCode: courseCode,
-                        accountType: accountType
-                    });
+                    if(pass = true) {
+                        ref.child("users").child(authData.uid).set({
+                            name: userName,
+                            courseCode: courseCode,
+                            accountType: accountType
+                        });
+                    }
                 }
             });
         }
@@ -150,7 +162,8 @@ $(function () {
         //     }
         // });
 
-        //closeLogin();
+        if(pass)
+        closeLogin();
 
     }
 
