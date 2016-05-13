@@ -43,7 +43,6 @@ $(function () {
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
         login(email,password);
-        closeLogin();
 
 
     }
@@ -55,13 +54,13 @@ $(function () {
             password: password
         }, function (error, authData) {
             if (error) {
-                alertError("Login Failed:","alert",error);
+                alertError("","alert",error);
             } else {
                 rememberMe: true;
                 var demail = authData.password.email.split('@')[0];
                 console.log(demail);
                 document.getElementById('user').innerHTML = authData.password.email.split('@')[0];
-                // closeLogin();
+                closeLogin();
 
             }
         });
@@ -88,7 +87,6 @@ $(function () {
 
 
     function createAccount() {
-        var pass = false;
         var userName = document.getElementById("name").value;
         var email = document.getElementById("email1").value;
         var courseCode = document.getElementById("course-code").value;
@@ -96,6 +94,28 @@ $(function () {
 
 
         if($("#password1").val()==$("#password2").val()) {
+            if (!isNaN(courseCode)) {
+                if (courseCode.length != 5) {
+                    alertError("Invalid Course Code!", 'alert1', '');
+                }
+                else {
+                    var cCoderef = new Firebase(url + "users/cCode/" + courseCode);
+                    cCoderef.on("value", function (snapshot) {
+                        if (snapshot.val() === null) {
+                            alertError("The Course Code: " + courseCode + " does not exist!", 'alert1', '');
+                        }
+                        else {
+                            accountType = "student";
+                        }
+                    }, function (err) {
+                        console.log("The read failed: " + err.code);
+                    });
+                }
+            }
+            else {
+                accountType = "normal";
+            }
+
             ref.createUser({
                 email: email,
                 password: document.getElementById("password1").value,
@@ -104,66 +124,26 @@ $(function () {
                     alertError("","alert1",error);
 
                 } else {
-                    if (!isNaN(courseCode)) {
-                        if(courseCode.length!=5){
-                            alertError("Invalid Course Code!",'alert1','');
-                        }
-                        else {
-                            var cCoderef = new Firebase(url + "users/cCode/" + courseCode);
-                            cCoderef.on("value", function (snapshot) {
-                                if (snapshot.val() === null) {
-                                    alertError("The Course Code: " + courseCode + " does not exist!", 'alert1', '');
-                                }
-                                else{
-                                    studentref.child(authData.uid).set({
-                                        name: userName,
-                                        email: email,
-                                        courseCode:courseCode
-                                    });
-                                    accountType= "student";
-                                    pass = true;
-                                }
 
-                            }, function (err) {
-                                console.log("The read failed: " + err.code);
-                            });
-                        }
+                    users.child(authData.uid).set({
+                        name: userName,
+                        email: email
+                    });
 
-                    }
-                    else {
-                        users.child(authData.uid).set({
-                            name: userName,
-                            email: email
-                        });
-                        accountType = "normal";
-                        pass = true;
-                    }
-                    if(pass = true) {
-                        ref.child("users").child(authData.uid).set({
-                            name: userName,
-                            courseCode: courseCode,
-                            accountType: accountType
-                        });
-                    }
+                    ref.child("users").child(authData.uid).set({
+                        name: userName,
+                        courseCode: courseCode,
+                        accountType: accountType
+                    });
+                    closeLogin();
+
                 }
             });
         }
+
         else {
             alertError("Password not matching!", "alert1", "");
         }
-        //login(email,document.getElementById("password1").value);
-        // ref.onAuth(function(authData) {
-        //     if (authData) {
-        //         alert("YESSS"+userName.value+" "+courseCode.value);
-        //         ref.child("users").child(authData.uid).set({
-        //             name: userName.value,
-        //             courseCode: courseCode.value
-        //         });
-        //     }
-        // });
-
-        if(pass)
-        closeLogin();
 
     }
 
@@ -173,7 +153,7 @@ $(function () {
         $("#b-login").show();
 
     }
-    
+
     function clear(){
         var inputList = document.getElementsByClassName("input");
         for (var i = 0; i < inputList.length; i++) {

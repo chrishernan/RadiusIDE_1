@@ -3,9 +3,8 @@
     position: fixed;
     height: 400px;
     width: 600px;
-    margin: -100px 0 0 -200px;
-    top: 40%;
-    left: 40%;
+    top: 30%;
+    left: 30%;
     border: 1px solid white;
     background: white;
     padding: 5px;
@@ -16,14 +15,13 @@
 
 }
 .form {
-    margin :10px;
+    margin :5px;
 }
 
 #login-form{
-    /*top:50%;*/
     left:50%;
-    top:0%;
-    width: 40%;
+    top:15%;
+    width: 45%;
     height: 90%;
     display: block;
     float: right;
@@ -32,10 +30,9 @@
 }
 
 #signup-form{
-    /*top:50%;*/
     left:0%;
-    top:0%;
-    width: 40%;
+    top:15%;
+    width: 45%;
     height: 90%;
     display: block;
     float:left;
@@ -62,9 +59,14 @@
     cursor: pointer;
 }
 
-.alert{
+.error{
     color: red;
     visibility: hidden;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 #b-signout{
