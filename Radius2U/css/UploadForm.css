@@ -1,0 +1,48 @@
+#upload-form {
+    width: 400px;
+    height: 400px;
+    top: 20%;
+    left: 35%;
+    position: relative;
+    z-index:990;
+    background-color: ghostwhite;
+    display: none;
+}
+
+#starter-code-form1 {
+    top:100px;
+    left:100px;
+    position: absolute;
+    float: right;
+}
+
+#upload-position-handler1 {
+   /* width: 200px;
+    height: 200px;*/
+
+    text-align: center;
+
+}
+
+#starter-code-form2 {
+    top:200px;
+    left: 100px;
+    margin-top: 100px;
+    position: absolute;
+    float: right;
+}
+#upload-position-handler2 {
+    text-align: center;
+}
+
+#upload-position-handler3 {
+    text-align: center;
+}
+
+#upload-position-handler4 {
+    text-align: center;
+}
+
+#upload-form-submit {
+    align-items:center;
+}

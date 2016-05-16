@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="css/Login.css"/>
     <link rel="stylesheet" type="text/css" href="css/ToolBar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/UploadForm.css">
 
 
 
@@ -36,6 +38,7 @@
     <script src="js/ToolBar.js"></script>
     <script src="js/resourcesPanel.js"></script>
     <script src="js/UploadAssignment.js"></script>
+
 
 
     <!--Angular and Controller -->
@@ -135,10 +138,29 @@
     </div>
 
 
+<!--Upload form -->
 
+<div id="upload-form" class="form">
+    <div id="upload-title" class="simple-title"> Upload
+        <span id="upload-close" class="close">x</span>
+    </div>
+    <div id="upload-position-handler1">
+        <form id="upload-form1">
+            <input type="text" class="input" id="Starter-Code-Form1" name="Name" placeholder="name" size="26"/>
+        </form>
 
+    </div>
+    <div id="upload-position-handler2">
+        <input type="text" class="input" id="Starter-Code-Form2" name="Due date" placeholder="Due Date" size="26"/>
+    </div>
+    <div id="upload-position-handler3">
+        <input type="text" class="input" id="Starter-Code-Form3" name="starter code" placeholder="Starter Code." size="26"/>
+    </div>
+    <div id="upload-position-handler4">
+        <input type="text" class="input" id="Starter-Code-Form4" name="Descriptions" placeholder="Descriptions " size="26"/>
+    </div>
+    <center><input type="submit" class="input" id="upload-form-submit" value="Submit"></center>
 </div>
-
 
 <div id="login-pop" class="pop">
     <div id="login-title" class="simple-title">Log In/Sign Up
