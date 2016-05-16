@@ -11,10 +11,10 @@
   Radius = window.Radius;
 
   jQuery(function() {
-    window.Radius.PrototypesOnReady();
     initAllBoxes();
+    window.Radius.PrototypesOnReady();
     window.Radius.ProgrammingPaneOnReady();
-
+    return $("#PrototypesPane").draggable();
   });
 
   initAllBoxes = function() {
@@ -22,6 +22,57 @@
     Radius.TheBlockList = new Radius.BlockList();
     startBlock = new Radius.Block(new Radius.Box("Start", "ProgrammingPane").setPos(20, 20));
     return Radius.TheBlockList.addBlock(startBlock);
+  };
+
+  Radius.serialize = function() {
+    var block, i, len, ref, ser;
+    ser = '--Radius.Serialized on ' + (new Date()) + '\n';
+    ref = Radius.TheBlockList.getAllBlocks();
+    for (i = 0, len = ref.length; i < len; i++) {
+      block = ref[i];
+      ser += block.serialize();
+    }
+    ser += '--End of serialization--\n';
+    return ser;
+  };
+
+  Radius.deserialize = function(serString) {
+    var blockStack, currBlock, currBox, fields, i, ignoreThisLine, len, line, lines, results, topLevelBlock;
+    Radius.clearProgrammingPane();
+    lines = serString.split('\n');
+    if (!lines[0].startsWith('--Radius.Serialized on')) {
+      console.log("****Could not deserialize", serString);
+      return;
+    }
+    blockStack = [];
+    topLevelBlock = false;
+    results = [];
+    for (i = 0, len = lines.length; i < len; i++) {
+      line = lines[i];
+      if (line.startsWith('--') || line.length === 0) {
+        results.push(ignoreThisLine = true);
+      } else if (line === '[') {
+        currBlock = new Radius.Block();
+        if (blockStack.length === 0) {
+          Radius.TheBlockList.addBlock(currBlock);
+        } else {
+          blockStack[blockStack.length - 1].add(currBlock);
+        }
+        results.push(blockStack.push(currBlock));
+      } else if (line === ']') {
+        results.push(blockStack.pop());
+      } else {
+        fields = line.split('//.');
+        currBox = new Radius.Box(fields[0], 'ProgrammingPane', fields[1], fields[2]);
+        blockStack[blockStack.length - 1].add(currBox);
+        if (blockStack.length === 1 && blockStack[0].list.length === 1) {
+          results.push(blockStack[0].moveTo(parseInt(fields[3], 10), parseInt(fields[4], 10)));
+        } else {
+          results.push(void 0);
+        }
+      }
+    }
+    return results;
   };
 
 }).call(this);

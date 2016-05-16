@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="b194035a-a81f-4411-9560-41b6b9b8ba24" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/Login.css" afterPath="$PROJECT_DIR$/css/Login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/LoginSignup.js" afterPath="$PROJECT_DIR$/js/LoginSignup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app/controllers/dataCtrl.js" afterPath="$PROJECT_DIR$/js/app/controllers/dataCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2.css" afterPath="$PROJECT_DIR$/Radius2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/help.html" afterPath="$PROJECT_DIR$/help.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/Block.js" afterPath="$PROJECT_DIR$/js/Block.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/Box.js" afterPath="$PROJECT_DIR$/js/Box.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ProgrammingPane.js" afterPath="$PROJECT_DIR$/js/ProgrammingPane.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ProgrammingPane1.js" afterPath="$PROJECT_DIR$/js/ProgrammingPane1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ProgrammingPaneDrag.js" afterPath="$PROJECT_DIR$/js/ProgrammingPaneDrag.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/PrototypesPane.js" afterPath="$PROJECT_DIR$/js/PrototypesPane.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/R2.tmproj" afterPath="$PROJECT_DIR$/js/R2.tmproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/Radius1.js" afterPath="$PROJECT_DIR$/js/Radius1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/Token.js" afterPath="$PROJECT_DIR$/js/Token.js" />
     </list>
     <ignored path="Radius2U.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,21 +77,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="LoginSignup.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="LoginSignup.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/LoginSignup.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1713">
+                <state relative-caret-position="900">
                   <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1911">
-                  <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
+                <state relative-caret-position="21">
+                  <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
                   <folding />
                 </state>
               </provider>
@@ -181,7 +188,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="4" />
     <option name="y" value="23" />
-    <option name="width" value="1676" />
+    <option name="width" value="838" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -209,6 +216,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -257,9 +267,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -684,15 +691,16 @@
       <workItem from="1462817861917" duration="12253000" />
       <workItem from="1463082099309" duration="3885000" />
       <workItem from="1463101035566" duration="24000" />
-      <workItem from="1463115746808" duration="325000" />
+      <workItem from="1463115746808" duration="437000" />
+      <workItem from="1463367546016" duration="74000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61355000" />
+    <option name="totallyTimeSpent" value="61541000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1676" height="1027" extended-state="6" />
+    <frame x="4" y="23" width="838" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1124,18 +1132,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/js/LoginSignup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1911">
-          <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
+        <state relative-caret-position="900">
+          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/LoginSignup.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1713">
-          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+        <state relative-caret-position="21">
+          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
           <folding />
         </state>
       </provider>

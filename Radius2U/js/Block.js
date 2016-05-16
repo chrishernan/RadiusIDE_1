@@ -17,11 +17,24 @@
   Radius.BlockList = (function() {
     function BlockList() {
       this.blocks = [];
+      this.prototypes = [];
       this.functions = [];
     }
 
     BlockList.prototype.addBlock = function(block1) {
       return this.blocks.push(block1);
+    };
+
+    BlockList.prototype.addPrototypeBlock = function(block1) {
+      return this.prototypes.push(block1);
+    };
+
+    BlockList.prototype.removePrototypeBlock = function(block1) {
+      var n;
+      n = this.prototypes.indexOf(block1);
+      if (n > -1) {
+        return this.prototypes.splice(n, 1);
+      }
     };
 
     BlockList.prototype.deleteBlock = function(block) {
@@ -48,27 +61,42 @@
     };
 
     BlockList.prototype.display = function() {
-      var b, bl, i, j, k, l, len, len1, len2, out, ref, ref1, ref2, results;
+      var bl, j, len, ref;
       console.log('--------', this.blocks.length, 'blocks --------');
       ref = this.blocks;
       for (j = 0, len = ref.length; j < len; j++) {
         bl = ref[j];
         bl.blockDisplay();
       }
-      return;
-      ref1 = this.blocks;
-      results = [];
-      for (i = k = 0, len1 = ref1.length; k < len1; i = ++k) {
-        bl = ref1[i];
-        out = "blk " + i + " ";
-        ref2 = bl.list;
-        for (l = 0, len2 = ref2.length; l < len2; l++) {
-          b = ref2[l];
-          out += b.id + " " + b.name + ", ";
+    };
+
+    BlockList.prototype.findBoxByID = function(boxID) {
+      var bl, found, j, len, ref;
+      ref = this.blocks;
+      for (j = 0, len = ref.length; j < len; j++) {
+        bl = ref[j];
+        found = bl.findBoxByID(boxID);
+        if (found != null) {
+          return found;
         }
-        results.push(console.log(out));
       }
-      return results;
+      return null;
+    };
+
+    BlockList.prototype.findPrototypeBoxByID = function(boxID) {
+      var bl, j, len, ref;
+      ref = this.prototypes;
+      for (j = 0, len = ref.length; j < len; j++) {
+        bl = ref[j];
+        if (bl.id === boxID) {
+          return bl;
+        }
+      }
+      return null;
+    };
+
+    BlockList.prototype.getAllBlocks = function() {
+      return this.blocks;
     };
 
     BlockList.prototype.loadFromStorage = function(o) {
@@ -80,6 +108,8 @@
   })();
 
   Radius.Block = (function() {
+    Block.nextSeq = 1000;
+
     function Block(box) {
       var b, j, len, ref;
       this.list = [];
@@ -98,14 +128,11 @@
       }
       this.isABox = false;
       this.parentBlock = null;
+      this.seq = Block.nextSeq++;
     }
 
-    Block.prototype.moveTo = function(box, newX, newY) {
-      if (box === this.list[0]) {
-        return this.lineUpBlock(newX, newY);
-      } else {
-        return console.log("***ERROR*** in Block.moveTo, not first box", box, "in", this);
-      }
+    Block.prototype.moveTo = function(newX, newY) {
+      return this.lineUpBlock(newX, newY);
     };
 
     Block.prototype.lineUpBlock = function(xStart, yStart) {
@@ -120,6 +147,7 @@
         if (this.parentBlock != null) {
           return this.parentBlock.lineUpBlock();
         }
+        barStack = [];
         xPos = this.list[0].x;
         yPos = this.list[0].y;
       }
@@ -159,7 +187,6 @@
             this.parentBlock.list.splice(n, 1, newBlock);
             this.parentBlock = null;
             Radius.TheBlockList.addBlock(this);
-            barStack = [];
             newBlock.parentBlock.lineUpBlock();
             return;
           }
@@ -171,44 +198,95 @@
         console.log("**ERROR** in Block.split, could not find", box, "in", this);
         return;
       }
-      newList = this.list.splice(n, 9999);
+      if (box.name === 'else') {
+        newList = this.list.splice(n, 3);
+      } else {
+        newList = this.list.splice(n, 9999);
+      }
       newBlock = new Block(newList);
-      console.log('in split, newblock:', n);
-      newBlock.blockDisplay();
+      this.lineUpBlock();
       newBlock.lineUpBlock();
       Radius.TheBlockList.addBlock(newBlock);
     };
 
     Block.prototype.append = function(box1, box2) {
-      var b, box2Parent, insertBlock, insertLoc, j, len, ref;
-      box2Parent = box2.parentBlock;
+      var b, blockControlledByElse, insertIntoBlock, insertLoc, insertedBlock, j, k, len, len1, moveToElseList, ref;
+      insertedBlock = box2.parentBlock;
       insertLoc = this.list.indexOf(box1);
       if (insertLoc === -1) {
         console.log("***ERROR*** in Block.append, could not find", box1, "in", this);
         return;
       }
-      if (box1.name === 'while' || box1.name === 'if' || box1.name === 'function') {
-        insertBlock = this.list[insertLoc + 2];
+      if (box2.name === 'else') {
+        if (box1.name === 'if') {
+          return this.appendAnElse(box1, box2);
+        } else if (box1.controlledByIfWithoutElse()) {
+          moveToElseList = this.list.splice(insertLoc - 1, 9999);
+          blockControlledByElse = insertedBlock.list[2];
+          for (j = 0, len = moveToElseList.length; j < len; j++) {
+            b = moveToElseList[j];
+            b.parentBlock = blockControlledByElse;
+            blockControlledByElse.list.push(b);
+          }
+          insertIntoBlock = this.parentBlock;
+          insertLoc = this.parentBlock.list.indexOf(this);
+        }
+      } else if (box1.name === 'while' || box1.name === 'if' || box1.name === 'else' || box1.name === 'function') {
+        insertIntoBlock = this.list[insertLoc + 2];
         insertLoc = -1;
       } else {
-        insertBlock = this;
+        insertIntoBlock = this;
       }
-      ref = box2Parent.list;
-      for (j = 0, len = ref.length; j < len; j++) {
-        b = ref[j];
+      ref = insertedBlock.list;
+      for (k = 0, len1 = ref.length; k < len1; k++) {
+        b = ref[k];
         insertLoc++;
-        insertBlock.list.splice(insertLoc, 0, b);
-        b.parentBlock = insertBlock;
+        insertIntoBlock.list.splice(insertLoc, 0, b);
+        b.parentBlock = insertIntoBlock;
       }
-      Radius.TheBlockList.deleteBlock(box2Parent);
-      barStack = [];
+      Radius.TheBlockList.deleteBlock(insertedBlock);
       return this.lineUpBlock();
+    };
+
+    Block.prototype.appendAnElse = function(box1, box2) {
+      var b, blockControlledByElse, insertIntoBlock, insertLoc, insertedBlock, j, len, moveToElseList;
+      insertedBlock = box2.parentBlock;
+      insertLoc = this.list.indexOf(box1);
+      if (box1.name === 'if') {
+        this.addAfter(insertLoc + 2, [new Block(), box2, insertedBlock.list[1]]);
+        this.list[insertLoc + 5].addAfter(0, insertedBlock.list[2]);
+        Radius.TheBlockList.deleteBlock(insertedBlock);
+        insertedBlock = null;
+        return this.lineUpBlock();
+      } else if (box1.controlledByIfWithoutElse()) {
+        moveToElseList = this.list.splice(insertLoc - 1, 9999);
+        blockControlledByElse = insertedBlock.list[2];
+        for (j = 0, len = moveToElseList.length; j < len; j++) {
+          b = moveToElseList[j];
+          b.parentBlock = blockControlledByElse;
+          blockControlledByElse.list.push(b);
+        }
+        insertIntoBlock = this.parentBlock;
+        return insertLoc = this.parentBlock.list.indexOf(this);
+      }
     };
 
     Block.prototype.add = function(boxOrBlock) {
       boxOrBlock.parentBlock = this;
       this.list.push(boxOrBlock);
-      barStack = [];
+      return this.lineUpBlock();
+    };
+
+    Block.prototype.addAfter = function(loc, boxOrBlockList) {
+      var b, i, j, len, ref;
+      i = 0;
+      for (j = 0, len = boxOrBlockList.length; j < len; j++) {
+        b = boxOrBlockList[j];
+        console.log('changing parent of', b != null ? b.name : void 0, 'from', b != null ? (ref = b.parentBlock) != null ? ref.seq : void 0 : void 0, 'to', this.seq);
+        b.parentBlock = this;
+        this.list.splice(loc + i, 0, b);
+        i++;
+      }
       return this.lineUpBlock();
     };
 
@@ -243,7 +321,12 @@
                 return $('#' + b.id).remove();
               };
             })(this));
-            results.push(b.deleted = true);
+            b.deleted = true;
+            if (b === Radius.Box.swoopTargetBox) {
+              results.push(Radius.Box.swoopTargetBox = null);
+            } else {
+              results.push(void 0);
+            }
           } else {
             results.push(void 0);
           }
@@ -278,19 +361,18 @@
     };
 
     Block.prototype.addEnd = function() {
+      var endBox, theName;
       if (this.list.length > 1) {
         console.log("**ERROR** in Block.addEnd, @list is too long:", this.list.length);
         return;
       }
       this.add(new Radius.Box('bar', 'ProgrammingPane'));
       this.add(new Block());
-      return this.add(new Radius.Box('endwhile', 'ProgrammingPane'));
-    };
-
-    Block.prototype.find = function(id) {};
-
-    Block.prototype.boxList = function() {
-      return this.list;
+      theName = this.list[0].name;
+      if (theName === 'if' || theName === 'while' || theName === 'function') {
+        endBox = new Radius.Box('end' + theName, 'ProgrammingPane');
+        return this.add(endBox);
+      }
     };
 
     Block.prototype.getParms = function() {
@@ -330,16 +412,164 @@
       return null;
     };
 
+    Block.prototype.copySelectedBoxes = function() {
+      var b, foundSelectedBoxes, j, len, ref;
+      if ((this.parentBlock != null) && this.list.length === 0) {
+        Radius.copyBuffer.push({
+          type: 'block'
+        });
+        Radius.copyBuffer.push({
+          type: 'endblock'
+        });
+        return;
+      }
+      foundSelectedBoxes = false;
+      ref = this.list;
+      for (j = 0, len = ref.length; j < len; j++) {
+        b = ref[j];
+        if (b.isABox) {
+          if ($('#' + b.id).hasClass('selected')) {
+            if (!foundSelectedBoxes) {
+              Radius.copyBuffer.push({
+                type: 'block'
+              });
+              foundSelectedBoxes = true;
+            }
+            Radius.copyBuffer.push({
+              type: 'box',
+              boxName: b.name,
+              boxParentDivID: b.parentDivID,
+              boxParm1: b.parm1,
+              boxParm2: b.parm2,
+              boxX: b.x,
+              boxY: b.y
+            });
+          }
+        } else {
+          b.copySelectedBoxes();
+        }
+      }
+      if (foundSelectedBoxes) {
+        return Radius.copyBuffer.push({
+          type: 'endblock'
+        });
+      }
+    };
+
+    Block.prototype.serialize = function(ser) {
+      var b, j, len, ref;
+      if ((ser == null) || ser === null) {
+        ser = '';
+      }
+      ser += '[\n';
+      ref = this.list;
+      for (j = 0, len = ref.length; j < len; j++) {
+        b = ref[j];
+        if (b.isABox) {
+          ser += b.name + '//.' + b.parm1 + '//.' + b.parm2 + '//.' + b.x + '//.' + b.y + '\n';
+        } else {
+          ser = b.serialize(ser);
+        }
+      }
+      ser += ']\n';
+      return ser;
+    };
+
+    Block.prototype.insertBoxFromArray = function(boxInfo) {
+      var newBlocks, newBox;
+      newBlocks = [];
+      return newBox = new Radius.Box(boxInfo[2], boxInfo[3], boxInfo[4], boxInfo[5]).setPos(boxInfo[6], boxInfo[7]);
+    };
+
+    Block.prototype.insertCopyBufferBoxes = function() {
+      var b, b1, blockStack, j, len, newBox, ref, results;
+      blockStack = [];
+      ref = Radius.copyBuffer;
+      results = [];
+      for (j = 0, len = ref.length; j < len; j++) {
+        b = ref[j];
+        if (b.type === 'block') {
+          b1 = new Block();
+          if (blockStack.length === 0) {
+            Radius.TheBlockList.addBlock(b1);
+          } else {
+            blockStack[blockStack.length - 1].add(b1);
+          }
+          results.push(blockStack.push(b1));
+        } else if (b.type === 'box') {
+          newBox = new Radius.Box(b.boxName, b.boxParentDivID, b.boxParm1, b.boxParm2).setPos(b.boxX + Radius.copyDeltaX, b.boxY + Radius.copyDeltaY);
+          $('#' + newBox.id).addClass('lastPasted');
+          results.push(blockStack[blockStack.length - 1].add(newBox));
+        } else {
+          results.push(blockStack.pop());
+        }
+      }
+      return results;
+    };
+
+    Block.prototype.insertCopyBufferBoxes1 = function() {
+      var b, boxsBlock, j, len, newBlock, newBlocks, newBox, newParentBlock, ref, results;
+      newBlocks = [];
+      ref = Radius.copyBuffer;
+      results = [];
+      for (j = 0, len = ref.length; j < len; j++) {
+        b = ref[j];
+        newBox = new Radius.Box(b.boxName, b.boxParentDivID, b.boxParm1, b.boxParm2).setPos(b.boxX + Radius.copyDeltaX, b.boxY + Radius.copyDeltaY);
+        $('#' + newBox.id).addClass('lastPasted');
+        console.log('inserting from Copy Buffer', b.boxName);
+        boxsBlock = this.findBlockFromCopyBuffer(newBlocks, b.blockSeq);
+        if (boxsBlock != null) {
+          boxsBlock.add(newBox);
+          console.log('...owning block existed');
+        } else {
+          newBlock = new Block(newBox);
+          console.log('...adding owning block, id', b.blockID);
+          newBlocks.push({
+            oldID: b.blockID,
+            block: newBlock
+          });
+          if (b.parentBlockID == null) {
+            console.log('...is top level block');
+            Radius.TheBlockList.addBlock(newBlock);
+          }
+        }
+        if (b.parentBlockID != null) {
+          console.log('...has a parent, id', b.parentBlockID);
+          newParentBlock = this.findBlockFromCopyBuffer(newBlocks, b.parentBlockID);
+          if (newParentBlock != null) {
+            newBlock.parentBlock = newParentBlock;
+            results.push(newParentBlock.add(newBlock));
+          } else {
+            results.push(console.log('Block.insertCopyBufferBoxes: could not find parent', newBlock));
+          }
+        } else {
+          results.push(void 0);
+        }
+      }
+      return results;
+    };
+
+    Block.prototype.findBlockFromCopyBuffer = function(newBlocks, seq) {
+      var j, len, newB;
+      for (j = 0, len = newBlocks.length; j < len; j++) {
+        newB = newBlocks[j];
+        if (newB.oldID === id) {
+          return newB.block;
+        }
+      }
+      return null;
+    };
+
     Block.prototype.blockDisplay = function(d) {
       var b, j, len, ref, results;
       if (d == null) {
         d = '>';
         if (this.list.length > 0) {
-          console.log('at (', this.list[0].x, this.list[0].y, ')');
+          console.log('at (', this.list[0].x, this.list[0].y, ') seq:', this.seq);
         }
       }
       if (this.list.length === 0) {
-        console.log(d, '--empty block--');
+        console.log(d, '--empty block--   seq', this.seq);
         return;
       }
       ref = this.list;
@@ -347,12 +577,31 @@
       for (j = 0, len = ref.length; j < len; j++) {
         b = ref[j];
         if (b.isABox) {
-          results.push(console.log(d, b.name, b.parm1, b.parm2));
+          results.push(console.log(d, b.name, b.parm1, b.parm2, "parent", b.parentBlock.seq));
         } else {
           results.push(b.blockDisplay(d + ' >'));
         }
       }
       return results;
+    };
+
+    Block.prototype.findBoxByID = function(boxID) {
+      var b, found, j, len, ref;
+      ref = this.list;
+      for (j = 0, len = ref.length; j < len; j++) {
+        b = ref[j];
+        if (b.isABox) {
+          if (b.id === boxID) {
+            return b;
+          }
+        } else {
+          found = b.findBoxByID(boxID);
+          if (found != null) {
+            return found;
+          }
+        }
+      }
+      return null;
     };
 
     return Block;
