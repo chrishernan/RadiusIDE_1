@@ -41,9 +41,6 @@ cbdad5
     height: 55%;
     top: 0%;
     left: 25%;
-    z-index: 200;
-
-    border-bottom: 5px solid #cbdad5;
 
 }
 
@@ -167,6 +164,11 @@ tr:hover {
     height: 45%;
     top: 55%;
     left: 256px;
+
+    border-top: 5px solid #cbdad5;
+    z-index: 200;
+
+
 }
 
 #tool-bar {

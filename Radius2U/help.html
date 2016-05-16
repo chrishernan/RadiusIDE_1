@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Radius-Ide Help</title>
+	<title>Radius information and warnings</title>
 </head>
 <body>
+Double-clicking on a prototype block sends that block, in an animated way, to the "swoop target."
+
+<p>
+A red line at bottom of block means that the block is the swoop target.
+Further work is needed on determining best swoop target, and/or enabling the user to change the swoop target.
+
+<p>
+Entering text in command parameter areas needs further study and work.  Horizontal scroll bar seems awkward.  Pressing Return leads to multiple lines, which is not handled correctly.
+Tab order from one parm (for example, in 'if' or 'assign') to another doesn't work correctly.
+
+<p>
+Many problems with 'else' exist.
+A second else can be attached to if  -- fixed, I think, but needs further testing.
+
+<p>
+Shift-click on background toggles box visibility.  This is an experiment, to see whether the text by itself is readable and visually attractive.  (Right now it isn't.)
+
+<p>
+Holding and dragging the mouse creates a selection box. Blocks inside (partially or completely) the selection box are selected.
+
+<p>
+Ctrl-C copies selected blocks and boxes to a buffer. 
+Ctrl-V inserts a copy of these blocks and buffers into the programming pane.
+
+<p>
+Known bug: serialization and deserialization will not work correctly if a parameter has a new line in it, or the string '//.'.
+
+<p>
+&nbsp;
+<br>
 
 </body>
-</html>
+</head>

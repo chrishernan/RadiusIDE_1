@@ -22,13 +22,12 @@
       bx = new Box(c, 'PrototypesPane').setPos(left, top);
       top += $('#' + bx.id).outerHeight() + VERTICAL_COMMAND_SEPARATION;
     }
-    return $('#PageBody').on("dblclick", ".draghandle", function(event) {
+    return $('#PrototypesPane').on("dblclick", ".draghandle", function(event) {
       var boxID, dblclickbox;
       boxID = $(event.target).parent().attr("id");
-      console.log('id', boxID);
       event.stopPropagation();
-      dblclickbox = Radius.allBoxes.find(boxID);
-      return dblclickbox.onDoubleClick();
+      dblclickbox = Radius.TheBlockList.findPrototypeBoxByID(boxID);
+      return dblclickbox.onPrototypeDoubleClick();
     });
   };
 

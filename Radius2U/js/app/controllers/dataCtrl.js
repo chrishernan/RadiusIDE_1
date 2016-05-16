@@ -35,8 +35,8 @@ app.controller("dataController",
                 closeLogin();
             }
         });
-        
-        
-        
+
+
+
 
     }]);

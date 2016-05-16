@@ -14,7 +14,7 @@
 
     Box.blockEnder = -1;
 
-    Box.targetID = 0;
+    Box.swoopTargetBox = null;
 
     Box.nextID = 200;
 
@@ -23,17 +23,18 @@
       this.parentDivID = parentDivID;
       this.parm1 = parm11;
       this.parm2 = parm21;
+      this.onPrototypeDoubleClick = bind(this.onPrototypeDoubleClick, this);
       this.onDragStop = bind(this.onDragStop, this);
       this.onDrag = bind(this.onDrag, this);
+      this.onDragStart = bind(this.onDragStart, this);
       this.deleted = false;
       this.parentBlock = null;
       this.isABox = true;
-      this.dragInProgress = false;
       this.isAPrototype = this.parentDivID === "PrototypesPane";
       if (this.parm1 == null) {
         this.parm1 = "";
       }
-      if (this.parm2 === null) {
+      if (this.parm2 == null) {
         this.parm2 = "";
       }
       this.id = "" + (Box.nextID++);
@@ -47,9 +48,13 @@
       }
       $("<div id='" + this.id + "' class=" + (this.name === 'Start' ? "'startBox box'>" : "'box'>") + "<span class='commandname draghandle'>" + this.name + "</span>" + this.makeBlockInnards(this.name, this.parm1, this.parm2) + "</div>").appendTo($("#" + this.parentDivID)).draggable({
         handle: ".draghandle",
+        start: this.onDragStart,
         drag: this.onDrag,
         stop: this.onDragStop
       });
+      if (this.isAPrototype) {
+        Radius.TheBlockList.addPrototypeBlock(this);
+      }
     }
 
     Box.prototype.setPos = function(x, y) {
@@ -61,33 +66,39 @@
       });
       this.x = x;
       this.y = y;
-      this.target();
+      if (!this.isAPrototype) {
+        this.setSwoopTarget();
+      }
       return this;
     };
 
-    Box.prototype.onDrag = function(event, ui) {
+    Box.prototype.onDragStart = function() {
       var bx;
-      if (!this.dragInProgress) {
-        if (this.isAPrototype) {
-          bx = new Box(this.name, 'PrototypesPane').setPos(this.x, this.y);
-          Radius.TheBlockList.addBlock(new Radius.Block(this));
-        }
-        this.parentBlock.split(this);
-        this.parentBlock.flagAsDragged();
-        $('.lastDragged').removeClass('lastDragged');
-        this.dragInProgress = true;
+      Radius.dragInProgress = true;
+      if (this.isAPrototype) {
+        Radius.TheBlockList.removePrototypeBlock(this);
+        bx = new Box(this.name, 'PrototypesPane').setPos(this.x, this.y);
+        Radius.TheBlockList.addBlock(new Radius.Block(this));
       }
-      this.parentBlock.moveTo(this, ui.position.left, ui.position.top);
+      this.parentBlock.split(this);
+      this.parentBlock.flagAsDragged();
+      $('.lastDragged').removeClass('lastDragged');
+      $('.lastDragged').removeClass('lastPasted');
+      return $('.selected').removeClass('selected');
+    };
+
+    Box.prototype.onDrag = function(event, ui) {
+      this.parentBlock.moveTo(ui.position.left, ui.position.top);
       return this.lookForAttachable(event, ui);
     };
 
     Box.prototype.lookForAttachable = function(event, ui) {
       var attBox, block, i, len, ref;
       $('.attachable').removeClass('attachable');
+      Box.attachableBox = null;
       if (this.name === 'Start') {
         return;
       }
-      Box.attachableBox = null;
       ref = Radius.TheBlockList.blocks;
       for (i = 0, len = ref.length; i < len; i++) {
         block = ref[i];
@@ -101,33 +112,53 @@
     };
 
     Box.prototype.okToAttach = function(box1) {
-      return true;
       if (this.name === "else") {
-        if (box1.name === "if") {
+        if (box1.name === "if" && box1.ifHasNoElse()) {
           return true;
         }
-        if (box1.nextBox != null) {
-          return false;
+        if (box1.controlledByIfWithoutElse()) {
+          return true;
         }
-        return box1.higherIf() != null;
+        return false;
       }
       return true;
     };
 
-    Box.prototype.higherIf = function() {
-      if (this.name === "if") {
-        return this;
+    Box.prototype.ifHasNoElse = function() {
+      var b, i, len, ref;
+      if (this.parentBlock == null) {
+        console.log("this if has no parent block:", this);
+        return false;
       }
-      if (this.prevBox != null) {
-        return this.prevBox.higherIf();
+      ref = this.parentBlock.list;
+      for (i = 0, len = ref.length; i < len; i++) {
+        b = ref[i];
+        if (b.name === 'else') {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    Box.prototype.controlledByIfWithoutElse = function() {
+      var b, i, len, ref;
+      if ((this.parentBlock != null) && (this.parentBlock.parentBlock != null) && (this.parentBlock.parentBlock.list[0].name = 'if')) {
+        ref = this.parentBlock.parentBlock.list;
+        for (i = 0, len = ref.length; i < len; i++) {
+          b = ref[i];
+          if (b.name === 'else') {
+            return false;
+          }
+        }
+        return true;
       } else {
-        return null;
+        return false;
       }
     };
 
     Box.prototype.onDragStop = function(event, ui, prototypeID) {
-      var b2, x1, y1;
-      this.dragInProgress = false;
+      var x1, y1;
+      Radius.dragInProgress = false;
       $('.beingDragged').removeClass('beingDragged').addClass('lastDragged');
       if (this.isAPrototype) {
         x1 = this.x + $('#PrototypesPane').offset().left - $('#ProgrammingPane').offset().left;
@@ -136,7 +167,8 @@
           $('#' + this.id).appendTo('#ProgrammingPane');
           this.setPos(x1, y1);
           this.isAPrototype = false;
-          if (this.name === 'while' || this.name === 'if' || this.name === 'function') {
+          this.parentDivID = 'ProgrammingPane';
+          if (this.name === 'while' || this.name === 'if' || this.name === 'else' || this.name === 'function') {
             this.parentBlock.addEnd();
           }
         } else {
@@ -153,15 +185,68 @@
         this.parentBlock.deleteBlock();
         return;
       }
-      return;
-      b2 = Box.attachableBox;
-      while (b2.prevBox != null) {
-        b2 = b2.prevBox;
+    };
+
+    Box.prototype.onPrototypeDoubleClick = function() {
+      return this.swoopTo();
+    };
+
+    Box.prototype.swoopTo = function() {
+      var goalx, goaly;
+      if (Box.swoopTargetBox == null) {
+        return;
       }
-      Box.blockEnder = -1;
-      b2.setPos(b2.x, b2.y);
-      Box.attachableBox = null;
-      return $('.attachable').removeClass('attachable');
+      goalx = $('#ProgrammingPane').offset().left - $('#PrototypesPane').offset().left + Box.swoopTargetBox.x;
+      goaly = $('#ProgrammingPane').offset().top - $('#PrototypesPane').offset().top + Box.swoopTargetBox.getBottom() - 1;
+      this.onDragStart();
+      return this.takeAStep(50, goalx, goaly);
+    };
+
+    Box.prototype.takeAStep = function(stepsLeft, destX, destY) {
+      var fake_ui;
+      if (stepsLeft === 0) {
+        this.onDragStop();
+        return;
+      }
+      fake_ui = {
+        position: {
+          left: this.x + (destX - this.x) / stepsLeft,
+          top: this.y + (destY - this.y) / stepsLeft
+        }
+      };
+      this.onDrag(null, fake_ui);
+      setTimeout(((function(_this) {
+        return function() {
+          return _this.takeAStep(stepsLeft - 1, destX, destY);
+        };
+      })(this)), 10);
+      return true;
+    };
+
+    Box.prototype.matchingEnd = function() {
+      var p;
+      if (this.name === 'if' || this.name === 'while' || this.name === 'function') {
+        p = this.parentBlock.list.indexOf(this);
+        if (p === -1) {
+          console.log('**ERROR in Box.matchingEnd(), could not find', this, 'in', this.parentBlock);
+        }
+        return this.parentBlock.list[p + 3];
+      } else {
+        return null;
+      }
+    };
+
+    Box.prototype.matchingBar = function() {
+      var p;
+      if (this.name === 'if' || this.name === 'while' || this.name === 'function') {
+        p = this.parentBlock.list.indexOf(this);
+        if (p === -1) {
+          console.log('**ERROR in Box.matchingBar(), could not find', this, 'in', this.parentBlock);
+        }
+        return this.parentBlock.list[+1];
+      } else {
+        return null;
+      }
     };
 
     Box.prototype.getRight = function() {
@@ -172,13 +257,10 @@
       return this.y + $('#' + this.id).outerHeight();
     };
 
-    Box.prototype.target = function() {
-      if (this.prototype) {
-        return;
-      }
-      $('.target').removeClass('target');
-      $('#' + this.id).addClass('target');
-      return Box.targetID = this.id;
+    Box.prototype.setSwoopTarget = function() {
+      $('.swoopTarget').removeClass('swoopTarget');
+      $('#' + this.id).addClass('swoopTarget');
+      return Box.swoopTargetBox = this;
     };
 
     Box.prototype.makeBlockInnards = function(name, parm1, parm2) {
