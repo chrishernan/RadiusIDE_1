@@ -3,6 +3,10 @@ $(function() {
     var counter=0;
     var data;
 
+    
+    
+
+
     //Changes the visibility of the assignments pane by a toggle button
     $('#b-ass').click(function() {
         var table;
@@ -17,8 +21,10 @@ $(function() {
         else {
             document.getElementById("assignment-panel").style.display = 'block';
         }
+        
+        
 
-        data = [];
+        data =[];
 
         table = document.getElementById("dataHolder");
 

@@ -3,8 +3,8 @@
  */
 $(function() {
    
-    var url = "https://radius-ide.firebaseio.com/Teachers/Frost/Students/"
-    var ref = new Firebase(url)
+    var url = "https://radius-ide.firebaseio.com/Teachers/Frost/Students/";
+    var ref = new Firebase(url);
     var name;
     var dueDate;
     var starterCode;
