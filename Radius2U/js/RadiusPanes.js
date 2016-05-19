@@ -1,6 +1,6 @@
 $(function () {
 
-    $("#program-output").resizable({ handles: 'n' });
+    $("#program-output").resizable({ handles: 'n', minHeight: 100 });
     $("#program-output").bind("resize", function () {
         $('#programming').height($('#window').height()-$("#program-output").height());
     });

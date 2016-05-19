@@ -160,10 +160,10 @@ tr:hover {
 
 
 #program-output {
-    width: calc(100% - 258px);
+    width: 75%;
     height: 45%;
     top: 55%;
-    left: 256px;
+    left: 25%;
 
     border-top: 5px solid #cbdad5;
     z-index: 200;
