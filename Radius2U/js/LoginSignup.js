@@ -61,7 +61,7 @@ $(function () {
                 rememberMe: true;
                 var demail = authData.password.email.split('@')[0];
                 console.log(demail);
-                document.getElementById('user').innerHTML = authData.password.email.split('@')[0];
+                userData.email = authData.password.email.split('@')[0];
                 closeLogin();
 
             }
@@ -78,6 +78,7 @@ $(function () {
     // var cCoderef = new Firebase(url+"users/cCode");
     var users = new Firebase(url+"Users/");
 
+    var studentUrl = url+"Teachers/";
 
     //
     // function checkCourseCode(urlref){
@@ -92,7 +93,7 @@ $(function () {
         var userName = document.getElementById("name").value;
         var email = document.getElementById("email1").value;
         var courseCode = document.getElementById("course-code").value;
-        studentref = new Firebase(url+"Courses/" + courseCode + "/");
+        // studentref = new Firebase(url+"Courses/" + courseCode + "/");
 
 
         if($("#password1").val()==$("#password2").val()) {
@@ -108,6 +109,8 @@ $(function () {
                         }
                         else {
                             accountType = "student";
+                            console.log(snapshot.val()[0]);
+                            // studentUrl +=snapshot.val()[1]
                         }
                     }, function (err) {
                         console.log("The read failed: " + err.code);
@@ -116,6 +119,7 @@ $(function () {
             }
             else {
                 accountType = "normal";
+
             }
 
             ref.createUser({
@@ -126,11 +130,21 @@ $(function () {
                     alertError("","alert1",error);
 
                 } else {
-
-                    users.child(authData.uid).set({
-                        name: userName,
-                        email: email
-                    });
+                    console.log(accountType);
+                    if(accountType=='normal') {
+                        users.child(authData.uid).set({
+                            name: userName,
+                            email: email
+                        });
+                        courseCode ='';
+                    }
+                    else if(accountType=='student'){
+                        studentref.child(authData.uid).set({
+                            name: userName,
+                            courseCode: courseCode,
+                            accountType: accountType
+                        })
+                    }
 
                     ref.child("users").child(authData.uid).set({
                         name: userName,
