@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="main" >
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +22,15 @@
 
 
 
+    <!--Angular and Controller -->
+    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
+
+
+
+
+    
     <script src="js/Radius1.js"></script>
     <script src="js/Box.js"></script>
     <script src="js/Block.js"></script>
@@ -35,10 +44,6 @@
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="js/ToolBar.js"></script>
 
-    <!--Angular and Controller -->
-    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
 
 
 </head>
@@ -58,7 +63,7 @@
 </div>
 
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--  <link href="css/bootstrap.min.css" rel="stylesheet">   -->
 
 <div id="tool-bar" class="pane">
     <button type="button" class="btn btn-success" value = "New"> NEW</button>
@@ -69,27 +74,15 @@
     <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
     
 
-    <button type="button" class="btn btn-success" valule = "Run"> RUN</button>
-    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
-    <a type="button" class="btn btn-success" href="help.html">? Help</a>
+    <button type="button" class="btn btn-success" value = "Run"> RUN</button>
 
-<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
+    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+
+    <a type="button" class="btn btn-success" href="help.html">? Help</a>
 
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
-    <span class = "spanRight" id="user-form"> <div id="user" ng-bind="userData.email| capitalize"></div> <button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+    <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
 
 
 </div>
@@ -167,11 +160,6 @@
     </div>
 
 </div>
-
-
-
-
 </body>
-
 </html>
 
