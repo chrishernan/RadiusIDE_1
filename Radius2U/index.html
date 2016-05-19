@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="main" >
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,11 +19,18 @@
     <link rel="stylesheet" type="text/css" href="css/Login.css"/>
     <link rel="stylesheet" type="text/css" href="css/ToolBar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="css/UploadForm.css">
 
 
 
+    <!--Angular and Controller -->
+    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
+    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
+
+
+
+
+    
     <script src="js/Radius1.js"></script>
     <script src="js/Box.js"></script>
     <script src="js/Block.js"></script>
@@ -36,15 +43,7 @@
     <script src="js/FileExplorerDataRetreival.js"></script>
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="js/ToolBar.js"></script>
-    <script src="js/resourcesPanel.js"></script>
-    <script src="js/UploadAssignment.js"></script>
 
-
-
-    <!--Angular and Controller -->
-    <script language="javascript" type="text/javascript" src="js/app/angular.min.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/main.js"></script>
-    <script language="javascript" type="text/javascript" src="js/app/controllers/dataCtrl.js"></script>
 
 
 </head>
@@ -53,7 +52,6 @@
 <title>Radius IDE Home</title>
 
 <div id="splash-screen">
-   <!-- <img id="splash-screen-gif"src="https://media.giphy.com/media/9fbYYzdf6BbQA/giphy.gif" > -->
     <span id="splash-screen-text">Welcome to Radius, a modern, block-based programming environment designed for schools and ready for everyone.
             You can create an account in Mr. Frost's class, or you can program without logging in.
             Have fun!</span>
@@ -65,12 +63,10 @@
 </div>
 
 <!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--  <link href="css/bootstrap.min.css" rel="stylesheet">   -->
 
 <div id="tool-bar" class="pane">
     <button type="button" class="btn btn-success" value = "New"> NEW</button>
-
-    <button type="button" class="btn btn-success" value="Save">SAVE</button>
 
     <button type="button" id="b-ass" class="btn btn-success" value = "Assignments"> ASSIGNMENTS</button>
 
@@ -78,30 +74,15 @@
     <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
     
 
-    <button type="button" class="btn btn-success" valule = "Run"> RUN</button>
-    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+    <button type="button" class="btn btn-success" value = "Run"> RUN</button>
 
-    <button id ="upload-assignments" type="button" class="btn btn-success" value = "Upload">UPLOAD</button>
+    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
 
     <a type="button" class="btn btn-success" href="help.html">? Help</a>
 
-<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
-
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
-    <span class = "spanRight" id="user-form"> <div id="user" ng-bind="userData.email| capitalize"></div> <button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+    <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
 
 
 </div>
@@ -113,7 +94,7 @@
 
 
 
-    <div id="program-output" class="draggable pane">
+    <div id="program-output" class="resizeN pane">
         <div id="program-ouput-title" class="simple-title">Program Output</div>
     </div>
 
@@ -140,39 +121,10 @@
     </div>
 
 
-<!--Upload form -->
-
-<div id="upload-form" class="form">
-    <div id="upload-title" class="simple-title"> Upload
-        <span id="upload-close" class="close">x</span>
-    </div>
-
-    <div id="title-upload-name" class="secondary-title"><p>Enter Assignment Name:</p></div>
-
-    <div id="upload-position-handler1">
-        <input type="text" class="input" id="Starter-Code-Form1" name="Name" placeholder="name" size="26"/
-    </div>
-
-    <div id="title-upload-name2" class="secondary-title"><p>Enter Assignment Due Date:</p></div>
-
-    <div id="upload-position-handler2">
-        <input type="text" class="input" id="Starter-Code-Form2" name="Due date" placeholder="Due Date" size="26"/>
-    </div>
-
-    <div id="title-upload-name3" class="secondary-title"><p>Enter the starter serial code:</p></div>
 
 
-    <div id="upload-position-handler3">
-        <input type="text" class="input" id="Starter-Code-Form3" name="starter code" placeholder="Starter Code." size="26"/>
-    </div>
-
-    <div id="title-upload-name4" class="secondary-title"><p>Enter Assignment Details:</p></div>
-
-    <div id="upload-position-handler4">
-        <input type="text" class="input" id="Starter-Code-Form4" name="Descriptions" placeholder="Descriptions " size="26"/>
-    </div>
-    <center><input type="submit" class="input" id="upload-form-submit" value="Submit"></center>
 </div>
+
 
 <div id="login-pop" class="pop">
     <div id="login-title" class="simple-title">Log In/Sign Up
@@ -208,11 +160,6 @@
     </div>
 
 </div>
-
-
-
-
 </body>
-
 </html>
 

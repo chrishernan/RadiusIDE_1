@@ -3,10 +3,6 @@ $(function() {
     var counter=0;
     var data;
 
-    
-    
-
-
     //Changes the visibility of the assignments pane by a toggle button
     $('#b-ass').click(function() {
         var table;
@@ -21,10 +17,8 @@ $(function() {
         else {
             document.getElementById("assignment-panel").style.display = 'block';
         }
-        
-        
 
-        data =[];
+        data = [];
 
         table = document.getElementById("dataHolder");
 
@@ -80,6 +74,25 @@ $(function() {
 
         $("#hover-div").toggle();
 
+    });
+
+    $("#resources-panel").mouseenter(function() {
+        var image = document.getElementById("plus-sign-image");
+        image.style.opacity= "0.2";
+    });
+
+    $("#resources-panel").mouseleave(function() {
+        var image = document.getElementById("plus-sign-image");
+        image.style.opacity = ".5";
+    });
+
+
+    $("#splash-screen").click(function () {
+        $("#splash-screen").fadeOut();
+    });
+
+    $("#splash-screen").click(function (){
+        $("#splash-screen").fadeOut();
     });
 
 

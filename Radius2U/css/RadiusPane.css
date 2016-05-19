@@ -19,21 +19,22 @@ cbdad5
 .simple-title {
     background: #689F38;
     color: white;
-    font-family: Helvetica, "Nimbus Sans L", "Liberation Sans", Arial, sans-serif;
     font-size: 15px;
     height: 20px;
     border-bottom: 2px solid #689F38;
     text-align: center;
+    padding-top: 4px;
     padding-bottom: 4px;
 }
 
 .pane {
-    margin: 0;
+    margin: auto;
     padding: 0px;
     z-index: 99;
     border: 1px solid #cbdad5;
     background: #bbeeee;
     position: absolute;
+    
 }
 
 #programming {
@@ -41,7 +42,8 @@ cbdad5
     height: 55%;
     top: 0%;
     left: 25%;
-
+    z-index: 200;
+    border-bottom: 5px solid #cbdad5;
 }
 
 #ProgrammingPane::-webkit-scrollbar {
@@ -56,7 +58,7 @@ cbdad5
     left: 0px;
     z-index: 400;
     border-right: 5px solid #cbdad5;
-
+    position: relative;
 }
 
 /*Splash screen css styling*/
@@ -160,10 +162,10 @@ tr:hover {
 
 
 #program-output {
-    width: calc(100% - 258px);
+    width: 75%;
     height: 45%;
     top: 55%;
-    left: 256px;
+    left: 25%;
 
     border-top: 5px solid #cbdad5;
     z-index: 200;
@@ -179,7 +181,7 @@ tr:hover {
     left: 0%;
     display: inline-block;
     padding-top: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 4px;
 }
 
 #tool-bar a{
