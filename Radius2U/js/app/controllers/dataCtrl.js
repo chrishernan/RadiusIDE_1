@@ -4,7 +4,7 @@ var url = "https://radius-ide.firebaseio.com/"
 var ref = new Firebase(url);
 var userUrl = url+"users/";
 
-var studentUrl = url+
+var studentUrl = url+"Teachers/"
 
 
 function clear(){

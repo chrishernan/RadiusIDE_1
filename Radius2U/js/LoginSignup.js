@@ -56,12 +56,12 @@ $(function () {
             password: password
         }, function (error, authData) {
             if (error) {
-                alertError("","alert",error);
+                alertError("LoginError","alert",error);
             } else {
                 rememberMe: true;
                 var demail = authData.password.email.split('@')[0];
                 console.log(demail);
-                userData.email = authData.password.email.split('@')[0];
+                document.getElementById('user').innerHTML = authData.password.email.split('@')[0];
                 closeLogin();
 
             }
@@ -78,7 +78,8 @@ $(function () {
     // var cCoderef = new Firebase(url+"users/cCode");
     var users = new Firebase(url+"Users/");
 
-    var studentUrl = url+"Teachers/";
+    var studentUrl;
+    var Teacher;
 
     //
     // function checkCourseCode(urlref){
@@ -93,6 +94,7 @@ $(function () {
         var userName = document.getElementById("name").value;
         var email = document.getElementById("email1").value;
         var courseCode = document.getElementById("course-code").value;
+        var password = document.getElementById("password1").value;
         // studentref = new Firebase(url+"Courses/" + courseCode + "/");
 
 
@@ -109,8 +111,8 @@ $(function () {
                         }
                         else {
                             accountType = "student";
-                            console.log(snapshot.val()[0]);
-                            // studentUrl +=snapshot.val()[1]
+                            Teacher = snapshot.val();
+
                         }
                     }, function (err) {
                         console.log("The read failed: " + err.code);
@@ -124,7 +126,7 @@ $(function () {
 
             ref.createUser({
                 email: email,
-                password: document.getElementById("password1").value,
+                password: password,
             }, function (error, authData) {
                 if (error) {
                     alertError("","alert1",error);
@@ -139,6 +141,9 @@ $(function () {
                         courseCode ='';
                     }
                     else if(accountType=='student'){
+                        studentUrl = url+"Teachers/"+Teacher+'/Students/';
+                        console.log(studentUrl);
+                        studentref = new Firebase(studentUrl);
                         studentref.child(authData.uid).set({
                             name: userName,
                             courseCode: courseCode,
@@ -151,10 +156,18 @@ $(function () {
                         courseCode: courseCode,
                         accountType: accountType
                     });
-                    closeLogin();
 
                 }
             });
+            console.log(email);
+            console.log(password);
+            login(email,password);
+            ref.onAuth(function (authData) {
+                if (authData) {
+                    closeLogin();
+                }
+            });
+
         }
 
         else {
@@ -162,6 +175,7 @@ $(function () {
         }
 
     }
+    
 
     function signOut() {
         ref.unauth();
@@ -180,7 +194,6 @@ $(function () {
             alertList[i].innerHTML ="";
         }
     }
-    
 
 
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="main" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,7 +82,9 @@
 
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
-    <span class = "spanRight" id="user-form"> <div id="user"> </div><button type = submit id="b-signout" class="button" value ="run">SignOut</button></span>
+    <button type="button"  id="b-signout" class="spanRight btn btn-success" value = "SignOut"> SignOut</button>
+
+    <span class = "spanRight" id="user-form"> <div id="user" ng-bind="userData.email"> </div></span>
 
 
 </div>
