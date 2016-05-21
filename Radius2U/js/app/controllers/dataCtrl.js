@@ -4,7 +4,8 @@ var url = "https://radius-ide.firebaseio.com/"
 var ref = new Firebase(url);
 var userUrl = url+"users/";
 
-var studentUrl = url+"Teachers/"
+var studentUrl = url+"Teachers/Frost/Students/"
+var student;
 
 
 function clear(){
@@ -54,18 +55,31 @@ app.controller("dataController",
         };
 
 
+        $scope.getAssignments = function(id){
+            console.log(studentUrl+id+"/");
+            student  = new Firebase(studentUrl+id+"/Assignments/");
+            student.on("value",function(assign){
+               console.log(assign.val());
+            });
+        };
+
+
+        $scope.saveAssignments = function(id,name,code){
+            student.child(name).set({
+                Starter : code
+            })
+        };
+
+
         window.onload = ref.onAuth(function (authData) {
             if (authData) {
                 $scope.userData.email= authData.password.email.split('@')[0];
                 closeLogin();
                 $scope.getUserInfo(authData.uid);
+                $scope.getAssignments(authData.uid);
             }
         });
 
 
-
-
-
-
-
+        
     }]);
