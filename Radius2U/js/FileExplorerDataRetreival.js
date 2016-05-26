@@ -42,8 +42,8 @@ $(function() {
 
 
      //var url = "https://amber-heat-3180.firebaseio.com/amber-heat-3180";
-     var url = "https://radius-ide.firebaseio.com/";
-     var reference = new Firebase(url);
+     // var url = "https://radius-ide.firebaseio.com/";
+     // var reference = new Firebase(url);
      //reference.set({Name:"assignment 1",Date: "08./15/17", assignmentDetails: "Turn the farenheit temperature into celsius."});
 
     $("#b-ass")[0].addEventListener("click",retrieveAssignmentName);
