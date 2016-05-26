@@ -3,15 +3,7 @@ var currentUser;
 $(function () {
 
     var accountType;
-
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyBMA2PKYvAawDiuhF_wMDJXr1oC9vvEKHs",
-        authDomain: "radius-ide.firebaseapp.com",
-        databaseURL: "https://radius-ide.firebaseio.com",
-        storageBucket: "radius-ide.appspot.com",
-    };
-    firebase.initializeApp(config);
+    
 
     var signup = document.getElementById("signup-form");
     var loginEnter = document.getElementById("login-enter");
@@ -56,21 +48,6 @@ $(function () {
 
 
     function login(email, password) {
-        // ref.authWithPassword({
-        //     email: email,
-        //     password: password
-        // }, function (error, authData) {
-        //     if (error) {
-        //         alertError("LoginError","alert",error);
-        //     } else {
-        //         rememberMe: true;
-        //         var demail = authData.password.email.split('@')[0];
-        //         console.log(demail);
-        //         document.getElementById('user').innerHTML = authData.password.email.split('@')[0];
-        //         closeLogin();
-        //
-        //     }
-        // });
 
         firebase.auth().signInWithEmailAndPassword(email, password).then(function (data) {
             var demail =data.email.split('@')[0];
@@ -97,14 +74,7 @@ $(function () {
     var studentUrl;
     var Teacher;
 
-    //
-    // function checkCourseCode(urlref){
-    //     var dataref = new Firebase(url+"Users/"+urlref);
-    //     dataref.on("value",function(snapshot){
-    //
-    //     })
-    // }
-
+    var userId = '';
 
     function createAccount() {
         var userName = document.getElementById("name").value;
@@ -116,22 +86,24 @@ $(function () {
         if ($("#password1").val() == $("#password2").val()) {
             if (!isNaN(courseCode)) {
                 if (courseCode.length != 5) {
-                    alertError("Invalid Course Code!", 'alert1', '');
+                    alertError("Invalid Course Code!: Making Normal Account", 'alert1', '');
+                    accountType = "normal";
                 }
                 else {
-                    // var cCoderef = new Firebase(url + "users/cCode/" + courseCode);
-                    // cCoderef.on("value", function (snapshot) {
-                    //     if (snapshot.val() === null) {
-                    //         alertError("The Course Code: " + courseCode + " does not exist!", 'alert1', '');
-                    //     }
-                    //     else {
-                    //         accountType = "student";
-                    //         Teacher = snapshot.val();
-                    //
-                    //     }
-                    // }, function (err) {
-                    //     console.log("The read failed: " + err.code);
-                    // });
+
+                    firebase.database().ref('users/cCode/' + courseCode ).on('value', function(snapshot) {
+                        console.log(snapshot.val());
+                        if (snapshot.val() === null) {
+                            alertError("The Course Code: " + courseCode + " does not exist!", 'alert1', '');
+                        }
+                        else {
+                            accountType = "student";
+                            Teacher = snapshot.val();
+
+                        }
+                    }, function (err) {
+                        console.log("The read failed: " + err.code);
+                    });
                 }
             }
             else {
@@ -140,6 +112,7 @@ $(function () {
             }
 
             firebase.auth().createUserWithEmailAndPassword(email, password).then(function (data) {
+
                 console.log(email);
                 console.log(password);
                 login(email, password);
@@ -152,38 +125,32 @@ $(function () {
                     console.log(accessToken);
                     closeLogin();
                 });
+                if (accountType == 'normal') {
+                    firebase.database().ref('NormalUsers/'+data.uid).set({
+                        username: userName,
+                        email: email
+                    });
 
-            }, function (error, authData) {
-                if (error) {
+                    courseCode = '';
+                }
+                else if (accountType == 'student') {
+                    firebase.database().ref("Teachers/" + Teacher + '/Students/'+ data.uid).set({
+                        username: userName,
+                        email: email,
+                        accountType: accountType
+                    });
+                }
+
+                firebase.database().ref("users/"+ data.uid).set({
+                    username: userName,
+                    email: email,
+                    courseCode: courseCode,
+                });
+
+
+            }, function (error) {
                     alertError("", "alert1", error);
 
-                } else {
-                    // console.log(accountType);
-                    // if (accountType == 'normal') {
-                    //     users.child(authData.uid).set({
-                    //         name: userName,
-                    //         email: email
-                    //     });
-                    //     courseCode = '';
-                    // }
-                    // else if (accountType == 'student') {
-                    //     studentUrl = url + "Teachers/" + Teacher + '/Students/';
-                    //     console.log(studentUrl);
-                    //     studentref = new Firebase(studentUrl);
-                    //     studentref.child(authData.uid).set({
-                    //         name: userName,
-                    //         courseCode: courseCode,
-                    //         accountType: accountType
-                    //     })
-                    // }
-                    //
-                    // ref.child("users").child(authData.uid).set({
-                    //     name: userName,
-                    //     courseCode: courseCode,
-                    //     accountType: accountType
-                    // });
-
-                }
             });
 
         }
@@ -199,7 +166,9 @@ $(function () {
 
         firebase.auth().signOut().then(function() {
             $("#user-form").hide();
-            $("#b-login").show();        
+            $("#b-login").show();
+            $("#b-signout").hide();
+
         }, function(error) {
             // An error happened.
         });

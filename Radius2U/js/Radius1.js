@@ -14,7 +14,6 @@
     initAllBoxes();
     window.Radius.PrototypesOnReady();
     window.Radius.ProgrammingPaneOnReady();
-    return $("#PrototypesPane").draggable();
   });
 
   initAllBoxes = function() {

@@ -12,7 +12,18 @@
     <script type="text/javascript" src="jQuery/js/jquery-ui-1.10.3.custom.min.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/3.0.2/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBMA2PKYvAawDiuhF_wMDJXr1oC9vvEKHs",
+            authDomain: "radius-ide.firebaseapp.com",
+            databaseURL: "https://radius-ide.firebaseio.com",
+            storageBucket: "radius-ide.appspot.com",
+        };
+        firebase.initializeApp(config);
 
+        var database = firebase.database();
+    </script>
 
     <link rel="stylesheet" type="text/css" href="jQuery/css/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css"href="Radius2.css"/>

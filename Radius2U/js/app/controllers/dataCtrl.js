@@ -8,37 +8,39 @@
 // var student;
 //
 //
-// function clear(){
-//     var inputList = document.getElementsByClassName("input");
-//     for (var i = 0; i < inputList.length; i++) {
-//         inputList[i].value ="";
-//     }
-//     var alertList = document.getElementsByClassName("alert");
-//     for (var i = 0; i < alertList.length; i++) {
-//         alertList[i].innerHTML ="";
-//     }
-// }
-//
-// function closeLogin(){
-//     $("#login-pop").hide();
-//     $("#b-login").hide();
-//     $("#user-form").show();
-//     $("#b-signout").show();
-//     clear();
-// }
-//
-// app.controller("dataController",
-//     ['$http', '$scope', function ($http, $scope) {
-//         $scope.userData = {};
-//         $scope.userData.email ='';
-//         $scope.userData.name = '';
-//         $scope.userData.accountType = "";
-//         $scope.userData.courseCode = '';
-//
-//         $scope.studentData = {};
-//         $scope.studentData.teacher ='';
-//
-//
+
+
+function clear() {
+    var inputList = document.getElementsByClassName("input");
+    for (var i = 0; i < inputList.length; i++) {
+        inputList[i].value = "";
+    }
+    var alertList = document.getElementsByClassName("alert");
+    for (var i = 0; i < alertList.length; i++) {
+        alertList[i].innerHTML = "";
+    }
+}
+
+function closeLogin() {
+    $("#login-pop").hide();
+    $("#b-login").hide();
+    $("#user-form").show();
+    $("#b-signout").show();
+    clear();
+}
+
+app.controller("dataController",
+    ['$http', '$scope', function ($http, $scope) {
+        $scope.userData = {};
+        $scope.userData.email = '';
+        $scope.userData.name = '';
+        $scope.userData.accountType = "";
+        $scope.userData.courseCode = '';
+
+        $scope.studentData = {};
+        $scope.studentData.teacher = '';
+
+
 //         $scope.getUserInfo = function(id){
 //             userUrl+=id+"/";
 //             console.log(userUrl);
@@ -79,7 +81,19 @@
 //                 $scope.getAssignments(authData.uid);
 //             }
 //         });
-//
-//
-//
-//     }]);
+
+        var auth = firebase.auth();
+
+        window.onload = auth.onAuthStateChanged(function (user) {
+            if (user) {
+                $scope.userData.email = user.email.split('@')[0];
+                closeLogin();
+                // $scope.getUserInfo(user.uid);
+                // $scope.getAssignments(user.uid);
+            } else {
+                // User logged out
+            }
+        });
+
+
+    }]);
