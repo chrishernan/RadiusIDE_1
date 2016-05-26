@@ -1,39 +1,39 @@
 $(function() {
 
-    var counter=0;
-    var data;
-
-    //Changes the visibility of the assignments pane by a toggle button
-    $('#b-ass').click(function() {
-        var table;
-        var row;
-        var cell1;
-        var cell2;
-
-        if (document.getElementById("assignment-panel").style.display === 'block') {
-            document.getElementById("assignment-panel").style.display = 'none';
-
-        }
-        else {
-            document.getElementById("assignment-panel").style.display = 'block';
-        }
-
-        data = [];
-
-        table = document.getElementById("dataHolder");
-
-        if (counter <= 0) {
-            for (var key in data) {
-                row = table.insertRow(counter);
-                cell1 = row.insertCell(0);
-                cell1.innerHTML = " <img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png' class='folder-images' style='width: 50px;height: 50px;'/> " + data[key].name;
-                counter++;
-
-
-
-            }
-        }
-    })
+    // var counter=0;
+    // var data;
+    //
+    // //Changes the visibility of the assignments pane by a toggle button
+    // $('#b-ass').click(function() {
+    //     var table;
+    //     var row;
+    //     var cell1;
+    //     var cell2;
+    //
+    //     if (document.getElementById("assignment-panel").style.display === 'block') {
+    //         document.getElementById("assignment-panel").style.display = 'none';
+    //
+    //     }
+    //     else {
+    //         document.getElementById("assignment-panel").style.display = 'block';
+    //     }
+    //
+    //     data = ["A1","B2","C3"];
+    //
+    //     table = document.getElementById("dataHolder");
+    //
+    //     if (counter <= 0) {
+    //         for (var key in data) {
+    //             row = table.insertRow(counter);
+    //             cell1 = row.insertCell(0);
+    //             cell1.innerHTML = " <img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png' class='folder-images' style='width: 50px;height: 50px;'/> " + data[key];
+    //             counter++;
+    //
+    //
+    //
+    //         }
+    //     }
+    // })
 
 
     $("table").on("click",'.folder-rows',function () {
@@ -42,8 +42,8 @@ $(function() {
 
 
      //var url = "https://amber-heat-3180.firebaseio.com/amber-heat-3180";
-     var url = "https://radius-ide.firebaseio.com/";
-     var reference = new Firebase(url);
+     // var url = "https://radius-ide.firebaseio.com/";
+     // var reference = new Firebase(url);
      //reference.set({Name:"assignment 1",Date: "08./15/17", assignmentDetails: "Turn the farenheit temperature into celsius."});
 
     $("#b-ass")[0].addEventListener("click",retrieveAssignmentName);
