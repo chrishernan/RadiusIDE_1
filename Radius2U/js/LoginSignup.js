@@ -18,7 +18,7 @@ $(function () {
 
     function onLogin() {
         $("#login-pop").css("display", "block");
-    }1
+    }
 
 
     $("#login-close")[0].addEventListener("click", closeOnClick);
