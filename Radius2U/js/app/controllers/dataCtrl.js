@@ -1,10 +1,10 @@
 
 
+
 app.controller("dataController",
     ['$http', '$scope', function ($http, $scope) {
 
         var accountType;
-
 
         var signup = document.getElementById("signup-form");
         var loginEnter = document.getElementById("login-enter");
@@ -62,6 +62,7 @@ app.controller("dataController",
                 alertError("LoginError", "alert", errorMessage);
 
             });
+            
         }
 
 

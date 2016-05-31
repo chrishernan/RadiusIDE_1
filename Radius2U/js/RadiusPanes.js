@@ -1,3 +1,6 @@
+var GLOBAL_STUDENT_ASSIGNMENT_REF;
+
+
 $(function () {
 
     $("#program-output").resizable({ handles: 'n', minHeight: 100 });
@@ -68,8 +71,57 @@ $(function () {
 
     })*/
 
-    $("#dataHolder").click(function () {
-        alert("Due Date: TBA");
+    $("#dataHolder").on("click", "tr",function (event) {
+        //alert(studentsRef.key);
+
+        var rowNumber = ($(this).index()+1);
+        var count = 1;
+
+        database.ref().once("value",function(snapshot) {
+            var currentUser = firebase.auth().currentUser.uid;
+            var students = snapshot.child("Teachers/Frost/Students");
+            students.forEach(function(studentSnapshot) {
+              //  alert(studentSnapshot.key);
+
+                //alert(currentUser);
+                if(studentSnapshot.key==currentUser) {
+                    var assignments = studentSnapshot.child("Assignments");
+                    assignments.forEach(function(assignmentSnapshot) {
+                        if(count == rowNumber) {
+                            GLOBAL_STUDENT_ASSIGNMENT_REF = assignmentSnapshot.ref;
+                            var savedCode =assignmentSnapshot.child("/SavedCode").val();
+                            var starterCode = assignmentSnapshot.child("/Start").val();
+                            if(savedCode=="") {
+                                if(starterCode=="") {
+                                    ;
+                                }
+
+                                else {
+                                    Radius.deserialize(starterCode);
+                                }
+                            }
+                                //making sure that the start button does not get when we deserialize an empty string
+                            else if(starterCode=="") {
+                                ;
+                            }
+
+                            else {
+                                Radius.deserialize(savedCode);
+                            }
+
+
+                        }
+
+                        count+=1;
+                    })
+
+
+                }
+            })
+
+
+
+        });
 
     })
 

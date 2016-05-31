@@ -14,7 +14,7 @@ Style the enclosing panes
 */
 #PrototypesPane {
 	position: absolute;
-	background-color: #EEE; 
+	background-color: #EEE;
 	border: medium solid black;
 	overflow: visible; 
 	padding: 5px; 
@@ -30,7 +30,7 @@ Style the enclosing panes
 
 #ProgrammingPane {
 	position: absolute;
-	background-color: #DED; 
+	background-color: #DED;
 	border: medium solid blue;
 	overflow: scroll; 
 	z-index: 5;
@@ -50,7 +50,7 @@ body {
     -moz-user-select: none; 
     -webkit-user-select: none; 
     -ms-user-select:none; 
-    user-select:none;' 
+    user-select:none;
 }
 
 .box {

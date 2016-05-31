@@ -35,10 +35,18 @@ $(function() {
     //     }
     // })
 
+    /*
+    var rowClicked;
 
     $("table").on("click",'.folder-rows',function () {
-        alert('You clicked row '+ ($(this).index()+1) );
+        rowClicked = ($(this).index()+1);
+        var studentsRef = database.toString();
+        alert("hello")
+        alert(studentsRef);
+
     })
+    */
+
 
 
      //var url = "https://amber-heat-3180.firebaseio.com/amber-heat-3180";
@@ -48,13 +56,16 @@ $(function() {
 
     $("#b-ass")[0].addEventListener("click",retrieveAssignmentName);
 
+    /*
     $("table").on("mouseenter",".folder-rows, #hover-div",function(event) {
 
         var hoverDiv = document.getElementById("hover-div");
         var left = event.clientX+"px";
         var top = event.clientY+"px";
 
+
         var rowNumber = "Assignment "+($(this).index()+1) +" details";
+
 
         hoverDiv.innerHTML = rowNumber;
 
@@ -67,7 +78,7 @@ $(function() {
 
 
         //alert("mouse over"+($(this).index()+1));
-    });
+    });*/
 
 
     $("table").on("mouseleave",".folder-rows, #hover-div",function() {

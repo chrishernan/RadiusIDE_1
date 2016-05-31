@@ -59,7 +59,7 @@ cbdad5
     left: 0px;
     z-index: 400;
     border-right: 5px solid #cbdad5;
-    position: relative;
+    position: absolute;
 }
 
 /*Splash screen css styling*/
