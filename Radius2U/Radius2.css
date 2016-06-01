@@ -1,10 +1,12 @@
 /*
 z-index
-	  5, 6 panes
-     10 regular boxes
-	 15 the most recently dragged block:  .lastDragged
-	 20 attachable box
-     30 dragged block: .beingDragged
+	5, 6 panes
+	10 regular boxes
+	15 the most recently dragged block:  .lastDragged
+	15 the most recently pasted block:  .lastPasted
+	20 attachable box:   .attachable
+	30 dragged block: .beingDragged
+	30 selection rect
 */
 
 /*
@@ -13,17 +15,14 @@ Style the enclosing panes
 #PrototypesPane {
 	position: absolute;
   overflow: scroll;
-	overflow: visible;
-	top: 0%;
+	overflow: visible; 
 	padding: 5px; 
-
 	/* it seems to be necessary for PrototypesPane to have a higher z than 
 	   ProgrammingPane, so that its sub-divs will be on top of ProgrammingPane
 	   while being dragged - the z of the sub-div has no effect */
 	z-index: 6;
   width: calc(100% - 15px);
   height: calc(95% - 15px);
-
 }
 
 #ProgrammingPane {
@@ -31,6 +30,16 @@ Style the enclosing panes
 	position: absolute;
 	overflow: scroll; 
 	z-index: 5;
+	width: calc(100% - 6px);
+	height: calc(95% - 6px);
+
+}
+
+#OutputPane {
+	position: absolute;
+	overflow: scroll; 
+	z-index: 5;
+	
 	width: calc(100% - 6px);
 	height: calc(95% - 6px);
 }
@@ -42,7 +51,7 @@ Style the enclosing panes
 body {
     xxfont:.8rem/1.5 sans-serif;
     xxmargin:1rem;
-    -moz-user-select: none;
+    -moz-user-select: none; 
     -webkit-user-select: none; 
     -ms-user-select:none; 
     user-select:none;' 
@@ -50,8 +59,6 @@ body {
 
 .box {
     /* command box in the programming area*/
-	border-radius: 5px;
-	top:5%;
     position: absolute;
 	padding: 2px;
 	border: thin solid black;
@@ -62,11 +69,24 @@ body {
 	justify-contents: center;
 }
 
+.boxFadedOut {
+	border: thin solid #DAEBDA;
+	background-color: #DED;
+}
+
+.selected {
+	background-color: #ABD;
+}
+
 .startBox {
 	background-color: #CFC;
 }
 
-/* single line text field */
+.startBoxFadedOut {
+	background-color: #DED;
+}
+
+/* single line text field */  /* parm2 not in use */
 .parm, .parm2   { margin-left: 0.5em; 
 	background-color: #EEF;
     display: inline-block;
@@ -77,6 +97,12 @@ body {
 	white-space: nowrap;
 	/*min-height: 20px;*/
 }
+
+.parmFadedOut, .parm2FadedOut {
+	background-color: #DED;
+	border: thin solid #DED;
+}
+
 .parm:focus {
 	background-color:#EFF;
 }
@@ -111,17 +137,31 @@ body {
 	z-index: 15;
 }
 
+.lastPasted {
+	z-index: 15;
+}
+
 .bar {
     position: absolute;
     background-color: #AAF;
+	border-top: thin solid black;
+	border-bottom: thin solid black;
     width: 10px;
 	height: 20px;
 }
 
-.target {
+.barFadedOut {
+	background-color: #DED;
+}
+
+.swoopTarget {
 	/* outline: red dashed thin; */
 	border-bottom-width: 1px;  /* more than 1 pix messes up alignment and outerHeight */
-	border-bottom-color: green;
+	border-bottom-color: red;
+}
+
+.swoopTargetFadedOut {
+	border-bottom-color: #DED;
 }
 
 .errorTextHighlight {
@@ -134,6 +174,12 @@ body {
 
 .errorEmptyParm {
 	background-color: #FAA;
+}
+
+.selectionRect {
+	outline: thin dotted black;
+	position: absolute;
+	z-index: 30;
 }
 
 
@@ -209,6 +255,3 @@ body {
 .ui-menu {
 	width: 250px;
 }
-
-
-

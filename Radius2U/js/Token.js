@@ -75,30 +75,4 @@
 
   })();
 
-
-  /* a token is an object with these attributes:
-  
-    .va     a string, later also a SchemeNumber
-    .ty     NUMBER, COMMAND, LVAL, RVAL, LABEL, FUNCTION, SYMBOL, OPERATOR (and WORD temporarily)
-    .id     a DOM id
-    .st     starting location in the DOM id's text
-    .sy     same as .va for SYMBOLs or [ or ], otherwise ""
-    .depth  nesting depth for (, ), [, ], comma, or operator
-            also used in IF and WHILE blocks
-    
-    NUMBER:  starts with a digit, ok'd by SchemeNumber
-    COMMAND: starts with #   (this will have to change)
-    STRING:  anything enclosed in "" or ''
-    SYMBOL:  matches validSymbol + - * / [ ] ? ( ) & . = , ! :
-              or validSymbol2    <= >= != <- &&
-    WORD:    anything else delimited; later transformed into one of the following
-     OPERATOR:  a WORD or SYMBOL that matches validOperator
-                  + - * / & && and or not ? [ . ?O ?B < = != <=
-     FUNCTION:  a user-defined or built-in function name
-     LABEL:     when followed by :  (as in [mylabel: 10]
-                or when preceded by .  (as in variable.mylabel)
-     LVAL:      when preceded by #ASSIGN
-     RVAL:      a WORD that isn't one of the previous cases
-   */
-
 }).call(this);

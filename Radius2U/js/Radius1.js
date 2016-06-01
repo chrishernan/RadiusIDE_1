@@ -4,24 +4,35 @@
  */
 
 (function() {
-  var Radius, initAllBoxes;
+  var Radius, rad;
 
   window.Radius = {};
 
   Radius = window.Radius;
 
+  Radius.Code = {};
+
+  rad = Radius.Code;
+
+  Radius.generatedCode = "";
+
+  Radius.Code.commandList = [];
+
   jQuery(function() {
-    initAllBoxes();
+    Radius.TheBlockList = new Radius.BlockList();
     window.Radius.PrototypesOnReady();
+    console.log('>>>', Radius.TheBlockList.prototypes);
     window.Radius.ProgrammingPaneOnReady();
+    return Radius.restoreFromCheckpoint();
   });
 
-  initAllBoxes = function() {
-    var startBlock;
-    Radius.TheBlockList = new Radius.BlockList();
-    startBlock = new Radius.Block(new Radius.Box("Start", "ProgrammingPane").setPos(20, 20));
-    return Radius.TheBlockList.addBlock(startBlock);
-  };
+
+  /*
+  initAllBoxes = ->
+  	Radius.TheBlockList = new Radius.BlockList()
+  	startBlock = new Radius.Block(new Radius.Box("Start", "ProgrammingPane").setPos(20, 20))
+  	Radius.TheBlockList.addBlock(startBlock)
+   */
 
   Radius.serialize = function() {
     var block, i, len, ref, ser;
@@ -72,6 +83,75 @@
       }
     }
     return results;
+  };
+
+  Radius.compile = function() {
+    var block, i, j, k, len, len1, len2, ref, ref1, ref2, returnedArray, t;
+    $(".errorText").remove();
+    ref = Radius.TheBlockList.getAllBlocks();
+    for (i = 0, len = ref.length; i < len; i++) {
+      block = ref[i];
+      block.getParms();
+    }
+    Radius.generateCode();
+    console.log("***Radius.generatedCode***");
+    console.log(Radius.generatedCode);
+    Radius.ParseInit();
+    returnedArray = Radius.RadiusParse(Radius.generatedCode);
+    console.log("***Parsed Tokens***");
+    ref1 = Radius.Code.tokens;
+    for (j = 0, len1 = ref1.length; j < len1; j++) {
+      t = ref1[j];
+      console.log(t.type, t.text, t.id, t.whichParm, t.start, t.length);
+    }
+    if (returnedArray.length > 1) {
+      console.log("---ERROR---");
+      console.log(returnedArray[0]);
+      Radius.showError(returnedArray[0][0], returnedArray[0][1], returnedArray[0][2], returnedArray[0][3], returnedArray[0][4]);
+      return false;
+    } else {
+      console.log("(no parsing errors)");
+    }
+    returnedArray = Radius.RadiusCompile();
+    rad.commandList = [];
+    if (returnedArray.length > 1) {
+      Radius.showError(returnedArray[0][0], returnedArray[0][1], returnedArray[0][2], returnedArray[0][3], returnedArray[0][4]);
+      return false;
+    } else {
+      rad.commandList = returnedArray[0];
+      console.log("***Compiled Tokens***");
+      ref2 = rad.commandList;
+      for (k = 0, len2 = ref2.length; k < len2; k++) {
+        t = ref2[k];
+        console.log(t.type, t.text, t.id, 'd', t.depth);
+      }
+      return true;
+    }
+  };
+
+  Radius.run = function() {
+    var e;
+    if (rad.commandList.length === 0) {
+      return;
+    }
+    Radius.RadiusRun();
+    if (Radius.Code.errors.length > 0) {
+      e = Radius.Code.errors[0];
+      return Radius.showError(e[0], e[1], e[2], e[3], e[4]);
+    }
+  };
+
+  Radius.stop = function() {
+    Radius.RadiusStop();
+  };
+
+  Radius.start = function() {
+    var successfulCompile;
+    Radius.clearErrors(false);
+    successfulCompile = Radius.compile();
+    if (successfulCompile) {
+      Radius.run();
+    }
   };
 
 }).call(this);

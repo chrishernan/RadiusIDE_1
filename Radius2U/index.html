@@ -42,13 +42,20 @@
 
 
 
-    
+
     <script src="js/Radius1.js"></script>
     <script src="js/Box.js"></script>
     <script src="js/Block.js"></script>
     <script src="js/Token.js"></script>
     <script src="js/PrototypesPane.js"></script>
     <script src="js/ProgrammingPane.js"></script>
+    <script src="js/doParse.js"></script>
+    <script src="js/doCompile.js"></script>
+    <script src="js/doRun.js"></script>
+    <script src="js/biginteger.js"></script>
+    <script src="js/schemeNumber.js"></script>
+
+
     <script src="js/RadiusPanes.js"></script>
     <script src="js/Help.js"></script>
     <script src="js/FileExplorerDataRetreival.js"></script>
@@ -85,11 +92,11 @@
     <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
     
 
-    <button type="button" class="btn btn-success" value = "Run"> RUN</button>
+    <button type="button" class="btn btn-success" value = "Run" onclick='Radius.start();'> RUN</button>
 
-    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+    <button type="button" class="btn btn-success" value = "Stop" onclick='Radius.stop();'> STOP</button>
 
-    <a type="button" class="btn btn-success" href="help.html">? Help</a>
+    <a type="button" class="btn btn-success" href="help.html">Help</a>
 
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
@@ -109,6 +116,7 @@
 
     <div id="program-output" class="resizeN pane">
         <div id="program-ouput-title" class="simple-title">Program Output</div>
+        <div id="OutputPane"></div>
     </div>
 
 
