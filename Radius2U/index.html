@@ -31,6 +31,9 @@
     <link rel="stylesheet" type="text/css" href="css/Login.css"/>
     <link rel="stylesheet" type="text/css" href="css/ToolBar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/UploadForm.css"/>
+
+
 
 
 
@@ -55,8 +58,7 @@
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="js/ToolBar.js"></script>
     <script src="js/SaveFeature.js"></script>
-
-
+    <script src="js/UploadAssignment.js"></script>
 
 </head>
 
@@ -89,6 +91,8 @@
     <button type="button" class="btn btn-success" value = "Run"> RUN</button>
 
     <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+
+    <button id="upload-assignments" type="button" class-="btn btn-success" value = "Upload">UPLOAD</button>
 
     <a type="button" class="btn btn-success" href="help.html">? Help</a>
 
@@ -132,9 +136,38 @@
         </div>
     </div>
 
+
+    <!--    Upload divs and structure      -->
+     <div id="wrapper">
+        <form id="upload-form">
+
+            <div id="upload-form-title" class="simple-title">Assignment Upload <span id="upload-close">x</span></div>
+            <p class="upload-container-paragraph">
+                <label for="upload-form" class="upload-label">Assignment Name</label>
+                <input id="starter-code-form1" name="name-form" required="required" type="text" placeholder="ramdomAssignmentName16"/>
+            </p>
+
+            <p class="upload-container-paragraph">
+                <label for="upload-form" class="upload-label">Due Date</label>
+                <input id="starter-code-form2" name="DueDate-form" required="required" type="text" placeholder="06/07/18"/>
+            </p>
+
+            <p class="upload-container-paragraph">
+                <label for="upload-form" class="upload-label">Description</label>
+                <input id="starter-code-form3" name="description-form" required="required" type="text" placeholder="Do the square root function......"/>
+            </p>
+
+            <p class="upload-container-paragraph">
+                <label for="upload-form" class="upload-label">Starter Code</label>
+                <input id="starter-code-form4" name="starter-form" required="required" type="text" placeholder="Random code....."/>
+            </p>
+
+            <p id ="upload-form-submit" class="login-button">
+                <input type="submit" value="Upload" />
+            </p>
+        </form>
+
     </div>
-
-
 
 
 </div>

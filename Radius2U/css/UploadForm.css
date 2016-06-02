@@ -1,10 +1,10 @@
-#upload-form {
+#wrapper {
     width: 300px;
     height: 280px;
     top: 25%;
     left: 35%;
-    position: relative;
-    z-index:990;
+    z-index: 300;
+    position:relative;
     background-color: ghostwhite;
     display: none;
 }
@@ -15,39 +15,27 @@
 
 }
 
-#upload-position-handler1 {
-   /* width: 200px;
-    height: 200px;*/
 
-    text-align: center;
-
-}
 
 #starter-code-form2 {
     position: absolute;
     cursor: pointer;
 }
-#upload-position-handler2 {
-    text-align: center;
+
+
+#upload-close {
+    margin-right: 2%;
+    float: right;
+    color: red;
+
 }
 
-#upload-position-handler3 {
-    text-align: center;
-}
-
-#upload-position-handler4 {
-    text-align: center;
-}
 
 #starter-code-form3 {
     cursor: pointer;
 
 }
 
-#starter-code-form4 {
-    cursor: pointer;
-
-}
 #upload-form-submit {
     align-items:center;
 }

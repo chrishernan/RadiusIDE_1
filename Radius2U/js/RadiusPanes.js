@@ -85,7 +85,7 @@ $(function () {
 
                 //alert(currentUser);
                 if(studentSnapshot.key==currentUser) {
-                    var assignments = studentSnapshot.child("Assignments");
+                    var assignments = studentSnapshot.child("/Assignments");
                     assignments.forEach(function(assignmentSnapshot) {
                         if(count == rowNumber) {
                             GLOBAL_STUDENT_ASSIGNMENT_REF = assignmentSnapshot.ref;
@@ -97,13 +97,11 @@ $(function () {
                                 }
 
                                 else {
+                                    console.log(starterCode);
                                     Radius.deserialize(starterCode);
                                 }
                             }
-                                //making sure that the start button does not get when we deserialize an empty string
-                            else if(starterCode=="") {
-                                ;
-                            }
+
 
                             else {
                                 Radius.deserialize(savedCode);

@@ -2,9 +2,7 @@
  * Created by christianhernandez on 5/11/16.
  */
 $(function() {
-   
-    var url = "https://radius-ide.firebaseio.com/Teachers/Frost/Students/";
-    var ref = new Firebase(url);
+
     var name;
     var dueDate;
     var starterCode;
@@ -15,76 +13,86 @@ $(function() {
         //due date, name
         //$("#upload-assignments-prompt").style.display = 'block';
 
-        document.getElementById("upload-form").style.display = "block";
-
-
+        document.getElementById("wrapper").style.display = "block";
 
 
     })
 
 
     //user clicks on submit button
-    $("#upload-form-submit").click(function() {
+    $("#upload-form-submit").click(function () {
 
 
-        name = document.getElementById("Starter-Code-Form1").value;
-        dueDate = document.getElementById("Starter-Code-Form2").value;
-        starterCode = document.getElementById("Starter-Code-Form3").value;
-        Description = document.getElementById("Starter-Code-Form4").value;
+        name = document.getElementById("starter-code-form1").value;
+        dueDate = document.getElementById("starter-code-form2").value;
+        Description = document.getElementById("starter-code-form3").value;
+        starterCode = document.getElementById("starter-code-form4").value;
 
-        var tempFirebase;
+        alert('upload clicked');
 
-        ref.once("value",function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                var studentData = childSnapshot.val();
+        //var tempFirebase;
+
+        database.ref().once("value", function (snapshot) {
+            var students = snapshot.child("Teachers/Frost/Students/");
+            students.forEach(function (student) {
                 // var student = child.val();
 
-                alert(childSnapshot.key());
-                tempFirebase = new Firebase("https://radius-ide.firebaseio.com/Teachers/Frost/Students/"+childSnapshot.key()+"/Assignments/"+name);
+                //Change in notation to enter the value of variable "name" as a key and object.
+                var lowerLevelEmptyObject = {};
+                var assignmentDetails = {"Name": name,
+                    "DueDate": dueDate,
+                    "Start": starterCode,
+                    "Description": Description,
+                    "Start": starterCode,
+                    "SavedCode": ""};
+                lowerLevelEmptyObject[name] = assignmentDetails;
 
-                // Same as the previous example, except we will also display an alert
-                // message when the data has finished synchronizing.
-                var onComplete = function(error) {
-                    if (error) {
-                        console.log('Synchronization failed');
-                    } else {
-                        console.log('Synchronization succeeded');
+
+                var assignments = "Assignments";
+
+                var upperLevelEmptyObject = {};
+                upperLevelEmptyObject[assignments] = lowerLevelEmptyObject;
+
+                console.log(upperLevelEmptyObject);
+
+                student.ref.set(upperLevelEmptyObject);
+                /*student.ref.set( {
+                    "Assignments" : {
+                        name : {
+                            "Name": name,
+                            "DueDate": dueDate,
+                            "Start": starterCode,
+                            "Description": Description,
+                            "Start": starterCode
+                        },
                     }
-                };
 
+                })*/
 
-                tempFirebase.update({Descriptions:Description,DueDate:dueDate,Last_Saved_State:'',Starter_Code:starterCode},onComplete());
-
-
-
-            });
-
-        })
+            })
+        });
 
 
 
 
-    })
+    });
 
 
-    $("#upload-close").click( function() {
+    $("#upload-close").click(function () {
 
-        document.getElementById("upload-form").style.display = "none";
+        document.getElementById("wrapper").style.display = "none";
 
     })
     //when the teacher fills in and submits the assignment fields we make the div dissapear again.
 
 
-
-
     //update assignments
 
 
-
-
-
-
-
 })
+
+
+
+
 
 
