@@ -75,6 +75,10 @@
     Box.prototype.onDragStart = function() {
       var bx;
       Radius.dragInProgress = true;
+      if (this.isAPrototype && (this.name === 'function' || this.name === 'function return' || this.name === 'do')) {
+        $('#' + this.id).draggable('destroy');
+        return;
+      }
       if (this.isAPrototype) {
         Radius.TheBlockList.removePrototypeBlock(this);
         bx = new Box(this.name, 'PrototypesPane').setPos(this.x, this.y);
@@ -173,18 +177,22 @@
           }
         } else {
           this.parentBlock.deleteBlock();
+          Radius.checkPoint();
           return;
         }
       }
       if (Box.attachableBox != null) {
         Box.attachableBox.parentBlock.append(Box.attachableBox, this);
         $('.attachable').removeClass('attachable');
+        Radius.checkPoint();
         return;
       }
       if (this.x < -10 || this.y < -10) {
         this.parentBlock.deleteBlock();
+        Radius.checkPoint();
         return;
       }
+      Radius.checkPoint();
     };
 
     Box.prototype.onPrototypeDoubleClick = function() {
@@ -261,6 +269,11 @@
       $('.swoopTarget').removeClass('swoopTarget');
       $('#' + this.id).addClass('swoopTarget');
       return Box.swoopTargetBox = this;
+    };
+
+    Box.prototype.getParms = function() {
+      this.parm1 = $('#' + this.id + " .parm").text();
+      return this.parm2 = $('#' + this.id + " .parm2").text();
     };
 
     Box.prototype.makeBlockInnards = function(name, parm1, parm2) {

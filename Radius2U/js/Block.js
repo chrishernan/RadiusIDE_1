@@ -18,7 +18,6 @@
     function BlockList() {
       this.blocks = [];
       this.prototypes = [];
-      this.functions = [];
     }
 
     BlockList.prototype.addBlock = function(block1) {
@@ -60,6 +59,19 @@
       return null;
     };
 
+    BlockList.prototype.getFunctionBlocks = function() {
+      var bl, fb, j, len, ref;
+      fb = [];
+      ref = this.blocks;
+      for (j = 0, len = ref.length; j < len; j++) {
+        bl = ref[j];
+        if (bl.list[0].name === 'function') {
+          fb.push(bl);
+        }
+      }
+      return fb;
+    };
+
     BlockList.prototype.display = function() {
       var bl, j, len, ref;
       console.log('--------', this.blocks.length, 'blocks --------');
@@ -92,20 +104,27 @@
           return bl;
         }
       }
+      console.log('***in findPrototypeBoxById cannot find boxID', boxID, '@prototypes:', this.prototypes);
       return null;
+    };
+
+    BlockList.prototype.removeAllBlocks = function() {
+      return this.blocks = [];
     };
 
     BlockList.prototype.getAllBlocks = function() {
       return this.blocks;
     };
 
-    BlockList.prototype.loadFromStorage = function(o) {
-      return $('#ProgrammingPane').empty();
-    };
-
     return BlockList;
 
   })();
+
+
+  /*
+  	loadFromStorage: (o) ->
+  		$('#ProgrammingPane').empty()   # zap all Box DOM objects
+   */
 
   Radius.Block = (function() {
     Block.nextSeq = 1000;
@@ -221,7 +240,7 @@
         if (box1.name === 'if') {
           return this.appendAnElse(box1, box2);
         } else if (box1.controlledByIfWithoutElse()) {
-          moveToElseList = this.list.splice(insertLoc - 1, 9999);
+          moveToElseList = this.list.splice(insertLoc + 1, 9999);
           blockControlledByElse = insertedBlock.list[2];
           for (j = 0, len = moveToElseList.length; j < len; j++) {
             b = moveToElseList[j];
@@ -294,15 +313,16 @@
       this.delete1();
       if (this.list[0].name === "Start") {
         this.list.splice(1, this.list.length);
-        return $('#' + this.list[0].id).animate({
+        $('#' + this.list[0].id).animate({
           left: 20,
           top: 20
         }, 600, (function(_this) {
           return function() {
             _this.list[0].setPos(20, 20);
-            return _this.list[0].target();
+            return _this.list[0].setSwoopTarget();
           };
         })(this));
+        return this.list[0].setPos(20, 20);
       } else {
         return Radius.TheBlockList.deleteBlock(this);
       }
@@ -316,11 +336,8 @@
         b = ref[j];
         if (b.isABox) {
           if (b.name !== "Start") {
-            $('#' + b.id).fadeOut("normal", (function(_this) {
-              return function() {
-                return $('#' + b.id).remove();
-              };
-            })(this));
+            $;
+            $('#' + b.id).remove();
             b.deleted = true;
             if (b === Radius.Box.swoopTargetBox) {
               results.push(Radius.Box.swoopTargetBox = null);
@@ -376,12 +393,16 @@
     };
 
     Block.prototype.getParms = function() {
-      var box, j, len, ref, results;
-      ref = this.boxes;
+      var b, j, len, ref, results;
+      ref = this.list;
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
-        box = ref[j];
-        results.push(box.getParms());
+        b = ref[j];
+        if (b.isABox) {
+          results.push(b.getParms());
+        } else {
+          results.push(b.getParms());
+        }
       }
       return results;
     };

@@ -31,9 +31,6 @@
     <link rel="stylesheet" type="text/css" href="css/Login.css"/>
     <link rel="stylesheet" type="text/css" href="css/ToolBar.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="css/UploadForm.css"/>
-
-
 
 
 
@@ -45,20 +42,27 @@
 
 
 
-    
+
     <script src="js/Radius1.js"></script>
     <script src="js/Box.js"></script>
     <script src="js/Block.js"></script>
     <script src="js/Token.js"></script>
     <script src="js/PrototypesPane.js"></script>
     <script src="js/ProgrammingPane.js"></script>
+    <script src="js/doParse.js"></script>
+    <script src="js/doCompile.js"></script>
+    <script src="js/doRun.js"></script>
+    <script src="js/biginteger.js"></script>
+    <script src="js/schemeNumber.js"></script>
+
+
     <script src="js/RadiusPanes.js"></script>
     <script src="js/Help.js"></script>
     <script src="js/FileExplorerDataRetreival.js"></script>
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script src="js/ToolBar.js"></script>
-    <script src="js/SaveFeature.js"></script>
-    <script src="js/UploadAssignment.js"></script>
+
+
 
 </head>
 
@@ -82,19 +86,17 @@
 <div id="tool-bar" class="pane">
     <button type="button" class="btn btn-success" value = "New"> NEW</button>
 
-    <button type="button" id="b-save" class="btn btn-success" value = "Save">SAVE</button>
-
     <button type="button" id="b-ass" class="btn btn-success" value = "Assignments"> ASSIGNMENTS</button>
+
     
     <button type="button" class="btn btn-success" value = "Settings"> SETTINGS</button>
+    
 
-    <button type="button" class="btn btn-success" value = "Run"> RUN</button>
+    <button type="button" class="btn btn-success" value = "Run" onclick='Radius.start();'> RUN</button>
 
-    <button type="button" class="btn btn-success" value = "Stop"> STOP</button>
+    <button type="button" class="btn btn-success" value = "Stop" onclick='Radius.stop();'> STOP</button>
 
-    <button id="upload-assignments" type="button" class-="btn btn-success" value = "Upload">UPLOAD</button>
-
-    <a type="button" class="btn btn-success" href="help.html">? Help</a>
+    <a type="button" class="btn btn-success" href="help.html">Help</a>
 
     <span class = "spanRight" ><button id="b-login" class="button"> Log In/Sign Up</button></span>
 
@@ -114,6 +116,7 @@
 
     <div id="program-output" class="resizeN pane">
         <div id="program-ouput-title" class="simple-title">Program Output</div>
+        <div id="OutputPane"></div>
     </div>
 
 
@@ -136,38 +139,9 @@
         </div>
     </div>
 
-
-    <!--    Upload divs and structure      -->
-     <div id="wrapper">
-        <form id="upload-form">
-
-            <div id="upload-form-title" class="simple-title">Assignment Upload <span id="upload-close">x</span></div>
-            <p class="upload-container-paragraph">
-                <label for="upload-form" class="upload-label">Assignment Name</label>
-                <input id="starter-code-form1" name="name-form" required="required" type="text" placeholder="ramdomAssignmentName16"/>
-            </p>
-
-            <p class="upload-container-paragraph">
-                <label for="upload-form" class="upload-label">Due Date</label>
-                <input id="starter-code-form2" name="DueDate-form" required="required" type="text" placeholder="06/07/18"/>
-            </p>
-
-            <p class="upload-container-paragraph">
-                <label for="upload-form" class="upload-label">Description</label>
-                <input id="starter-code-form3" name="description-form" required="required" type="text" placeholder="Do the square root function......"/>
-            </p>
-
-            <p class="upload-container-paragraph">
-                <label for="upload-form" class="upload-label">Starter Code</label>
-                <input id="starter-code-form4" name="starter-form" required="required" type="text" placeholder="Random code....."/>
-            </p>
-
-            <p id ="upload-form-submit" class="login-button">
-                <input type="submit" value="Upload" />
-            </p>
-        </form>
-
     </div>
+
+
 
 
 </div>

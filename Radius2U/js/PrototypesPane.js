@@ -15,8 +15,8 @@
     console.log("in Radius.PrototypesOnReady");
     commandNames = ['clear', 'show', 'while', 'assign', 'if', 'else', 'function', 'function return', 'do'];
     offset = $('#PrototypesPane').offset();
-    left = offset.left + 10;
-    top = offset.top + VERTICAL_COMMAND_SEPARATION;
+    left = 10;
+    top = VERTICAL_COMMAND_SEPARATION;
     for (i = 0, len = commandNames.length; i < len; i++) {
       c = commandNames[i];
       bx = new Box(c, 'PrototypesPane').setPos(left, top);
@@ -24,6 +24,7 @@
     }
     return $('#PrototypesPane').on("dblclick", ".draghandle", function(event) {
       var boxID, dblclickbox;
+      Radius.clearErrors(false);
       boxID = $(event.target).parent().attr("id");
       event.stopPropagation();
       dblclickbox = Radius.TheBlockList.findPrototypeBoxByID(boxID);
