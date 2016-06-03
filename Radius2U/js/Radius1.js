@@ -23,33 +23,34 @@
     window.Radius.PrototypesOnReady();
     console.log('>>>', Radius.TheBlockList.prototypes);
     window.Radius.ProgrammingPaneOnReady();
+    $("#PrototypesPane").draggable();
     return Radius.restoreFromCheckpoint();
   });
 
 
   /*
-  initAllBoxes = ->
-  	Radius.TheBlockList = new Radius.BlockList()
-  	startBlock = new Radius.Block(new Radius.Box("Start", "ProgrammingPane").setPos(20, 20))
-  	Radius.TheBlockList.addBlock(startBlock)
+   initAllBoxes = ->
+   Radius.TheBlockList = new Radius.BlockList()
+   startBlock = new Radius.Block(new Radius.Box("Start", "ProgrammingPane").setPos(20, 20))
+   Radius.TheBlockList.addBlock(startBlock)
    */
 
   Radius.serialize = function() {
     var block, i, len, ref, ser;
-    ser = '--Radius.Serialized on ' + (new Date()) + '\n';
+    ser = '--Radius.Serialized on ' + (new Date()) + '^%^';
     ref = Radius.TheBlockList.getAllBlocks();
     for (i = 0, len = ref.length; i < len; i++) {
       block = ref[i];
       ser += block.serialize();
     }
-    ser += '--End of serialization--\n';
+    ser += '--End of serialization--^%^';
     return ser;
   };
 
   Radius.deserialize = function(serString) {
     var blockStack, currBlock, currBox, fields, i, ignoreThisLine, len, line, lines, results, topLevelBlock;
     Radius.clearProgrammingPane();
-    lines = serString.split('\n');
+    lines = serString.split('^%^');
     if (!lines[0].startsWith('--Radius.Serialized on')) {
       console.log("****Could not deserialize", serString);
       return;

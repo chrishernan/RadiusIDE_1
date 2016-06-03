@@ -154,7 +154,9 @@
     });
     return $('body').on("keydown", null, function(event) {
       var block, i, info, j, len, len1, ref, ref1;
-      if (event.which === 67 && (event.altKey || event.ctrlKey || event.metaKey)) {
+      if (event.which === 65 && (event.altKey || event.ctrlKey || event.metaKey)) {
+        Radius.TheBlockList.findPrototypeBoxByName('assign').onPrototypeDoubleClick();
+      } else if (event.which === 67 && (event.altKey || event.ctrlKey || event.metaKey)) {
         Radius.copyBuffer = [];
         ref = Radius.TheBlockList.getAllBlocks();
         for (i = 0, len = ref.length; i < len; i++) {
@@ -291,12 +293,12 @@
   Radius.checkPoint = function() {
     var s;
     s = Radius.serialize();
-    return localStorage.setItem("RadiusCheckpoint", s);
+    return localStorage.setItem("RadiusCheckpoint2", s);
   };
 
   Radius.restoreFromCheckpoint = function() {
     var s;
-    s = localStorage.getItem("RadiusCheckpoint");
+    s = localStorage.getItem("RadiusCheckpoint2");
     if ((s != null) && s.length > 10) {
       Radius.deserialize(s);
       return true;

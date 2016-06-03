@@ -104,7 +104,20 @@
           return bl;
         }
       }
-      console.log('***in findPrototypeBoxById cannot find boxID', boxID, '@prototypes:', this.prototypes);
+      console.log('***in findPrototypeBoxByID cannot find boxID', boxID, '@prototypes:', this.prototypes);
+      return null;
+    };
+
+    BlockList.prototype.findPrototypeBoxByName = function(boxName) {
+      var bl, j, len, ref;
+      ref = this.prototypes;
+      for (j = 0, len = ref.length; j < len; j++) {
+        bl = ref[j];
+        if (bl.name === boxName) {
+          return bl;
+        }
+      }
+      console.log('***in findPrototypeBoxByName cannot find boxName', boxName, '@prototypes:', this.prototypes);
       return null;
     };
 
@@ -122,8 +135,8 @@
 
 
   /*
-  	loadFromStorage: (o) ->
-  		$('#ProgrammingPane').empty()   # zap all Box DOM objects
+   loadFromStorage: (o) ->
+   $('#ProgrammingPane').empty()   # zap all Box DOM objects
    */
 
   Radius.Block = (function() {
@@ -482,17 +495,17 @@
       if ((ser == null) || ser === null) {
         ser = '';
       }
-      ser += '[\n';
+      ser += '[^%^';
       ref = this.list;
       for (j = 0, len = ref.length; j < len; j++) {
         b = ref[j];
         if (b.isABox) {
-          ser += b.name + '//.' + b.parm1 + '//.' + b.parm2 + '//.' + b.x + '//.' + b.y + '\n';
+          ser += b.name + '//.' + b.parm1 + '//.' + b.parm2 + '//.' + b.x + '//.' + b.y + '^%^';
         } else {
           ser = b.serialize(ser);
         }
       }
-      ser += ']\n';
+      ser += ']^%^';
       return ser;
     };
 

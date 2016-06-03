@@ -10,6 +10,7 @@ $(function() {
        //to save pretty much
 
        var serializedCode = Radius.serialize();
+       console.log(serializedCode);
        var assignmentDetailsArray = [];
 
 //       alert(serializedCode);
