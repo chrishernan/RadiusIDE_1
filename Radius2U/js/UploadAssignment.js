@@ -86,7 +86,6 @@ $(function() {
     //when the teacher fills in and submits the assignment fields we make the div dissapear again.
 
 
-    //update assignments
 
 
 })

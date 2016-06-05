@@ -44,12 +44,54 @@ cbdad5
     left: 300px;
     z-index: 200;
     border-bottom: 5px solid #cbdad5;
+    border-right: 5px solid #cbdad5;
 
 }
 
 #ProgrammingPane::-webkit-scrollbar {
     display: none;
 }
+
+#assignment-description {
+    float: right;
+    width:22.5%;
+    height: 55%;
+    top:0%;
+    left:calc(22.5% + 300px);
+    z-index: 200;
+    border-left: 5px solid #cbdad5;
+    border-bottom: 5px solid #cbdad5;
+    display: none;
+    overflow: visible;
+}
+
+
+#assignmentDescriptionPane{
+    width: 100%;
+}
+
+#description{
+    -ms-word-break: break-all;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    word-wrap:break-word;
+    white-space: normal;
+    height: 100%;
+    width: 96%;
+    margin-left: 2%;
+    font-size: larger;
+    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
+}
+
+
+#minimize-button {
+    float: right;
+    font-size: 30px;
+    margin-right: 1%;
+    color: white;
+    cursor: pointer;
+}
+
 
 #control-panel {
     float:left;
@@ -77,6 +119,7 @@ cbdad5
     text-align: center;
 }
 
+
 #splash-screen-text {
     width:30%;
     height:100%;
@@ -88,7 +131,6 @@ cbdad5
     vertical-align: middle;
     line-height: normal;
     color: white;
-    font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, sans-serif;
     font-size: 200%;
 }
 
