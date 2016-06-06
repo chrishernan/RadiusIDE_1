@@ -5,9 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" afterPath="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/index.html" afterPath="$PROJECT_DIR$/Radius2U/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" afterPath="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/js/RadiusPanes.js" afterPath="$PROJECT_DIR$/Radius2U/js/RadiusPanes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Radius2U/js/UploadAssignment.js" afterPath="$PROJECT_DIR$/Radius2U/js/UploadAssignment.js" />
     </list>
     <ignored path="RadiusIDE_1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +31,8 @@
       <file leaf-file-name="UploadAssignment.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/js/UploadAssignment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+            <state relative-caret-position="389">
+              <caret line="61" column="41" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
               <folding>
                 <element signature="e#0#52#0" expanded="false" />
               </folding>
@@ -42,11 +40,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadiusPanes.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RadiusPanes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/js/RadiusPanes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="99" column="67" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
+            <state relative-caret-position="509">
+              <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Radius2.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Radius2U/Radius2.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="410">
+              <caret line="175" column="27" selection-start-line="175" selection-start-column="27" selection-end-line="175" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -65,8 +73,18 @@
       <file leaf-file-name="RadiusPane.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="90" column="17" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="17" />
+            <state relative-caret-position="375">
+              <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ToolBar.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Radius2U/css/ToolBar.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -75,18 +93,18 @@
       <file leaf-file-name="Login.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Radius2U/css/Login.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-130">
+            <state relative-caret-position="810">
               <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Radius2U/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-895">
-              <caret line="125" column="118" selection-start-line="125" selection-start-column="118" selection-end-line="125" selection-end-column="118" />
+            <state relative-caret-position="229">
+              <caret line="106" column="63" selection-start-line="106" selection-start-column="63" selection-end-line="106" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -141,10 +159,11 @@
         <option value="$PROJECT_DIR$/Radius2U/js/Box.js" />
         <option value="$PROJECT_DIR$/Radius2U/js/UploadAssignment.js" />
         <option value="$PROJECT_DIR$/Radius2U/js/FileExplorerDataRetreival.js" />
-        <option value="$PROJECT_DIR$/Radius2U/Radius2.css" />
+        <option value="$PROJECT_DIR$/Radius2U/css/ToolBar.css" />
         <option value="$PROJECT_DIR$/Radius2U/index.html" />
-        <option value="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
+        <option value="$PROJECT_DIR$/Radius2U/Radius2.css" />
         <option value="$PROJECT_DIR$/Radius2U/js/RadiusPanes.js" />
+        <option value="$PROJECT_DIR$/Radius2U/css/RadiusPane.css" />
       </list>
     </option>
   </component>
@@ -185,7 +204,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -256,6 +274,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
@@ -422,7 +441,8 @@
       <workItem from="1464932868090" duration="5767000" />
       <workItem from="1464939601768" duration="1326000" />
       <workItem from="1464975982030" duration="2008000" />
-      <workItem from="1465031395124" duration="21783000" />
+      <workItem from="1465031395124" duration="22131000" />
+      <workItem from="1465185887415" duration="3454000" />
     </task>
     <task id="LOCAL-00001" summary="Folder pictures work now. I was putting a local file as URL which didn't work. I've added a hovering div functionality that can display the assignment information such as starter code, and assignment details.">
       <created>1461537166330</created>
@@ -543,11 +563,18 @@
       <option name="project" value="LOCAL" />
       <updated>1464979228039</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Assignment Description Div functionality is done. &#10;1) It can be minimized by clickking on the minus button.&#10;2) it can be brought back by clicking on the assignmnent&#10;&#10;TODO: draggable.">
+      <created>1465153861371</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1465153861371</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167878000" />
+    <option name="totallyTimeSpent" value="171680000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -562,11 +589,10 @@
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24146147" sideWeight="0.49467275" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49245432" sideWeight="0.49467275" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.369863" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36834094" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -588,6 +614,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -647,7 +674,8 @@
     <MESSAGE value="The upload function is almost complete. I just need some information from professor frost so that upload, save, and open work without fault." />
     <MESSAGE value="I added my functionality again for upload, save, and open after some merge conflicts." />
     <MESSAGE value="Commit for Friday Expo." />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit for Friday Expo." />
+    <MESSAGE value="Assignment Description Div functionality is done. &#10;1) It can be minimized by clickking on the minus button.&#10;2) it can be brought back by clicking on the assignmnent&#10;&#10;TODO: draggable." />
+    <option name="LAST_COMMIT_MESSAGE" value="Assignment Description Div functionality is done. &#10;1) It can be minimized by clickking on the minus button.&#10;2) it can be brought back by clicking on the assignmnent&#10;&#10;TODO: draggable." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -763,13 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/css/ToolBar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -955,7 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="31" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -975,45 +995,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/Radius2.css">
+    <entry file="file://$PROJECT_DIR$/Radius2U/css/Login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="90" column="14" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="14" />
+        <state relative-caret-position="810">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Radius2U/js/UploadAssignment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
+        <state relative-caret-position="389">
+          <caret line="61" column="41" selection-start-line="61" selection-start-column="41" selection-end-line="61" selection-end-column="41" />
           <folding>
             <element signature="e#0#52#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-895">
-          <caret line="125" column="118" selection-start-line="125" selection-start-column="118" selection-end-line="125" selection-end-column="118" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="90" column="17" selection-start-line="90" selection-start-column="17" selection-end-line="90" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Radius2U/css/Login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-130">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,10 +1021,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Radius2U/css/ToolBar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Radius2U/Radius2.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="175" column="27" selection-start-line="175" selection-start-column="27" selection-end-line="175" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Radius2U/js/RadiusPanes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="99" column="67" selection-start-line="99" selection-start-column="67" selection-end-line="99" selection-end-column="67" />
+        <state relative-caret-position="509">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Radius2U/css/RadiusPane.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Radius2U/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="106" column="63" selection-start-line="106" selection-start-column="63" selection-end-line="106" selection-end-column="63" />
           <folding />
         </state>
       </provider>
