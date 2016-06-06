@@ -1,7 +1,11 @@
 var GLOBAL_STUDENT_ASSIGNMENT_REF;
+var currentdate = new Date();
+var DESCRIPTION_OF_CLICKED_ASSIGNMENT;
 
 
 $(function () {
+
+    var original_programming_pane_width = document.getElementById("programming").offsetWidth;
 
     $("#program-output").resizable({ handles: 'n', minHeight: 100 });
     $("#program-output").bind("resize", function () {
@@ -18,72 +22,36 @@ $(function () {
 
     });
 
-/*
-    //Changes the visibility of the assignments pane by a toggle button
-    $('#b-assignments').click(function() {
-        var table;
-        var row;
-        var cell1;
-        var cell2;
 
-        if(document.getElementById("assignment-panel").style.display=='block') {
-            document.getElementById("assignment-panel").style.display='none';
-        }
-        else {
-            document.getElementById("assignment-panel").style.display='block';
-        }
+    //Creates a new
+    $("#new-button").click(function() {
 
-        var data = [{"name":"Assignment 1","due_date":"08/16/17"},{"name":"Assignment 2","due_date":"08/24/17"},{"name":"Assignment 3","due_date":"09/03/17"},{"name":"Assignment 4","due_date":"09/25/17"}];
-        var counter = 0;
+        $("#programming").css({width: original_programming_pane_width+'px'});
+        $("#assignment-description").css({display: 'none'});
 
-        table = document.getElementById("dataHolder");
+        var serialized_start_string = "--Radius.Serialized on "+currentdate+"^%^[^%^Start//.//.//.20//.20^%^]^%^--End of serialization--";
+        Radius.deserialize(serialized_start_string);
 
-
-        for(var key in data) {
-            row = table.insertRow(counter);
-            cell1 = row.insertCell(0);
-            cell2 = row.insertCell(1);
-            cell1.innerHTML = "<img src='http://icons.iconarchive.com/icons/dtafalonso/yosemite-flat/512/Folder-icon.png'>";
-            cell2.innerHTML = data[key].name;
-            counter++;
-        }
-
-        /*
-        table = $('.dataHolder').DataTable({
-             rows: [
-                {'name':'assignment 1'},
-                {'name':'assignment 2'},
-                {'name':'assignment 3'},
-                {'name':'assignment 4'},
-            ]
-        });
-        var data = {"assignments": [{"name":"Assignment 1"},{"name":"Assignment 2"},{"name":"Assignment 3"},{"name":"Assignment 4"}]};
-    */
-        /*
-        table.row.add([
-            'Assignment 1',
-            'Assignment 2' ,
-            'Assignment 3',
-            'Assignment 4'
-        ]).draw(false);
-
-
-
-    })*/
-
+    });
+    
+    //1.Opens the assignment clicked by the user
+    //2. displays the assignment Description Div
     $("#dataHolder").on("click", "tr",function (event) {
-        //alert(studentsRef.key);
 
         var rowNumber = ($(this).index()+1);
         var count = 1;
 
+        // Displaying the Assignment Details/Description Div
+        $("#programming").css({width: original_programming_pane_width/2+'px'});
+        $("#assignment-description").css({left: original_programming_pane_width/2+300+'px',width:(original_programming_pane_width-20)/2+'px',display: 'block'});
+
+
         database.ref().once("value",function(snapshot) {
             var currentUser = firebase.auth().currentUser.uid;
             var students = snapshot.child("Teachers/Frost/Students");
+            //Loops through every Frost Student
             students.forEach(function(studentSnapshot) {
-              //  alert(studentSnapshot.key);
 
-                //alert(currentUser);
                 if(studentSnapshot.key==currentUser) {
                     var assignments = studentSnapshot.child("/Assignments");
                     assignments.forEach(function(assignmentSnapshot) {
@@ -91,6 +59,7 @@ $(function () {
                             GLOBAL_STUDENT_ASSIGNMENT_REF = assignmentSnapshot.ref;
                             var savedCode =assignmentSnapshot.child("/SavedCode").val();
                             var starterCode = assignmentSnapshot.child("/Start").val();
+                            DESCRIPTION_OF_CLICKED_ASSIGNMENT = assignmentSnapshot.child("/Description").val().toString();
                             if(savedCode=="") {
                                 if(starterCode=="") {
                                     ;
@@ -110,16 +79,46 @@ $(function () {
 
                         }
 
+
                         count+=1;
                     })
 
 
                 }
+
             })
+            //displaying Description to Description Div
+            $("#description").text(DESCRIPTION_OF_CLICKED_ASSIGNMENT.toString());
+
+
+        })
 
 
 
-        });
+       /* document.getElementById("description").style.textAlign = "center"
+        document.getElementById("description").style.textAlign = "center"
+        document.getElementById("description").style.textAlign = "center"*/
+
+
+
+    });
+
+    $("#minimize-button").mouseenter(function() {
+        $("#minimize-button").css({color: 'black'});
+
+    })
+
+    $("#minimize-button").mouseleave(function() {
+        $("#minimize-button").css({color: 'white'});
+
+    })
+
+
+    $("#minimize-button").click(function() {
+        alert("Click on your assignment to bring back the instructions.");
+        $("#assignment-description").css({display: 'none'});
+        $("#programming").css({width: original_programming_pane_width+'px'});
+
 
     })
 

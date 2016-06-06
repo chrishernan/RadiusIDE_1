@@ -85,10 +85,11 @@
 </div>
 
 <!-- Bootstrap -->
-<!--  <link href="css/bootstrap.min.css" rel="stylesheet">   -->
+<!--  <link href="css/bootstrap.min.css" rel="stylesheet">
+img id="description-minimize-button" src="http://winaero.com/blog/wp-content/uploads/2014/04/minimize.png" alt="-"> -->
 
 <div id="tool-bar" class="pane">
-    <button type="button" class="btn btn-success" value = "New"> NEW</button>
+    <button id="new-button" type="button" class="btn btn-success" value = "New"> NEW</button>
 
     <button type="button" id="b-save" class="btn btn-success" value = "Save">SAVE</button>
 
@@ -119,6 +120,11 @@
     <div id="programming" class="draggable pane">
         <div id="programming-title" class="simple-title">Program</div>
         <div id="ProgrammingPane"></div>
+    </div>
+
+    <div id="assignment-description" class="draggable pane">
+        <div id="assignment-description-title" class="simple-title">Assignment Description<span id="minimize-button">-</span></div>
+        <div id="assignmentDescriptionPane"><p id="description"></p></div>
     </div>
 
 

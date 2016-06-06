@@ -16,7 +16,7 @@ $(function() {
         document.getElementById("wrapper").style.display = "block";
 
 
-    })
+    });
 
 
     //user clicks on submit button
@@ -48,6 +48,9 @@ $(function() {
             }
         });
 
+        document.getElementById("wrapper").style.display = "none";
+
+
 
 
 
@@ -60,9 +63,7 @@ $(function() {
 
     })
 
-
-})
-
+});
 
 
 
