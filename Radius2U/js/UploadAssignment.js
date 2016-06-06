@@ -33,43 +33,19 @@ $(function() {
         //var tempFirebase;
 
         database.ref().once("value", function (snapshot) {
-            var students = snapshot.child("Teachers/Frost/Students/");
-            students.forEach(function (student) {
-                // var student = child.val();
+            var students = snapshot.child("Teachers/Frost/Students/").val();
 
-                //Change in notation to enter the value of variable "name" as a key and object.
-                var lowerLevelEmptyObject = {};
-                var assignmentDetails = {"Name": name,
+            for( var st in students){
+                console.log(st);
+                firebase.database().ref("Teachers/Frost/Students/"+st+"/Assignments/"+name).set({
+                    "Name": name,
                     "DueDate": dueDate,
                     "Start": starterCode,
                     "Description": Description,
                     "Start": starterCode,
-                    "SavedCode": ""};
-                lowerLevelEmptyObject[name] = assignmentDetails;
-
-
-                var assignments = "Assignments";
-
-                var upperLevelEmptyObject = {};
-                upperLevelEmptyObject[assignments] = lowerLevelEmptyObject;
-
-                console.log(upperLevelEmptyObject);
-
-                student.ref.set(upperLevelEmptyObject);
-                /*student.ref.set( {
-                    "Assignments" : {
-                        name : {
-                            "Name": name,
-                            "DueDate": dueDate,
-                            "Start": starterCode,
-                            "Description": Description,
-                            "Start": starterCode
-                        },
-                    }
-
-                })*/
-
-            })
+                    "SavedCode": ""
+                })
+            }
         });
 
 
@@ -83,10 +59,6 @@ $(function() {
         document.getElementById("wrapper").style.display = "none";
 
     })
-    //when the teacher fills in and submits the assignment fields we make the div dissapear again.
-
-
-    //update assignments
 
 
 })
